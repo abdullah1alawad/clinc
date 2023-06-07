@@ -31,7 +31,6 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
         });
     }
 
