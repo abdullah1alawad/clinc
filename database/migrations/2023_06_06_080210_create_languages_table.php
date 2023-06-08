@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->unsignedBigInteger('fd_id')->nullable();
-            $table->unsignedBigInteger('fa_id')->nullable();
+            $table->unsignedBigInteger('fd_id');
+            $table->unsignedBigInteger('fa_id');
             $table->string('language_name');
             $table->foreign('fd_id')->references('fu_id')->on('doctors')->onDelete('cascade');
             $table->foreign('fa_id')->references('fu_id')->on('assistants')->onDelete('cascade');
