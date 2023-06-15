@@ -18,9 +18,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'name', 'username', 'fname', 'mname', 'lname','mother_name',
+        'birth_date','birth_location',
+        'national_id', 'constraint',
+        'gender','sieve',
+        'address',
+        'email','phone',
         'password',
+        'type_id',
+        'created_at','updated_at',
     ];
 
     /**
@@ -31,6 +37,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at','updated_at',
     ];
 
     /**
@@ -41,4 +48,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
+    }
+    public function assistant()
+    {
+        return $this->hasOne(Assistant::class);
+    }
+    public function patient()
+    {
+        return $this->hasOne(Patient::class);
+    }
+    public function emergency()
+    {
+        return $this->hasOne(Emergency::class);
+    }
 }
