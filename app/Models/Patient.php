@@ -47,7 +47,7 @@ class Patient extends Authenticatable
     protected $casts = [
     ];
 
-    public function patient()
+    public function user()
     {
         return $this -> belongsTo(User::class);
     }

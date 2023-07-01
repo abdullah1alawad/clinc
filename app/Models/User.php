@@ -25,7 +25,6 @@ class User extends Authenticatable
         'address',
         'email','phone',
         'password',
-        'type_id',
         'created_at','updated_at',
     ];
 
@@ -68,5 +67,9 @@ class User extends Authenticatable
     public function emergency()
     {
         return $this->hasOne(Emergency::class);
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

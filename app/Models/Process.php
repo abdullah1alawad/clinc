@@ -22,6 +22,7 @@ class Process extends Authenticatable
         'fd_id',
         'fp_id',
         'fa_id',
+        'fc_id',
         'photo',
         'created_at','updated_at',
     ];
@@ -58,5 +59,9 @@ class Process extends Authenticatable
     public function patient()
     {
         return $this->belongsTo(Patient::class);
+    }
+    public function chair()
+    {
+        return $this->belongsTo(Chair::class);
     }
 }

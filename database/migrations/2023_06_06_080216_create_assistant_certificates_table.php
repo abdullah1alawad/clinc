@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('assistant_certificates', function (Blueprint $table) {
             $table->unsignedBigInteger('fa_id');
-            $table->string('certificates_name');
+            $table->string('certificate_name');
             $table->string('photo');
             $table->foreign('fa_id')->references('fu_id')->on('assistants')->onDelete('cascade');
             $table->timestamps();

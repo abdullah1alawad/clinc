@@ -41,7 +41,7 @@ class Subject extends Authenticatable
 
     ];
 
-    public function student_marks()
+    public function studentMarks()
     {
         return $this->hasMany(Student_mark::class);
     }

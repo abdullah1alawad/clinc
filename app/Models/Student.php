@@ -39,10 +39,12 @@ class Student extends Model
      */
     protected $casts = [];
 
-    public function student(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function student_marks(){
+    public function studentMarks()
+    {
         return $this->hasMany(Student_mark::class);
     }
     public function processes(){

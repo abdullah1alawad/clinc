@@ -20,7 +20,8 @@ class Assistant extends Model
         'recruitment_division','military_status',
         'family_status','mother_language',
         'driving_license',
-        'email'
+        'email','email_verified_at',
+        'created_at','updated_at',
     ];
 
     /**
@@ -38,20 +39,24 @@ class Assistant extends Model
      * @var array<string, string>
      */
     protected $casts = [];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function processes()
     {
         return $this->hasMany(Process::class);
     }
     public function skills()
     {
-        return $this->hasMany(Skill::class);
+        return $this->hasMany(Assistant_skill::class);
     }
     public function certificates()
     {
-        return $this->hasMany(Certificate::class);
+        return $this->hasMany(Assistant_certificate::class);
     }
     public function languages()
     {
-        return $this->hasMany(Language::class);
+        return $this->hasMany(Assistant_language::class);
     }
 }

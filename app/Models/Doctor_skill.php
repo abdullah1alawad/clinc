@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chair extends Model
+class Doctor_skill extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'fc_id',
+        'fd_id',
+        'skill_name',
         'created_at','updated_at'
     ];
 
@@ -18,12 +19,8 @@ class Chair extends Model
         'created_at','updated_at'
     ];
 
-    public function clinic()
+    public function doctor()
     {
-        return $this->belongsTo(Clinic::class);
-    }
-    public function processes()
-    {
-        return $this->hasMany(Process::class);
+        return $this->belongsTo(Doctor::class);
     }
 }

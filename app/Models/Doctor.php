@@ -50,7 +50,7 @@ class Doctor extends Authenticatable
     ];
 
 
-    public function doctor(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
@@ -58,10 +58,20 @@ class Doctor extends Authenticatable
         return $this->hasMany(Process::class);
     }
 
-    public function patents()
+    public function patients()
     {
         return $this->hasMany(Patient::class);
     }
-
-    //skills lang and degrees relation are not done yat don't forget that
+    public function skills()
+    {
+        return $this->hasMany(Doctor_skill::class);
+    }
+    public function certificates()
+    {
+        return $this->hasMany(Doctor_certificate::class);
+    }
+    public function languages()
+    {
+        return $this->hasMany(Doctor_language::class);
+    }
 }

@@ -44,12 +44,12 @@ class Emergency extends Authenticatable
     protected $casts = [
     ];
 
-    public function emergency()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function sensitivitys()
+    public function sensitivities()
     {
         return $this -> hasMany(Sensitivity::class);
     }

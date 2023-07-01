@@ -28,7 +28,6 @@ return new class extends Migration
             $table->boolean('sieve');
             $table->string('phone')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('type_id');
             $table->rememberToken();
             $table->timestamps();
         });
