@@ -11,12 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
+        Schema::create('processes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('fs_id');
             $table->unsignedBigInteger('fd_id');
+            $table->unsignedBigInteger('fp_id');
             $table->unsignedBigInteger('fa_id');
-            $table->string('skill_name');
+            $table->unsignedBigInteger('fc_id');
+//            $table->date('date');
+            $table->string('photo');
+            $table->foreign('fs_id')->references('fu_id')->on('students')->onDelete('cascade');
             $table->foreign('fd_id')->references('fu_id')->on('doctors')->onDelete('cascade');
+            $table->foreign('fp_id')->references('fu_id')->on('patients')->onDelete('cascade');
             $table->foreign('fa_id')->references('fu_id')->on('assistants')->onDelete('cascade');
+            $table->foreign('fc_id')->references('id')->on('chairs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('processes');
     }
 };
