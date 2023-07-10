@@ -18,11 +18,13 @@ class Process extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fs_id',
-        'fd_id',
-        'fp_id',
-        'fa_id',
-        'fc_id',
+        'student_id',
+        'doctor_id',
+        'patient_id',
+        'assistant_id',
+        'chair_id',
+        'subject_id',
+        'level','semester',
         'url',
         'created_at','updated_at',
     ];

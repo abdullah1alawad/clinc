@@ -18,7 +18,7 @@ class Patient extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fu_id','fs_id','fd_id',
+        'user_id','student_id','doctor_id',
         'questions',
         'job',
         'last_scan_date',
@@ -26,7 +26,7 @@ class Patient extends Authenticatable
         'reason_to_go_hospital',
         'reason_to_transform_blood',
         'reason_to_came',
-        'photo_url',
+        'url',
         'created_at','updated_at',
     ];
 

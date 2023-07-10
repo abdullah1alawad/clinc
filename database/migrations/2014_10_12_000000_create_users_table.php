@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('constraint');
             $table->boolean('gender');
             $table->string('address');
-            $table->boolean('sieve');
+            $table->boolean('sieve')->nullable();
             $table->string('phone')->unique();
             $table->string('url')->nullable();
             $table->string('password');

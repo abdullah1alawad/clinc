@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('reason_to_go_hospital')->nullable();
             $table->string('reason_to_transform_blood')->nullable();
             $table->string('reason_to_came');
-            $table->string('photo_url');
+            $table->string('url');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('student_id')->references('user_id')->on('students')->onDelete('cascade');
             $table->foreign('doctor_id')->references('user_id')->on('doctors')->onDelete('cascade');

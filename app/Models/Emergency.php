@@ -18,7 +18,7 @@ class Emergency extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fu_id',
+        'user_id',
         'spare_phone_number',
         'home_number',
         'blood_type',

@@ -18,8 +18,8 @@ class Student_mark extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fs_id',
-        'f_subject_id',
+        'student_id',
+        'subject_id',
         'mark',
         'created_at','updated_at',
     ];

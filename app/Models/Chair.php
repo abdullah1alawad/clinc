@@ -10,7 +10,7 @@ class Chair extends Model
     use HasFactory;
 
     protected $fillable=[
-        'fc_id',
+        'clinic_id',
         'created_at','updated_at'
     ];
 

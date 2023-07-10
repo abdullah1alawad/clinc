@@ -18,7 +18,7 @@ class Disease extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fu_id',
+        'emergency_id',
         'disease_name',
         'created_at','updated_at',
     ];

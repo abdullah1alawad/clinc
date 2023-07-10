@@ -25,6 +25,7 @@ class User extends Authenticatable
         'gender','sieve',
         'address',
         'email','phone',
+        'url',
         'password',
         'created_at','updated_at',
     ];
@@ -77,5 +78,9 @@ class User extends Authenticatable
     public function getGenderAttribute($val)
     {
         return (!$val)?'Male':'Female';
+    }
+    public function setGenderAttribute($val)
+    {
+        $this->attributes['gender']=strtolower($val)=='female'? 1 : 0;
     }
 }

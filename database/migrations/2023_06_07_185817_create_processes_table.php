@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->tinyInteger('level');
             $table->tinyInteger('semester');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->foreign('student_id')->references('user_id')->on('students')->onDelete('cascade');
             $table->foreign('doctor_id')->references('user_id')->on('doctors')->onDelete('cascade');
             $table->foreign('patient_id')->references('user_id')->on('patients')->onDelete('cascade');

@@ -19,7 +19,7 @@ class Doctor extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fu_id',
+        'user_id',
         'recruitment_division',
         'military_status',
         'family_status',
@@ -73,5 +73,14 @@ class Doctor extends Authenticatable
     public function languages()
     {
         return $this->morphMany(Language::class,'languageable');
+    }
+
+    public function getDrivingLicenseAttribute($val)
+    {
+        return (!$val)?'NO':'Yes';
+    }
+    public function setDrivingLicenseAttribute($val)
+    {
+        $this->attributes['driving_license']=strtolower($val)=='yes'? 1 : 0;
     }
 }

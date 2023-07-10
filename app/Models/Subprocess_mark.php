@@ -18,7 +18,7 @@ class Subprocess_mark extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fpro_id',
+        'process_id',
         'mark',
         'created_at',
         'updated_at',
