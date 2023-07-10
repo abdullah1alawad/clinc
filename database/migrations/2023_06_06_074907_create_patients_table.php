@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('student_user_id');
+            $table->unsignedBigInteger('doctor_user_id');
             $table->bigInteger('questions');
             $table->string('job');
             $table->date('last_scan_date');
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('reason_to_came');
             $table->string('url');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('student_id')->references('user_id')->on('students')->onDelete('cascade');
-            $table->foreign('doctor_id')->references('user_id')->on('doctors')->onDelete('cascade');
+            $table->foreign('student_user_id')->references('user_id')->on('students')->onDelete('cascade');
+            $table->foreign('doctor_user_id')->references('user_id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -88,4 +88,9 @@ class Student extends Model
                 return 'nothing';
         }
     }
+
+    public function getKeyName()
+    {
+        return 'user_id';
+    }
 }

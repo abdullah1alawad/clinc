@@ -49,9 +49,9 @@ class StudentController extends Controller
     {
         $user=User::where('id',1)->with('student')->first();
 
-        //$userProgress=$user->student->processes()->get();
+        $userProgress=Student::find(1)->processes()->get();
 
-        //dd($userProgress);
+        dd($userProgress);
         return view('student.profile',compact('user'));
     }
 
