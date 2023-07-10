@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->unsignedBigInteger('fu_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('recruitment_division');
             $table->string('military_status');
             $table->string('family_status');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('driving_license');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreign('fu_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

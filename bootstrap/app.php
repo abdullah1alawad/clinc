@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../app/Helpers/GlobalFunctions.php';
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

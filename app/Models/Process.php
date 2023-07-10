@@ -23,7 +23,7 @@ class Process extends Authenticatable
         'fp_id',
         'fa_id',
         'fc_id',
-        'photo',
+        'url',
         'created_at','updated_at',
     ];
 

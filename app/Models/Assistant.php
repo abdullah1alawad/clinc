@@ -49,14 +49,14 @@ class Assistant extends Model
     }
     public function skills()
     {
-        return $this->hasMany(Assistant_skill::class);
+        return $this->morphMany(Skill::class,'skillable');
     }
     public function certificates()
     {
-        return $this->hasMany(Assistant_certificate::class);
+        return $this->morphMany(Certificate::class,'certificateable');
     }
     public function languages()
     {
-        return $this->hasMany(Assistant_language::class);
+        return $this->morphMany(Language::class,'languageable');
     }
 }

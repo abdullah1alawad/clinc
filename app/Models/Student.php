@@ -17,7 +17,7 @@ class Student extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'fu_id','university_id',
+        'user_id','university_id',
         'level','semester',
         'email','email_verified_at',
         'created_at','updated_at',
@@ -53,5 +53,39 @@ class Student extends Model
     public function patents()
     {
         return $this->hasMany(Patient::class);
+    }
+
+    public function getLevelAttribute($val)
+    {
+        switch ($val)
+        {
+            case 1:
+                return 'First Year';
+            case 2:
+                return 'Second Year';
+            case 3:
+                return 'Third Year';
+            case 4:
+                return 'Fourth Year';
+            case 5:
+                return 'Fifth Year';
+            default:
+                return 'nothing';
+        }
+    }
+
+    public function getSemesterAttribute($val)
+    {
+        switch ($val)
+        {
+            case 1:
+                return 'First Semester';
+            case 2:
+                return 'Second Semester';
+            case 3:
+                return 'Third Semester';
+            default:
+                return 'nothing';
+        }
     }
 }

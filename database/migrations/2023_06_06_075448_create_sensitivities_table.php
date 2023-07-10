@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sensitivities', function (Blueprint $table) {
-            $table->unsignedBigInteger('fu_id');
+            $table->unsignedBigInteger('emergency_id');
             $table->string('sensitivity_name');
-            $table->foreign('fu_id')->references('fu_id')->on('emergency')->onDelete('cascade');
+            $table->foreign('emergency_id')->references('user_id')->on('emergency')->onDelete('cascade');
             $table->timestamps();
         });
     }

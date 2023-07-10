@@ -64,14 +64,14 @@ class Doctor extends Authenticatable
     }
     public function skills()
     {
-        return $this->hasMany(Doctor_skill::class);
+        return $this->morphMany(Skill::class,'skillable');
     }
     public function certificates()
     {
-        return $this->hasMany(Doctor_certificate::class);
+        return $this->morphMany(Certificate::class,'certificateable');
     }
     public function languages()
     {
-        return $this->hasMany(Doctor_language::class);
+        return $this->morphMany(Language::class,'languageable');
     }
 }

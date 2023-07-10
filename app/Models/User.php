@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\GlobalFunctions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'username', 'fname', 'mname', 'lname','mother_name',
+        'username', 'fname', 'mname', 'lname','mother_name',
         'birth_date','birth_location',
         'national_id', 'constraint',
         'gender','sieve',
@@ -71,5 +72,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function getGenderAttribute($val)
+    {
+        return (!$val)?'Male':'Female';
     }
 }

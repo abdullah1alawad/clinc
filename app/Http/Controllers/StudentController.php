@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Process;
 use App\Models\Student;
+use App\Models\User;
+use App\Traits\GlobalFunctions;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+
+    use GlobalFunctions;
     /**
      * Display a listing of the resource.
      */
@@ -37,6 +42,16 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         //
+    }
+    //-----------------------
+
+    public function profileInfo()
+    {
+        $user=User::where('id',1)->with('student')->first();
+        $userProgress=Process::where('student_id',$user->id)->get();
+
+        dd($userProgress);
+        return view('student.profile',compact('user'));
     }
 
     /**

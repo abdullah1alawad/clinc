@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('chairs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fc_id');
-            $table->foreign('fc_id')->references('id')->on('clinics')->onDelete('cascade');
+            $table->unsignedBigInteger('clinic_id');
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->timestamps();
         });
     }
