@@ -47,11 +47,10 @@ class StudentController extends Controller
 
     public function profileInfo()
     {
-        $user=User::where('id',1)->with('student')->first();
+        $user=User::where('id',2)->with('student')->first();
 
-        $userProgress=Student::find(1)->processes()->get();
+        $userProgress=Student::find(2)->processes()->get();
 
-        dd($userProgress);
         return view('student.profile',compact('user'));
     }
 
