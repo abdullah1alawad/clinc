@@ -66,4 +66,9 @@ class Process extends Authenticatable
     {
         return $this->belongsTo(Chair::class);
     }
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
 }

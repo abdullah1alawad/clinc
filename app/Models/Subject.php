@@ -45,4 +45,8 @@ class Subject extends Authenticatable
     {
         return $this->hasMany(Student_mark::class);
     }
+    public function processes()
+    {
+        return $this->hasMany(Process::class);
+    }
 }

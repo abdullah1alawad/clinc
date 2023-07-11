@@ -47,11 +47,35 @@ class StudentController extends Controller
 
     public function profileInfo()
     {
+        $allUserSubjects=[];
+        $semesterUserSubjects=[];
         $user=User::where('id',2)->with('student')->first();
 
-        $userProgress=Student::find(2)->processes()->get();
+        $allUserProgress=Student::find(2)->processes()->get();
 
-        return view('student.profile',compact('user'));
+        $semesterUserProgress=Student::with(['processes'=>function ($q) use ($user){
+            $q->where('level',$user->student->level);
+            $q->where('semester',$user->student->semester);
+        }])->find(2);
+
+        foreach ($semesterUserProgress->processes as $progress){
+            $subject=$progress->subject;
+            if(isset($semesterUserSubjects[$subject->name]))
+                $semesterUserSubjects[$subject->name]++;
+            else
+                $semesterUserSubjects[$subject->name]=1;
+        }
+
+        foreach ($allUserProgress as $progress){
+            $subject=$progress->subject;
+            if(isset($allUserSubjects[$subject->name]))
+                $allUserSubjects[$subject->name]++;
+            else
+                $allUserSubjects[$subject->name]=1;
+        }
+
+
+        return view('student.profile',compact('user','allUserSubjects','semesterUserSubjects'));
     }
 
     /**
