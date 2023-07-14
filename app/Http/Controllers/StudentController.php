@@ -39,9 +39,26 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function showSemesterInformation($id)
     {
-        //
+        $semesterUserSubjects=[];
+
+        $user=User::where('id',$id)->with('student')->first();
+
+        $semesterUserProgress=Student::with(['processes'=>function ($q) use ($user){
+            $q->where('level',$user->student->level);
+            $q->where('semester',$user->student->semester);
+        }])->find($id);
+
+        foreach ($semesterUserProgress->processes as $progress){
+            $subject=$progress->subject;
+            if(isset($semesterUserSubjects[$subject->name]))
+                $semesterUserSubjects[$subject->name]++;
+            else
+                $semesterUserSubjects[$subject->name]=1;
+        }
+
+        return view('student.showSemesterInformation',compact('semesterUserSubjects'));
     }
     //-----------------------
 

@@ -56,6 +56,8 @@
         <ul>
           <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
           <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About me</span></a></li>
+          <li><a href="#semester-progress" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Semester progress</span></a></li>
+          <li><a href="#all-progress" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>All progress</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
@@ -117,12 +119,15 @@
       </div>
     </section><!-- End About Section -->
 
-    <!-- ======= Facts Section ======= -->
-    <section id="facts" class="facts">
+    <!-- ======= semester-progress Section ======= -->
+    <section id="semester-progress" class="facts">
       <div class="container">
 
         <div class="section-title">
-          <h2>Semester Progress</h2>
+          <h2 style="display: inline-block">Semester Progress</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <h4 style="display: inline-block">
+                <a href="{{route('student.show.semester',['id'=>$user->id])}}">details</a>
+            </h4>
            <p>The topics and the number of completed tasks in this semester.</p>
         </div>
 
@@ -138,15 +143,16 @@
             @endforeach
 
         </div>
-
       </div>
-    </section><!-- End Facts Section -->
+    </section><!-- end semester-progress Section -->
 
-      <section id="facts" class="facts">
+      <!-- ======= all-progress Section ======= -->
+      <section id="all-progress" class="facts">
           <div class="container">
 
               <div class="section-title">
-                  <h2>All Progress</h2>
+                  <h2 style="display: inline-block;">All Progress </h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <h4 style="display: inline-block"><a href="">details</a></h4>
                   <p>The topics and the number of completed tasks yet.</p>
               </div>
 
@@ -164,7 +170,7 @@
               </div>
 
           </div>
-      </section>
+      </section><!-- ======= end all-progress Section ======= -->
 
 
 
