@@ -47,4 +47,9 @@ class Subprocess_mark extends Authenticatable
     {
         return $this->belongsTo(Process::class);
     }
+
+    public function getKeyName()
+    {
+        return 'process_id';
+    }
 }

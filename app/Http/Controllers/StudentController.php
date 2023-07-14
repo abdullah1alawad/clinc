@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Process;
 use App\Models\Student;
+use App\Models\Subprocess_mark;
 use App\Models\User;
 use App\Traits\GlobalFunctions;
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ class StudentController extends Controller
      */
     public function showSemesterInformation($id)
     {
-        $semesterUserSubjects=[];
+        $semesterUserInfo=[];
+        $processMarks=[];
 
         $user=User::where('id',$id)->with('student')->first();
 
@@ -52,14 +54,31 @@ class StudentController extends Controller
 
         foreach ($semesterUserProgress->processes as $progress){
             $subject=$progress->subject;
-            if(isset($semesterUserSubjects[$subject->name]))
-                $semesterUserSubjects[$subject->name]++;
-            else
-                $semesterUserSubjects[$subject->name]=1;
+            $doctor=User::find($progress->doctor_user_id);
+            $patient=User::find($progress->patient_user_id);
+            $assistant=User::find($progress->assistant_user_id);
+            $chair=$progress->chair_id;
+            $photo=$progress->url;
+            $subMarks=Subprocess_mark::where('process_id',$progress->id)->get();
+            $sum=0;
+
+            foreach($subMarks as $subMark)
+                $sum+=$subMark->mark;
+            $processMark=$sum;
+
+            $semesterUserInfo[$subject->name][]=[$doctor,$patient,$assistant,$chair,$photo,$progress->created_at,$processMark];
         }
 
-        return view('student.showSemesterInformation',compact('semesterUserSubjects'));
+        return view('student.showSemesterInformation',compact('semesterUserInfo'));
     }
+
+    //------------------------------
+
+    public function showSemesterMarks()
+    {
+        return view('student.showSemesterMarks');
+    }
+
     //-----------------------
 
     public function profileInfo()

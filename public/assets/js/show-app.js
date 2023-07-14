@@ -6,15 +6,31 @@ tabButtons.forEach(button => {
         const tab = button.dataset.tab;
 
         tabButtons.forEach(btn => {
-            btn.classList.remove('active');
+            if (btn !== button) {
+                btn.classList.remove('active');
+            }
         });
 
         tabContents.forEach(content => {
-            content.classList.remove('active');
+            if (content.id !== tab) {
+                content.classList.remove('active');
+            }
         });
 
         button.classList.add('active');
         document.getElementById(tab).classList.add('active');
+
+        // Hide processes for other subjects
+        tabContents.forEach(content => {
+            if (content.id !== tab) {
+                const questions = content.querySelectorAll('.question');
+                questions.forEach(question => {
+                    question.classList.remove('active');
+                    const answer = question.querySelector('p');
+                    answer.classList.remove('show');
+                });
+            }
+        });
     });
 });
 
@@ -35,3 +51,17 @@ questions.forEach(question => {
         }
     });
 });
+
+let profileClicked = false;
+
+function navigateToProfile(event) {
+    if (!profileClicked) {
+        profileClicked = true;
+        setTimeout(() => {
+            window.location.href = event.target.href;
+        }, 100);
+    } else {
+        event.preventDefault();
+    }
+}
+

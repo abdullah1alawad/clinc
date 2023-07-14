@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::get('student/profile',[StudentController::class,'profileInfo'])->name('student.profile');
 Route::get('student/show/semester/{id}',[StudentController::class,'showSemesterInformation'])->name('student.show.semester');
+Route::get('student/semester/marks',[StudentController::class,'showSemesterMarks'])->name('student.semester.marks');
 
 Auth::routes();
 

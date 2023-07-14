@@ -23,8 +23,7 @@ class User extends Authenticatable
         'birth_date','birth_location',
         'national_id', 'constraint',
         'gender','sieve',
-        'address',
-        'email','phone',
+        'address', 'phone',
         'url',
         'password',
         'created_at','updated_at',
@@ -46,9 +45,20 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    protected $primaryKey = 'username';
+    public $incrementing = false;
+
+    public function getAuthIdentifierName()
+    {
+        return 'username';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->username;
+    }
+
 
     public function student()
     {

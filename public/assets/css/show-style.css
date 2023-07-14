@@ -10,6 +10,31 @@ body{
     background-color: #040b14;
 }
 
+*{
+    text-decoration: none;
+}
+.navbar{
+    background:#040b14; font-family: calibri;padding-left: 570px;padding-top: 20px;
+}
+.navdiv{
+    display: flex; align-items: center; justify-content: space-between;
+}
+.logo a{
+    font-size: 35px; font-weight: 600; color: white;
+}
+li{
+    list-style: none; display: inline-block;
+}
+li a{
+    color: white; font-size: 18px; font-weight: bold; margin-right: 25px;
+}
+.navdiv button{
+    background-color: black; margin-left: 10px; border-radius: 10px; padding: 10px; width: 90px;
+}
+button a{
+    color: white; font-weight: bold; font-size: 15px;
+}
+
 .title{
     font-size: 50px;
     text-align: center;
@@ -58,7 +83,7 @@ body{
 
 /*add this class when click*/
 .question p.show{
-    max-height: 200px;
+    max-height: 500px;
     opacity: 1;
     padding:0px 15px 30px 15px;
 }
