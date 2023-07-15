@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
@@ -197,7 +197,7 @@
                             <div class="col-md-6">
                                 <select class="form-control @error('role_id') is-invalid @enderror" name="role_id[]" id="role_id" multiple>
                                     @foreach($roles as $role)
-                                        <option name="role_id" value="{{$role->name}}">{{$role->role_name}}</option>
+                                        <option value="{{$role->id}}">{{$role->role_name}}</option>
                                     @endforeach
                                 </select>
 

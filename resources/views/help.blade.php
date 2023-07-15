@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-{{$user->username}}<br>
-{{$user->student->email}}
+{{$user_id}}<br>
+{{$roles_id}}
 </body>
 </html>

@@ -40,3 +40,15 @@ function getSemester($val)
             return 'nothing';
     }
 }
+
+function saveImage($photo,$folder){
+    //save photo in folder
+    //folder must be full path ex:images/student or images
+
+    $file_extension = $photo -> getClientOriginalExtension();
+    $file_name = time().'.'.$file_extension;
+    $path = $folder;
+    $photo -> move($path,$file_name);
+
+    return $file_name;
+}

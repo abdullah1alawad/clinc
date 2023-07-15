@@ -26,3 +26,4 @@ Route::get('student/semester/marks',[StudentController::class,'showSemesterMarks
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
