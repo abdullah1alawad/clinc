@@ -177,19 +177,19 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="url" class="col-md-4 col-form-label text-md-end">{{ __('url') }}</label>
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="url" class="col-md-4 col-form-label text-md-end">{{ __('url') }}</label>--}}
 
-                            <div class="col-md-6">
-                                <input id="url" type="file" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ old('url') }}" required autocomplete="url" autofocus>
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="url" type="file" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ old('url') }}"  autocomplete="url" autofocus>--}}
 
-                                @error('url')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+{{--                                @error('url')--}}
+{{--                                <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="row mb-3">
                             <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Roles') }}</label>

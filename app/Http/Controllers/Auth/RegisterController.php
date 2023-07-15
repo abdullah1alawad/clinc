@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'gender'=>['required'],
             'address'=>['required','regex:/^[A-Za-z0-9]+$/','string', 'max:255'],
             'phone'=>['required','string','max:255'],
-            'url' => ['required', 'image', 'max:2048'], // Replace 'photo' with the name of your input field
+//            'url' => [ 'image', 'max:2048'], // Replace 'photo' with the name of your input field
             'role'=>['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -78,20 +78,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $photoPath = null;
 
-        if (isset($data['url'])) {
-            $photo = $data['url'];
-            $photoPath = $photo->store('public/photos');
-
-            // Resize and save a thumbnail version of the photo
-            $thumbnailPath = 'public/thumbnails/' . $photo->hashName();
-            Image::make($photo)
-                ->fit(200, 200)
-                ->save(storage_path('app/' . $thumbnailPath));
-
-            $photoPath = $thumbnailPath;
-        }
+//        $photoPath = null;
+//
+//        if (isset($data['url'])) {
+//            $photo = $data['url'];
+//            $photoPath = $photo->store('public/photos');
+//
+//            // Resize and save a thumbnail version of the photo
+//            $thumbnailPath = 'public/thumbnails/' . $photo->hashName();
+//            Image::make($photo)
+//                ->fit(200, 200)
+//                ->save(storage_path('app/' . $thumbnailPath));
+//
+//            $photoPath = $thumbnailPath;
+//        }
 
         $user=User::create([
             'fname' => $data['fname'],
@@ -106,12 +107,14 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'address' => $data['address'],
             'phone' => $data['phone'],
-            'url' => $photoPath,
+//            'url' => $photoPath,
             'password' => Hash::make($data['password']),
         ]);
 
         $roles=$data['role_id'];
         $user->roles()->attach($roles);
+
+        dd($user);
         return $user;
 
     }

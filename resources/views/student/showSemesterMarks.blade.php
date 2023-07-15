@@ -1,3 +1,4 @@
+{{changeWord('abdullah')}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     <div class="navdiv">
         <ul>
             <li><a href="{{route('student.profile')}}">Profile</a></li>
-            <a href="{{route('student.show.semester',['id'=>auth()->user()->id])}}">Details</a>
+            <a href="{{route('student.show.semester',['id'=>2])}}">Details</a>
             <li><a href="{{route('student.semester.marks')}}">Marks</a></li>
             <li><a href="">Sub-marks</a></li>
         </ul>

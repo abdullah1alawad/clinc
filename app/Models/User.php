@@ -46,18 +46,18 @@ class User extends Authenticatable
      * @var array<string, string>
      */
 
-    protected $primaryKey = 'username';
-    public $incrementing = false;
+//    protected $primaryKey = 'username';
+//    public $incrementing = false;
 
-    public function getAuthIdentifierName()
-    {
-        return 'username';
-    }
+//    public function getAuthIdentifierName()
+//    {
+//        return 'username';
+//    }
 
-    public function getAuthIdentifier()
-    {
-        return $this->username;
-    }
+//    public function getAuthIdentifier()
+//    {
+//        return $this->username;
+//    }
 
 
     public function student()

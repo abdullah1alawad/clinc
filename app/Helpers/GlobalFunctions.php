@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 function calculateAge($birthdate)
 {
@@ -38,5 +39,17 @@ function getSemester($val)
             return 'Third Semester';
         default:
             return 'nothing';
+    }
+}
+
+if(!function_exists('changeWord'))
+{
+    function changeWord($word)
+    {
+        Log::info('hiiiiiiiiiiiiiiii');
+        if(!strlen($word))
+            return 'null';
+        $word[0]=strtoupper($word[0]);
+        return $word;
     }
 }
