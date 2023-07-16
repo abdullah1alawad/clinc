@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -34,7 +34,33 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->user_id=auth()->user()->id;
+        
+        $errorMessages = [
+            'university_id.required'=>'The university id is required.',
+            'university_id.max'=>'The university id must be less than or equal to 30 digits.',
+            'university_id.regex'=>'The university id can only have numbers.',
+            'email.required'=>'The email is required.',
+            'email.email'=>'The email is invalid.',
+            'email.max'=>'The email must be less than or equal to 30 digits.',
+            'level.required'=>'The level is required.',
+            'level.between'=>'The level can be number from 1 to 5.',
+            'semester.required'=>'The semester is required.',
+            'semester.between'=>'The semester can be number from 1 to 3.',
+            'user_id.required'=>'you should register or login.',
+        ];
+        $student=$request->validate([
+            'user_id'=>'required',
+            'university_id'=>'required|max:30|unique:students|regex:/^[0-9]+$/',
+            'email'=>'required|email|max:30|unique:students',
+            'level'=>'required|numeric|between:1,5',
+            'semester'=>'required|numeric|between:1,3',
+        ],$errorMessages);
+
+
+        Student::create($student);
+
+        return redirect()->route('student.profile');
     }
 
     /**
@@ -83,16 +109,18 @@ class StudentController extends Controller
 
     public function profileInfo()
     {
+        $user=auth()->user();
+
         $allUserSubjects=[];
         $semesterUserSubjects=[];
-        $user=User::where('id',2)->with('student')->first();
+        $user=User::where('id',$user->id)->with('student')->first();
 
-        $allUserProgress=Student::find(2)->processes()->get();
+        $allUserProgress=Student::find($user->id)->processes()->get();
 
         $semesterUserProgress=Student::with(['processes'=>function ($q) use ($user){
             $q->where('level',$user->student->level);
             $q->where('semester',$user->student->semester);
-        }])->find(2);
+        }])->find($user->id);
 
         foreach ($semesterUserProgress->processes as $progress){
             $subject=$progress->subject;
@@ -137,4 +165,5 @@ class StudentController extends Controller
     {
         //
     }
+
 }

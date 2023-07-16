@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +28,9 @@ Route::get('student/semester/marks',[StudentController::class,'showSemesterMarks
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
+Route::post('/student/store', [StudentController::class, 'store'])->name('student.store');
+Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
+Route::post('/doctor/store', [DoctorController::class, 'store'])->name('doctor.store');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+

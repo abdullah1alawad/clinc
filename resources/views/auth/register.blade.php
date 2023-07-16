@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label for="fname" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
@@ -177,27 +177,27 @@
                             </div>
                         </div>
 
-{{--                        <div class="row mb-3">--}}
-{{--                            <label for="url" class="col-md-4 col-form-label text-md-end">{{ __('url') }}</label>--}}
+                        <div class="row mb-3">
+                            <label for="url" class="col-md-4 col-form-label text-md-end">{{ __('url') }}</label>
 
-{{--                            <div class="col-md-6">--}}
-{{--                                <input id="url" type="file" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ old('url') }}"  autocomplete="url" autofocus>--}}
+                            <div class="col-md-6">
+                                <input id="url" type="file" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ old('url') }}"  autocomplete="url" autofocus>
 
-{{--                                @error('url')--}}
-{{--                                <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                                @error('url')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Roles') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control @error('role_id') is-invalid @enderror" name="role_id[]" id="role_id" multiple>
+                                <select class="form-control @error('role_id') is-invalid @enderror" name="role_id" id="role_id">
                                     @foreach($roles as $role)
-                                        <option name="role_id" value="{{$role->name}}">{{$role->role_name}}</option>
+                                        <option value="{{$role->id}}">{{$role->role_name}}</option>
                                     @endforeach
                                 </select>
 
