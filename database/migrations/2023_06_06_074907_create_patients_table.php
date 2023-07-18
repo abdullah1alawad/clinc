@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('doctor_id');
             $table->string('name');
+            $table->string('national_id')->unique();
             $table->boolean('gender');
             $table->date('birth_date');
             $table->float('height');
