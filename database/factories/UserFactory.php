@@ -18,19 +18,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'username'=>$this->faker->userName(),
-            'fname' => $this->faker->firstName(),
-            'mname'=>$this->faker->name(),
-            'lname'=>$this->faker->lastName(),
-            'mother_name'=>$this->faker->firstNameFemale(),
-            'birth_date'=>$this->faker->date(),
-            'birth_location'=>$this->faker->city(),
-            'national_id'=>$this->faker->numberBetween(1,2000),
-            'constraint'=>$this->faker->city(),
+            'email'=>$this->faker->email,
+            'name'=>$this->faker->name,
             'gender'=>$this->faker->randomElement(['Male', 'Female']),
-            'address'=>$this->faker->country(),
             'phone'=>$this->faker->phoneNumber(),
             'password' =>bcrypt('password'),
+            'national_id'=>$this->faker->numberBetween(1,2000),
             'remember_token' => Str::random(10),
         ];
     }

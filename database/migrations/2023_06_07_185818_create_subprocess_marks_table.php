@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subprocess_marks', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('process_id');
+            $table->string('name');
             $table->unsignedBigInteger('mark');
             $table->foreign('process_id')->references('id')->on('processes')->onDelete('cascade');
             $table->timestamps();

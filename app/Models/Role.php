@@ -10,7 +10,7 @@ class Role extends Model
     use HasFactory;
 
     protected $fillable=[
-        'role_name',
+        'name',
         'created_at','updated_at'
     ];
 
@@ -18,8 +18,7 @@ class Role extends Model
         'created_at','updated_at'
     ];
 
-    public function users()
-    {
+    public function users(){
         return $this->belongsToMany(User::class);
     }
 }

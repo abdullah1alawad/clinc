@@ -18,15 +18,20 @@ class Patient extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id','student_id','doctor_id',
+        'student_id','doctor_id',
+        'name','gender',
+        'birth_date',
+        'height','weight',
+        'address','job',
+        'phone',
         'questions',
-        'job',
-        'last_scan_date',
+        'last_medical_scan_date',
         'personal_doctor_name',
+        'currently_disease','skin_disease','skin_surgery',
         'reason_to_go_hospital',
-        'reason_to_transform_blood',
+        'reason_to_transform_blood','skin_tooth_disease',
         'reason_to_came',
-        'url',
+        'signature',
         'created_at','updated_at',
     ];
 
@@ -39,29 +44,33 @@ class Patient extends Authenticatable
         'created_at','updated_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-    ];
 
-    public function user()
-    {
-        return $this -> belongsTo(User::class);
+    public function student(){
+        return $this->belongsTo(User::class,'student_id','id');
     }
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
-    public function doctor()
-    {
-        return $this->belongsTo(Doctor::class);
+
+    public function doctor(){
+        return $this->belongsTo(User::class,'doctor_id','id');
     }
 
     public function processes(){
         return $this->hasMany(Process::class);
+    }
+
+    public function diseases(){
+        return $this->hasMany(Disease::class);
+    }
+
+    public function medicines(){
+        return $this->hasMany(Medicine::class);
+    }
+
+    public function getGenderAttribute($val){
+        return (!$val)?'Male':'Female';
+    }
+
+    public function setGenderAttribute($val){
+        $this->attributes['gender']=strtolower($val)=='female'? 1 : 0;
     }
 
 }

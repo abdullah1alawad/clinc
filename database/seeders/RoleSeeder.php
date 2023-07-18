@@ -13,10 +13,9 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('roles')->insert(['role_name'=>'admin']);
-        DB::table('roles')->insert(['role_name'=>'student']);
-        DB::table('roles')->insert(['role_name'=>'doctor']);
-        DB::table('roles')->insert(['role_name'=>'patient']);
-        DB::table('roles')->insert(['role_name'=>'assistant']);
+        DB::table('roles')->insert(['name'=>'admin']);
+        DB::table('roles')->insert(['name'=>'student']);
+        DB::table('roles')->insert(['name'=>'doctor']);
+        DB::table('roles')->insert(['name'=>'assistant']);
     }
 }

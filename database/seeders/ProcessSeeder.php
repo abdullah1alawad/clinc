@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Assistant;
+use App\Models\Process;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AssistantSeeder extends Seeder
+class ProcessSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Assistant::factory(4)->create();
+        Process::factory(10)->create();
     }
 }

@@ -32,14 +32,6 @@ class Subject extends Authenticatable
         'created_at','updated_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-
-    ];
 
     public function studentMarks()
     {

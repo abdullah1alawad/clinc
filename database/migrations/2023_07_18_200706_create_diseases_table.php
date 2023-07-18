@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
+        Schema::create('diseases', function (Blueprint $table) {
             $table->id();
-            $table->string('language_name');
-            $table->morphs('languageable');
+            $table->unsignedBigInteger('patient_id');
+            $table->string('name');
             $table->timestamps();
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('diseases');
     }
 };

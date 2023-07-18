@@ -19,6 +19,7 @@ class Subprocess_mark extends Authenticatable
      */
     protected $fillable = [
         'process_id',
+        'name',
         'mark',
         'created_at',
         'updated_at',
@@ -34,22 +35,8 @@ class Subprocess_mark extends Authenticatable
         'created_at','updated_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-
-    ];
-
-    public function process()
-    {
+    public function process(){
         return $this->belongsTo(Process::class);
     }
 
-    public function getKeyName()
-    {
-        return 'process_id';
-    }
 }

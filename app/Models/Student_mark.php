@@ -33,20 +33,11 @@ class Student_mark extends Authenticatable
         'created_at','updated_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-    ];
-
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
+    public function student(){
+        return $this->belongsTo(User::class,'student_id','id');
     }
-    public function subject()
-    {
+
+    public function subject(){
         return $this->belongsTo(Subject::class);
     }
 

@@ -24,8 +24,8 @@ class Process extends Authenticatable
         'assistant_id',
         'chair_id',
         'subject_id',
-        'level','semester',
-        'url',
+        'date',
+        'photo',
         'created_at','updated_at',
     ];
 
@@ -46,29 +46,32 @@ class Process extends Authenticatable
     protected $casts = [
     ];
 
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
+    public function student(){
+        return $this->belongsTo(User::class,'student_id','id');
     }
-    public function doctor()
-    {
-        return $this->belongsTo(Doctor::class);
+
+    public function doctor(){
+        return $this->belongsTo(User::class,'doctor_id','id');
     }
-    public function assistant()
-    {
-        return $this->belongsTo(Assistant::class);
+
+    public function assistant(){
+        return $this->belongsTo(User::class,'assistant_id','id');
     }
-    public function patient()
-    {
+
+    public function patient(){
         return $this->belongsTo(Patient::class);
     }
-    public function chair()
-    {
+
+    public function chair(){
         return $this->belongsTo(Chair::class);
     }
-    public function subject()
-    {
+
+    public function subject(){
         return $this->belongsTo(Subject::class);
+    }
+
+    public function marks(){
+        return $this->hasMany(Subprocess_mark::class);
     }
 
 }

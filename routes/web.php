@@ -21,16 +21,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/student/profile',function (){
+    return view('student.profile');
+});
 
-Route::get('student/profile',[StudentController::class,'profileInfo'])->name('student.profile');
-Route::get('student/show/semester/{id}',[StudentController::class,'showSemesterInformation'])->name('student.show.semester');
-Route::get('student/semester/marks',[StudentController::class,'showSemesterMarks'])->name('student.semester.marks');
+Route::get('/home',function (){
+    return view('home');
+});
 
-Auth::routes();
 
-Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
-Route::post('/student/store', [StudentController::class, 'store'])->name('student.store');
-Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
-Route::post('/doctor/store', [DoctorController::class, 'store'])->name('doctor.store');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+//Route::get('student/profile',[StudentController::class,'profileInfo'])->name('student.profile');
+//Route::get('student/show/semester/{id}',[StudentController::class,'showSemesterInformation'])->name('student.show.semester');
+//Route::get('student/semester/marks',[StudentController::class,'showSemesterMarks'])->name('student.semester.marks');
+//
+//Auth::routes();
+//
+//Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
+//Route::post('/student/store', [StudentController::class, 'store'])->name('student.store');
+//Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
+//Route::post('/doctor/store', [DoctorController::class, 'store'])->name('doctor.store');
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
 

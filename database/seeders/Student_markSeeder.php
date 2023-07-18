@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Doctor;
+use App\Models\Student_mark;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DoctorSeeder extends Seeder
+class Student_markSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Doctor::factory(3)->create();
+        Student_mark::factory(10)->create();
     }
 }

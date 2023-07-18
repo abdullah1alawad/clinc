@@ -19,12 +19,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username', 'fname', 'mname', 'lname','mother_name',
-        'birth_date','birth_location',
-        'national_id', 'constraint',
-        'gender','sieve',
-        'address', 'phone',
-        'url',
+        'email', 'name', 'gender',
+        'phone',
+        'photo',
+        'national_id',
         'password',
         'created_at','updated_at',
     ];
@@ -40,44 +38,51 @@ class User extends Authenticatable
         'created_at','updated_at',
     ];
 
+
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
 
-    public function student()
-    {
-        return $this->hasOne(Student::class);
+    public function studentPatients(){
+        return $this->hasMany(Patient::class,'student_id','id');
     }
-    public function doctor()
-    {
-        return $this->hasOne(Doctor::class);
+
+    public function doctorPatients(){
+        return $this->hasMany(Patient::class,'doctor_id','id');
     }
-    public function assistant()
-    {
-        return $this->hasOne(Assistant::class);
-    }
-    public function patient()
-    {
-        return $this->hasOne(Patient::class);
-    }
-    public function emergency()
-    {
-        return $this->hasOne(Emergency::class);
-    }
-    public function roles()
-    {
+
+    public function roles(){
         return $this->belongsToMany(Role::class);
     }
 
-    public function getGenderAttribute($val)
-    {
+    public function studentProcesses(){
+        return $this->hasMany(Process::class,'student_id','id');
+    }
+
+    public function doctorProcesses(){
+        return $this->hasMany(Process::class,'doctor_id','id');
+    }
+
+    public function assistantProcesses(){
+        return $this->hasMany(Process::class,'assistant_id','id');
+    }
+
+    public function studentMarks(){
+        return $this->hasMany(Student_mark::class,'student_id','id');
+    }
+
+    public function getGenderAttribute($val){
         return (!$val)?'Male':'Female';
     }
-    public function setGenderAttribute($val)
-    {
+
+    public function setGenderAttribute($val){
         $this->attributes['gender']=strtolower($val)=='female'? 1 : 0;
     }
 }

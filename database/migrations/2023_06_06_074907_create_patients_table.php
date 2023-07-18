@@ -12,21 +12,32 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('student_user_id');
-            $table->unsignedBigInteger('doctor_user_id');
-            $table->bigInteger('questions');
+            $table->id();
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('doctor_id');
+            $table->string('name');
+            $table->boolean('gender');
+            $table->date('birth_date');
+            $table->float('height');
+            $table->float('weight');
+            $table->string('address');
             $table->string('job');
-            $table->date('last_scan_date');
+            $table->string('phone')->unique();
+            $table->bigInteger('questions');
+            $table->date('last_medical_scan_date')->nullable();
             $table->string('personal_doctor_name')->nullable();
+            $table->string('currently_disease')->nullable();
+            $table->string('skin_disease')->nullable();
+            $table->string('skin_surgery')->nullable();
             $table->string('reason_to_go_hospital')->nullable();
             $table->string('reason_to_transform_blood')->nullable();
-            $table->string('reason_to_came');
-            $table->string('url');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('student_user_id')->references('user_id')->on('students')->onDelete('cascade');
-            $table->foreign('doctor_user_id')->references('user_id')->on('doctors')->onDelete('cascade');
+            $table->string('skin_tooth_disease')->nullable();
+            $table->string('reason_to_came')->nullable();
+            $table->string('signature');
             $table->timestamps();
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
