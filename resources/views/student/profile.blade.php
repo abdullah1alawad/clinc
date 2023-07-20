@@ -3,155 +3,167 @@
 @section('content')
 
     <div class="container emp-profile">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                            alt=""/>
-                        <div class="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5>
-                            Kshiti Ghelani
-                        </h5>
-                        <h6>
-                            Web Developer and Designer
-                        </h6>
-                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                   aria-controls="home" aria-selected="true">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false">Timeline</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img
+                        src="{{asset('images/' . $user->photo)}}"
+                        alt="image error"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-work">
-                        <p>WORK LINK</p>
-                        <a href="">Website Link</a><br/>
-                        <a href="">Bootsnipp Profile</a><br/>
-                        <a href="">Bootply Profile</a>
-                        <p>SKILLS</p>
-                        <a href="">Web Designer</a><br/>
-                        <a href="">Web Developer</a><br/>
-                        <a href="">WordPress</a><br/>
-                        <a href="">WooCommerce</a><br/>
-                        <a href="">PHP, .Net</a><br/>
-                    </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{$user->name}}
+                    </h5>
+                    <h6>
+                        The Best Dentist In The World
+                    </h6>
                 </div>
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>User Id</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Kshiti123</p>
-                                </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{{route('student.edit.profile')}}" class="profile-edit-btn">Edit Profile</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK SPACE</p>
+                    <a href="">Add Patient</a><br/>
+                    <a href="">Search on Patient</a><br/>
+                    <a href="">Booking an Chair</a><br/>
+                    <a href="">Canceling a Chair Reservation</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tabs-sec">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab"
+                               aria-controls="about" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="upcomingAppointments-tab" data-toggle="tab"
+                               href="#upcomingAppointments" role="tab"
+                               aria-controls="upcomingAppointments" aria-selected="false">Your Upcoming Appointments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="completedAppointments-tab" data-toggle="tab"
+                               href="#completedAppointments" role="tab"
+                               aria-controls="completedAppointments" aria-selected="false">Your Completed Appointments</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Name</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Kshiti Ghelani</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>kshitighelani@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>123 456 7890</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Profession</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Web Developer and Designer</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Experience</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Total Projects</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>230</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Availability</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>6 months</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br/>
-                                    <p>Your detail description</p>
-                                </div>
+                            <div class="col-md-6">
+                                <p>{{$user->name}}</p>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{$user->email}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{$user->phone}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>National Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{$user->national_id}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Gender</label>
+                            </div>
+                            <div class="col-md-6">
+                                @if($user->gender=='Male')
+                                    <div class="radio-container">
+                                        <input type="radio" id="male" name="gender" value="0" checked>
+                                        <label for="male">Male</label>
+                                    </div>
+                                @else
+                                    <div class="radio-container">
+                                        <input type="radio" id="female" name="gender" value="1" checked>
+                                        <label for="female">Female</label>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="upcomingAppointments" role="tabpanel"
+                         aria-labelledby="upcomingAppointments-tab">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>Assistant Name</th>
+                                <th>Subject Name</th>
+                                <th>Chair Number</th>
+                                <th>Remaining Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($upcomingAppointments as $appointment)
+                            <tr>
+                                <td>{{$appointment->doctor_name}}</td>
+                                <td>{{$appointment->patient_name}}</td>
+                                <td>{{$appointment->assistant_name}}</td>
+                                <td>{{$appointment->subject_name}}</td>
+                                <td>{{$appointment->chair_id}}</td>
+                                <td>{{$appointment->time_difference}}</td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
+                         aria-labelledby="completedAppointments-tab">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Patient Name</th>
+                                <th>Assistant Name</th>
+                                <th>Subject Name</th>
+                                <th>Chair Number</th>
+                                <th>Completion Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($upcomingAppointments as $appointment)
+                                <tr>
+                                    <td>{{$appointment->doctor_name}}</td>
+                                    <td>{{$appointment->patient_name}}</td>
+                                    <td>{{$appointment->assistant_name}}</td>
+                                    <td>{{$appointment->subject_name}}</td>
+                                    <td>{{$appointment->chair_id}}</td>
+                                    <td>{{$appointment->date}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\GlobalFunctions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -62,5 +63,40 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function studentProfile()
+    {
+        $user=auth()->user();
+
+        $current_time = Carbon::now();
+        $upcomingAppointments = $user->studentProcesses()->where('date','>=',$current_time)->get();
+
+        foreach ($upcomingAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        return view('student.profile',compact('user','upcomingAppointments'));
+    }
+
+    public function studentProfileEdit()
+    {
+        $user=auth()->user();
+
+        return view('student.editProfile',compact('user'));
     }
 }

@@ -1,24 +1,41 @@
 // Get the tabs and tab content elements
-const aboutTab = document.getElementById("home-tab");
-const timelineTab = document.getElementById("profile-tab");
-const aboutContent = document.getElementById("home");
-const timelineContent = document.getElementById("profile");
+const aboutTab = document.getElementById("about-tab");
+const upcomingAppointmentsTab = document.getElementById("upcomingAppointments-tab");
+const completedAppointmentsTab = document.getElementById("completedAppointments-tab");
+const aboutContent = document.getElementById("about");
+const upcomingAppointmentsContent = document.getElementById("upcomingAppointments");
+const completedAppointmentsContent = document.getElementById("completedAppointments");
 
 // Add event listeners to the tabs
 aboutTab.addEventListener("click", () => {
     // Show the "About" tab content and hide the "Timeline" tab content
     aboutContent.classList.add("show", "active");
-    timelineContent.classList.remove("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
     // Update the active class of the tabs
     aboutTab.classList.add("active");
-    timelineTab.classList.remove("active");
+    upcomingAppointmentsTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
 });
 
-timelineTab.addEventListener("click", () => {
+upcomingAppointmentsTab.addEventListener("click", () => {
     // Show the "Timeline" tab content and hide the "About" tab content
-    timelineContent.classList.add("show", "active");
+    upcomingAppointmentsContent.classList.add("show", "active");
     aboutContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
     // Update the active class of the tabs
-    timelineTab.classList.add("active");
+    upcomingAppointmentsTab.classList.add("active");
     aboutTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
+});
+
+completedAppointmentsTab.addEventListener("click", () => {
+    // Show the "Timeline" tab content and hide the "About" tab content
+    completedAppointmentsContent.classList.add("show", "active");
+    aboutContent.classList.remove("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    completedAppointmentsTab.classList.add("active");
+    aboutTab.classList.remove("active");
+    upcomingAppointmentsTab.classList.remove("active");
 });

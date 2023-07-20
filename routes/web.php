@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -21,20 +22,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/student/profile',function (){
-    return view('student.profile');
-});
-Route::get('/student/profile/edit',function (){
-    return view('student.editProfile');
-});
-
 
 Route::get('/home',function (){
     return view('home');
 });
 
-
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+//////////////////////student route///////////////////
+
+Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
+
+    Route::get('/profile',[UserController::class, 'studentProfile'])->name('student.profile');
+    Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
+});
+
+/////////////////////end student route//////////////////
