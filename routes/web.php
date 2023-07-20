@@ -37,6 +37,7 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
 
     Route::get('/profile',[UserController::class, 'studentProfile'])->name('student.profile');
     Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
+    Route::get('/profile/sub-mark/{id}',[UserController::class, 'showSubprocessMark'])->name('student.showSubprocessMark');
 });
 
 /////////////////////end student route//////////////////

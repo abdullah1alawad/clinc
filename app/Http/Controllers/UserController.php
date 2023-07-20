@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Process;
 use App\Traits\GlobalFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -71,6 +72,7 @@ class UserController extends Controller
 
         $current_time = Carbon::now();
         $upcomingAppointments = $user->studentProcesses()->where('date','>=',$current_time)->get();
+        $completedAppointments = $user->studentProcesses()->where('date','<',$current_time)->get();
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -90,7 +92,25 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('student.profile',compact('user','upcomingAppointments'));
+        foreach ($completedAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        return view('student.profile',compact('user','upcomingAppointments','completedAppointments'));
     }
 
     public function studentProfileEdit()
@@ -98,5 +118,19 @@ class UserController extends Controller
         $user=auth()->user();
 
         return view('student.editProfile',compact('user'));
+    }
+
+    public function showSubprocessMark($process_id)
+    {
+        $process = Process::find($process_id);
+        $process_mark=$process->marks;
+
+        $total_mark=0;
+        foreach ($process_mark as $mark)
+            $total_mark += $mark->mark;
+        $process_mark->total_mark=$total_mark;
+
+        return view('student.showSubprocessMark',compact('process_mark'));
+
     }
 }
