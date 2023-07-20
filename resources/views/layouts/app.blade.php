@@ -82,10 +82,10 @@
 
     </div>
 
-    <footer class="bg-light py-3">
-        <div class="container text-center">
-            <p>&copy; 2023 My Company. All rights reserved.</p>
-        </div>
-    </footer>
+{{--    <footer class="bg-light py-3">--}}
+{{--        <div class="container text-center">--}}
+{{--            <p>&copy; 2023 My Company. All rights reserved.</p>--}}
+{{--        </div>--}}
+{{--    </footer>--}}
 </body>
 </html>
