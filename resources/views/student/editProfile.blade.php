@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container emp-profile">
-        <form method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
@@ -32,125 +32,109 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false">Timeline</a>
+                                   aria-controls="profile" aria-selected="false">Change Password</a>
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-work">
-                        <p>WORK LINK</p>
-                        <a href="">Website Link</a><br/>
-                        <a href="">Bootsnipp Profile</a><br/>
-                        <a href="">Bootply Profile</a>
-                        <p>SKILLS</p>
-                        <a href="">Web Designer</a><br/>
-                        <a href="">Web Developer</a><br/>
-                        <a href="">WordPress</a><br/>
-                        <a href="">WooCommerce</a><br/>
-                        <a href="">PHP, .Net</a><br/>
+{{--                        keep it empty        --}}
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="tab-content profile-tab" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>User Id</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Kshiti123</p>
-                                </div>
-                            </div>
-                            <div class="row">
+                            <div class="row py-1">
                                 <div class="col-md-6">
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Kshiti Ghelani</p>
+                                    <input type="text" name="name" value="Kshiti Ghelani">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row py-1">
                                 <div class="col-md-6">
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>kshitighelani@gmail.com</p>
+                                    <input type="email" name="email" value="kshitighelani@gmail.com">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row py-1">
                                 <div class="col-md-6">
                                     <label>Phone</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>123 456 7890</p>
+                                    <input type="text" name="phone" value="123 456 7890">
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row py-1">
                                 <div class="col-md-6">
-                                    <label>Profession</label>
+                                    <label>National_id</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Web Developer and Designer</p>
+                                    <input type="text" name="national_id" value="123 456 7890">
+                                </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-md-6">
+                                    <label>Gender</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="radio-container">
+                                        <input type="radio" id="male" name="gender" value="0">
+                                        <label for="male">Male</label>
+                                    </div>
+
+                                    <div class="radio-container">
+                                        <input type="radio" id="female" name="gender" value="1">
+                                        <label for="female">Female</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
+                            <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label>Experience</label>
+                                    <label>Old Password</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
+                                    <input type="password" name="oldpassword">
+                                    {{--                                    <p>Expert</p>--}}
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label>Total Projects</label>
+                                    <label>New Password</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>230</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
+                                    <input type="password" name="newpassword">
+                                    {{--                                    <p>10$/hr</p>--}}
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row py-2">
                                 <div class="col-md-6">
-                                    <label>Availability</label>
+                                    <label>Confirm Password</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>6 months</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br/>
-                                    <p>Your detail description</p>
+                                    <input type="password" name="confirmpassword">
+                                    {{--                                    <p>230</p>--}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row justify-content-center py-4">
+                <div class="col-md-5 text-center">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                </div>
+            </div>
+
         </form>
     </div>
 

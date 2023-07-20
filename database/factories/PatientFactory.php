@@ -30,6 +30,7 @@ class PatientFactory extends Factory
             'student_id'=>$student,
             'doctor_id'=>$doctor,
             'name'=>$this->faker->name,
+            'national_id'=>$this->faker->numberBetween(10000,1000000),
             'gender'=>$this->faker->randomElement(['Male', 'Female']),
             'birth_date'=>$this->faker->date(),
             'height'=>$this->faker->numberBetween(150,200),

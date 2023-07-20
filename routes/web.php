@@ -24,6 +24,10 @@ Route::get('/', function () {
 Route::get('/student/profile',function (){
     return view('student.profile');
 });
+Route::get('/student/profile/edit',function (){
+    return view('student.editProfile');
+});
+
 
 Route::get('/home',function (){
     return view('home');

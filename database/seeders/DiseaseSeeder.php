@@ -13,8 +13,8 @@ class DiseaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('diseases')->insert(['patient_id'=>28,'name'=>'cancer']);
-        DB::table('diseases')->insert(['patient_id'=>30,'name'=>'cohg']);
-        DB::table('diseases')->insert(['patient_id'=>31,'name'=>'i dont know']);
+        DB::table('diseases')->insert(['patient_id'=>1,'name'=>'cancer']);
+        DB::table('diseases')->insert(['patient_id'=>2,'name'=>'cohg']);
+        DB::table('diseases')->insert(['patient_id'=>3,'name'=>'i dont know']);
     }
 }
