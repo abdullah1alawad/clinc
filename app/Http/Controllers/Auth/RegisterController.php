@@ -28,7 +28,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $roles=Role::where('role_name','LIKE','student')->orWhere('role_name','LIKE','doctor')->get();
+        $roles=Role::where('name','LIKE','student')->orWhere('name','LIKE','doctor')->get();
         return view('auth.register',compact('roles'));
     }
 

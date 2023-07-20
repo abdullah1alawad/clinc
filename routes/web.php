@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeController;
@@ -30,15 +31,7 @@ Route::get('/home',function (){
 });
 
 
-//Route::get('student/profile',[StudentController::class,'profileInfo'])->name('student.profile');
-//Route::get('student/show/semester/{id}',[StudentController::class,'showSemesterInformation'])->name('student.show.semester');
-//Route::get('student/semester/marks',[StudentController::class,'showSemesterMarks'])->name('student.semester.marks');
-//
-//Auth::routes();
-//
-//Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
-//Route::post('/student/store', [StudentController::class, 'store'])->name('student.store');
-//Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
-//Route::post('/doctor/store', [DoctorController::class, 'store'])->name('doctor.store');
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
