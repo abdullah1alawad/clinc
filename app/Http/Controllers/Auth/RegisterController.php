@@ -61,8 +61,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $errorMessages=[
-            'name.required'=>'The last name field is required.',
-            'name.max'=>'The last name must be less than or equal to 40 characters.',
+            'name.required'=>'The name field is required.',
+            'name.regex'=>'The name can have only letters.',
+            'name.max'=>'The name must be less than or equal to 40 characters.',
             'national_id.required'=>'The national id field is required.',
             'national_id.regex'=>'The national id can only have numbers.',
             'national_id.max'=>'The national id must be less than or equal to 30 digits.',
@@ -80,7 +81,7 @@ class RegisterController extends Controller
             'password.confirmed'=>'The password does not equal the confirm password.'
         ];
         return Validator::make($data, [
-            'name' => ['required','string', 'max:40'],
+            'name' => ['required','regex:/^[A-Za-z\s]+$/', 'max:40'],
             'email'=>['required','email','unique:users'],
             'national_id'=>['required','regex:/^[0-9]+$/', 'max:30','unique:users'],
             'gender'=>['required'],
