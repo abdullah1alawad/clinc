@@ -99,4 +99,52 @@ class UserController extends Controller
 
         return view('student.editProfile',compact('user'));
     }
+
+    public function doctorProfile()
+    {
+        $user=auth()->user();
+
+        $current_time = Carbon::now();
+        $upcomingAppointments = $user->doctorProcesses()->where('date','>=',$current_time)->get();
+
+        foreach ($upcomingAppointments as $appointment){
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+
+            $student_name = $appointment->student->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        $completedAppointments = $user->doctorProcesses()->where('date','<',$current_time)->get();
+
+        foreach ($completedAppointments as $appointment){
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+
+            $student_name = $appointment->student->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        return view('doctor.profile',compact('user','upcomingAppointments','completedAppointments'));
+    }
 }

@@ -31,7 +31,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-//////////////////////student route///////////////////
+//////////////////////student routes///////////////////
 
 Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
 
@@ -39,4 +39,15 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
     Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
 });
 
-/////////////////////end student route//////////////////
+/////////////////////end student routes//////////////////
+
+
+//////////////////////doctor routes///////////////////
+
+Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
+
+    Route::get('/profile',[UserController::class, 'doctorProfile'])->name('doctor.profile');
+    Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
+});
+
+/////////////////////end doctor routes//////////////////
