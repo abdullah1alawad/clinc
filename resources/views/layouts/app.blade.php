@@ -16,9 +16,8 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/profile.js'])
+
 </head>
 <body>
     <div id="app">
@@ -80,6 +79,13 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
+
+    <footer class="bg-light py-3">
+        <div class="container text-center">
+            <p>&copy; 2023 My Company. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -13,8 +13,8 @@ class MedicineSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('medicines')->insert(['patient_id'=>28,'name'=>'panadol']);
-        DB::table('medicines')->insert(['patient_id'=>30,'name'=>'cetmol']);
-        DB::table('medicines')->insert(['patient_id'=>31,'name'=>'merge']);
+        DB::table('medicines')->insert(['patient_id'=>1,'name'=>'panadol']);
+        DB::table('medicines')->insert(['patient_id'=>2,'name'=>'cetmol']);
+        DB::table('medicines')->insert(['patient_id'=>3,'name'=>'merge']);
     }
 }
