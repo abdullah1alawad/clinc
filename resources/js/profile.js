@@ -4,9 +4,11 @@
 const aboutTab = document.getElementById("about-tab");
 const upcomingAppointmentsTab = document.getElementById("upcomingAppointments-tab");
 const completedAppointmentsTab = document.getElementById("completedAppointments-tab");
+const subjectsMarkTab = document.getElementById("subjectsMark-tab");
 const aboutContent = document.getElementById("about");
 const upcomingAppointmentsContent = document.getElementById("upcomingAppointments");
 const completedAppointmentsContent = document.getElementById("completedAppointments");
+const subjectsMarkContent = document.getElementById("subjectsMark");
 
 // Add event listeners to the tabs
 aboutTab.addEventListener("click", () => {
@@ -41,10 +43,23 @@ completedAppointmentsTab.addEventListener("click", () => {
     aboutTab.classList.remove("active");
     upcomingAppointmentsTab.classList.remove("active");
 });
+
+subjectsMarkTab.addEventListener("click", () => {
+    // Show the "About" tab content and hide the "Timeline" tab content
+    subjectsMarkContent.classList.add("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
+    aboutContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    subjectsMarkTab.classList.add("active");
+    upcomingAppointmentsTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
+    aboutTab.classList.remove("active");
+});
 /////////////////////////////////////////end tabs code //////////////////////////////////////////////////////////////
 
 
-/////////////////////////////////// back botton//////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 import $ from 'jquery';
 
 $(document).ready(function() {
@@ -54,13 +69,25 @@ $(document).ready(function() {
 });
 
 
-///////////////////////////// end back botton /////////////////////////////
+///////////////////////////// /////////////////////////////
 
+const urlParams = new URLSearchParams(window.location.search);
+const subject = urlParams.get('subject');
 
+if(subject !== null){
+    completedAppointmentsContent.classList.add("show", "active");
+    aboutContent.classList.remove("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    completedAppointmentsTab.classList.add("active");
+    aboutTab.classList.remove("active");
+    upcomingAppointmentsTab.classList.remove("active");
+}
 
+//////////////////////////////////////////////////////
 let fragment = window.location.hash.substr(1);
 
-if(fragment === '' || fragment === 'about'){
+if((fragment === '' && subject === null )|| fragment === 'about'){
     aboutContent.classList.add("show", "active");
     upcomingAppointmentsContent.classList.remove("show", "active");
     completedAppointmentsContent.classList.remove("show", "active");
@@ -87,3 +114,17 @@ else if(fragment === 'completedAppointments') {
     aboutTab.classList.remove("active");
     upcomingAppointmentsTab.classList.remove("active");
 }
+else if(fragment === 'subjectsMark'){
+    subjectsMarkContent.classList.add("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
+    aboutContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    subjectsMarkTab.classList.add("active");
+    upcomingAppointmentsTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
+    aboutTab.classList.remove("active");
+}
+
+///////////////////////////////////////////////////////////////////////
+

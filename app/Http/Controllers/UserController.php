@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Process;
+use App\Models\Subject;
 use App\Traits\GlobalFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -10,6 +11,7 @@ use Illuminate\Support\Carbon;
 class UserController extends Controller
 {
     use GlobalFunctions;
+
     /**
      * Display a listing of the resource.
      */
@@ -66,13 +68,20 @@ class UserController extends Controller
         //
     }
 
-    public function studentProfile()
+    public function studentProfile(Request $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
+        $subjects = Subject::all();
 
+        $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $user->studentProcesses()->where('date','>=',$current_time)->get();
-        $completedAppointments = $user->studentProcesses()->where('date','<',$current_time)->paginate(3)->fragment('completedAppointments');
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->get();
+
+        if ($selected_subject) {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+        } else {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+        }
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -110,29 +119,28 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        //return view('student.test',compact('completedAppointments'));
 
-        return view('student.profile',compact('user','upcomingAppointments','completedAppointments'));
+        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
     }
 
     public function studentProfileEdit()
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        return view('student.editProfile',compact('user'));
+        return view('student.editProfile', compact('user'));
     }
 
     public function showSubprocessMark($process_id)
     {
         $process = Process::find($process_id);
-        $process_mark=$process->marks;
+        $process_mark = $process->marks;
 
-        $total_mark=0;
+        $total_mark = 0;
         foreach ($process_mark as $mark)
             $total_mark += $mark->mark;
-        $process_mark->total_mark=$total_mark;
+        $process_mark->total_mark = $total_mark;
 
-        return view('student.showSubprocessMark',compact('process_mark'));
+        return view('student.showSubprocessMark', compact('process_mark'));
 
     }
 }
