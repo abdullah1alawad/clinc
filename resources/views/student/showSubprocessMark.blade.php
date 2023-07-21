@@ -28,10 +28,13 @@
                             <tr>
                                 <th>Total Mark</th>
                                 <th>{{$process_mark->total_mark}}</th>
-
                             </tr>
                             </tfoot>
                         </table>
+                        <div class="col-md-12 text-center">
+                            <a href="{{ \Illuminate\Support\Facades\URL::previous() }}#completedAppointments"
+                               class="back-btn">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -72,7 +72,7 @@ class UserController extends Controller
 
         $current_time = Carbon::now();
         $upcomingAppointments = $user->studentProcesses()->where('date','>=',$current_time)->get();
-        $completedAppointments = $user->studentProcesses()->where('date','<',$current_time)->get();
+        $completedAppointments = $user->studentProcesses()->where('date','<',$current_time)->paginate(3)->fragment('completedAppointments');
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -109,6 +109,8 @@ class UserController extends Controller
             $appointment->subject_name = $subject_name;
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
+
+        //return view('student.test',compact('completedAppointments'));
 
         return view('student.profile',compact('user','upcomingAppointments','completedAppointments'));
     }
