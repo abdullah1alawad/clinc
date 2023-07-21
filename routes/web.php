@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SubprocessMarkController;
 
 
 /*
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
 
     Route::get('/profile',[UserController::class, 'studentProfile'])->name('student.profile');
     Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
+    Route::get('/profile/sub-mark/{id}',[UserController::class, 'showSubprocessMark'])->name('student.showSubprocessMark');
 });
 
 /////////////////////end student routes//////////////////
@@ -48,6 +50,9 @@ Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
 
     Route::get('/profile',[UserController::class, 'doctorProfile'])->name('doctor.profile');
     Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
+    Route::get('/profile/set-sub-marks/{id}',[SubprocessMarkController::class,'create'])->name('doctor.setSubmarks');
+    Route::post('/profile/store-sub-marks',[SubprocessMarkController::class,'store'])->name('doctor.storeSubmarks');
+    Route::delete('/profile/delete-sub-marks/{id}',[SubprocessMarkController::class,'destroy'])->name('doctor.deleteSubmarks');
 });
 
 /////////////////////end doctor routes//////////////////

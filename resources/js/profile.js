@@ -1,3 +1,5 @@
+
+///////////////////////////////// tabs code  //////////////////////////////////////////////////////////////////////////////////////////
 // Get the tabs and tab content elements
 const aboutTab = document.getElementById("about-tab");
 const upcomingAppointmentsTab = document.getElementById("upcomingAppointments-tab");
@@ -38,4 +40,12 @@ completedAppointmentsTab.addEventListener("click", () => {
     completedAppointmentsTab.classList.add("active");
     aboutTab.classList.remove("active");
     upcomingAppointmentsTab.classList.remove("active");
+});
+/////////////////////////////////////////end tabs code //////////////////////////////////////////////////////////////
+import $ from 'jquery';
+
+$(document).ready(function() {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
 });

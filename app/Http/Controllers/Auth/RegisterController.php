@@ -90,8 +90,6 @@ class RegisterController extends Controller
             'role_id'=>['required'],
             'password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/', 'min:8','max:20', 'confirmed'],
         ],$errorMessages);
-
-
     }
 
     /**

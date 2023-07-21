@@ -50,7 +50,8 @@
                         <li class="nav-item">
                             <a class="nav-link" id="completedAppointments-tab" data-toggle="tab"
                                href="#completedAppointments" role="tab"
-                               aria-controls="completedAppointments" aria-selected="false">Your Completed Appointments</a>
+                               aria-controls="completedAppointments" aria-selected="false">Your Completed
+                                Appointments</a>
                         </li>
                     </ul>
                 </div>
@@ -122,20 +123,21 @@
                             </thead>
                             <tbody>
                             @foreach($upcomingAppointments as $appointment)
-                            <tr>
-                                <td>{{$appointment->doctor_name}}</td>
-                                <td>{{$appointment->patient_name}}</td>
-                                <td>{{$appointment->assistant_name}}</td>
-                                <td>{{$appointment->subject_name}}</td>
-                                <td>{{$appointment->chair_id}}</td>
-                                <td>{{$appointment->time_difference}}</td>
-                            </tr>
+                                <tr>
+                                    <td>{{$appointment->doctor_name}}</td>
+                                    <td>{{$appointment->patient_name}}</td>
+                                    <td>{{$appointment->assistant_name}}</td>
+                                    <td>{{$appointment->subject_name}}</td>
+                                    <td>{{$appointment->chair_id}}</td>
+                                    <td>{{$appointment->time_difference}}</td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
                          aria-labelledby="completedAppointments-tab">
+                        <h6>press any row to show sub-mark</h6>
                         <table>
                             <thead>
                             <tr>
@@ -148,8 +150,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($upcomingAppointments as $appointment)
-                                <tr>
+                            @foreach($completedAppointments as $appointment)
+                                <tr class="clickable-row" data-href="{{route('student.showSubprocessMark',$appointment->id)}}">
                                     <td>{{$appointment->doctor_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
                                     <td>{{$appointment->assistant_name}}</td>

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/profile.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/profile.js','resources/js/set-sub-marks.js'])
 
 </head>
 <body>

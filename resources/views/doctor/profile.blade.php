@@ -148,7 +148,7 @@
                             </thead>
                             <tbody>
                             @foreach($completedAppointments as $appointment)
-                                <tr>
+                                <tr class="clickable-row" data-href="{{route('doctor.setSubmarks',$appointment->id)}}">
                                     <td>{{$appointment->student_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
                                     <td>{{$appointment->assistant_name}}</td>
