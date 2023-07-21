@@ -31,6 +31,7 @@
                     <p>WORK SPACE</p>
                     <a href="">Search on Student</a><br/>
                     <a href="">Search on Patient</a><br/>
+                    <a href="">Search on Patient</a><br/>
                 </div>
             </div>
             <div class="col-md-8">
@@ -132,8 +133,27 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
-                         aria-labelledby="completedAppointments-tab">
+                        <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
+                             aria-labelledby="completedAppointments-tab">
+
+{{--                        <div style="display: flex; justify-content: space-between; align-items: center;">--}}
+{{--                            <h6>Press any row to show sub-mark</h6>--}}
+
+{{--                            <form method="GET" action="{{ route('doctor.profile') }}">--}}
+{{--                                <label for="subject" style="margin-right: 5px">Filter by subject:</label>--}}
+{{--                                <select name="subject" id="subject">--}}
+{{--                                    <option value="">All subjects</option>--}}
+{{--                                    @foreach($subjects as $subject)--}}
+{{--                                        <option value="{{ $subject->id }}"--}}
+{{--                                            {{ request()->input('subject') == $subject->id ? 'selected' : '' }}>--}}
+{{--                                            {{ $subject->name }}--}}
+{{--                                        </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                <button type="submit" class="btn btn-primary" style="margin-left: 5px">Filter</button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+
                         <table>
                             <thead>
                             <tr>
@@ -147,7 +167,8 @@
                             </thead>
                             <tbody>
                             @foreach($completedAppointments as $appointment)
-                                <tr class="clickable-row" data-href="{{route('doctor.setSubmarks',$appointment->id)}}">
+                                <tr class="clickable-row"
+                                    data-href="{{route('doctor.setSubmarks',$appointment->id)}}">
                                     <td>{{$appointment->student_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
                                     <td>{{$appointment->assistant_name}}</td>
@@ -158,6 +179,10 @@
                             @endforeach
                             </tbody>
                         </table>
+{{--                        <br>--}}
+{{--                        <div class="text-center">--}}
+{{--                            {!!$completedAppointments->links() !!}--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

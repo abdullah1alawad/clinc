@@ -53,6 +53,11 @@
                                aria-controls="completedAppointments" aria-selected="false">Your Completed
                                 Appointments</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="subjectsMark-tab" data-toggle="tab"
+                               href="#subjectsMark" role="tab"
+                               aria-controls="subjectsMark" aria-selected="false">Subjects Mark</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="tab-content profile-tab" id="myTabContent">
@@ -137,7 +142,26 @@
                     </div>
                     <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
                          aria-labelledby="completedAppointments-tab">
-                        <h6>press any row to show sub-mark</h6>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h6>Press any row to show sub-mark</h6>
+
+                            <form method="GET" action="{{ route('student.profile') }}">
+                                <label for="subject" style="margin-right: 5px">Filter by subject:</label>
+                                <select name="subject" id="subject">
+                                    <option value="">All subjects</option>
+                                    @foreach($subjects as $subject)
+                                        <option value="{{ $subject->id }}"
+                                            {{ request()->input('subject') == $subject->id ? 'selected' : '' }}>
+                                            {{ $subject->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-primary" style="margin-left: 5px">Filter</button>
+                            </form>
+                        </div>
+
+
                         <table>
                             <thead>
                             <tr>
@@ -163,9 +187,14 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <br>
                         <div class="text-center">
                             {!! $completedAppointments->links() !!}
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="subjectsMark" role="tabpanel"
+                         aria-labelledby="subjectsMark-tab">
+                        <h1>Hello</h1>
                     </div>
                 </div>
             </div>
