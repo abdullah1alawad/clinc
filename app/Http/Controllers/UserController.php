@@ -85,6 +85,8 @@ class UserController extends Controller
             $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
         }
 
+        $studentMarks = $user->studentMarks()->paginate(5)->fragment('subjectsMark');
+
         foreach ($upcomingAppointments as $appointment) {
 
             $date_from_database = Carbon::parse($appointment->date);
@@ -121,8 +123,13 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
+        foreach ($studentMarks as $mark) {
+            $subject_name = $mark->subject->name;
 
-        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
+            $mark->subject_name = $subject_name;
+        }
+
+        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
     }
 
     public function studentProfileEdit()
@@ -185,7 +192,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments','subjects'));
+        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
     }
 
     public function showSubprocessMark($process_id)
@@ -198,6 +205,6 @@ class UserController extends Controller
             $total_mark += $mark->mark;
         $process_mark->total_mark = $total_mark;
 
-        return view('student.showSubprocessMark',compact('process_mark'));
+        return view('student.showSubprocessMark', compact('process_mark'));
     }
 }

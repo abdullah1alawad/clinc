@@ -4,11 +4,9 @@
 const aboutTab = document.getElementById("about-tab");
 const upcomingAppointmentsTab = document.getElementById("upcomingAppointments-tab");
 const completedAppointmentsTab = document.getElementById("completedAppointments-tab");
-const subjectsMarkTab = document.getElementById("subjectsMark-tab");
 const aboutContent = document.getElementById("about");
 const upcomingAppointmentsContent = document.getElementById("upcomingAppointments");
 const completedAppointmentsContent = document.getElementById("completedAppointments");
-const subjectsMarkContent = document.getElementById("subjectsMark");
 
 // Add event listeners to the tabs
 aboutTab.addEventListener("click", () => {
@@ -44,18 +42,6 @@ completedAppointmentsTab.addEventListener("click", () => {
     upcomingAppointmentsTab.classList.remove("active");
 });
 
-subjectsMarkTab.addEventListener("click", () => {
-    // Show the "About" tab content and hide the "Timeline" tab content
-    subjectsMarkContent.classList.add("show", "active");
-    upcomingAppointmentsContent.classList.remove("show", "active");
-    completedAppointmentsContent.classList.remove("show", "active");
-    aboutContent.classList.remove("show", "active");
-    // Update the active class of the tabs
-    subjectsMarkTab.classList.add("active");
-    upcomingAppointmentsTab.classList.remove("active");
-    completedAppointmentsTab.classList.remove("active");
-    aboutTab.classList.remove("active");
-});
 /////////////////////////////////////////end tabs code //////////////////////////////////////////////////////////////
 
 
@@ -113,17 +99,6 @@ else if(fragment === 'completedAppointments') {
     completedAppointmentsTab.classList.add("active");
     aboutTab.classList.remove("active");
     upcomingAppointmentsTab.classList.remove("active");
-}
-else if(fragment === 'subjectsMark'){
-    subjectsMarkContent.classList.add("show", "active");
-    upcomingAppointmentsContent.classList.remove("show", "active");
-    completedAppointmentsContent.classList.remove("show", "active");
-    aboutContent.classList.remove("show", "active");
-    // Update the active class of the tabs
-    subjectsMarkTab.classList.add("active");
-    upcomingAppointmentsTab.classList.remove("active");
-    completedAppointmentsTab.classList.remove("active");
-    aboutTab.classList.remove("active");
 }
 
 ///////////////////////////////////////////////////////////////////////

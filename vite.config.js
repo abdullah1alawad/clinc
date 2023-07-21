@@ -8,7 +8,8 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
-                'resources/js/profile.js',
+                'resources/js/studentProfile.js',
+                'resources/js/doctorProfile.js',
                 'resources/js/set-sub-marks.js',
             ],
             refresh: true,

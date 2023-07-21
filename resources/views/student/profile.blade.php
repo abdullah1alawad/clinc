@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.student')
 
 @section('content')
 
@@ -194,7 +194,26 @@
                     </div>
                     <div class="tab-pane fade" id="subjectsMark" role="tabpanel"
                          aria-labelledby="subjectsMark-tab">
-                        <h1>Hello</h1>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Subject Name</th>
+                                <th>Mark</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($studentMarks as $mark)
+                                <tr>
+                                    <td>{{$mark->subject_name}}</td>
+                                    <td>{{$mark->mark}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <br>
+                        <div class="text-center">
+                            {!! $completedAppointments->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>
