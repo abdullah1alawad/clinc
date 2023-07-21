@@ -37,3 +37,7 @@ document.getElementById("addFieldBtn").addEventListener("click", function() {
     var fieldWrapper = document.getElementById("fieldWrapper");
     fieldWrapper.appendChild(clonedField);
 });
+
+function goBackToPrevious(anchor) {
+    window.location.href = document.referrer + anchor;
+}

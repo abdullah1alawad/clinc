@@ -31,7 +31,6 @@
                     <p>WORK SPACE</p>
                     <a href="">Search on Student</a><br/>
                     <a href="">Search on Patient</a><br/>
-                    <a href="">set student sub-marks</a>
                 </div>
             </div>
             <div class="col-md-8">

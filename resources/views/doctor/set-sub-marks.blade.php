@@ -67,8 +67,11 @@
                             </div>
                         @endif
 
+                        <div class="col-md-12 text-center">
+                            <a href="{{ \Illuminate\Support\Facades\URL::route('doctor.profile') }}#completedAppointments"
+                               class="back-btn">Back</a>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
