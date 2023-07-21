@@ -42,6 +42,9 @@ completedAppointmentsTab.addEventListener("click", () => {
     upcomingAppointmentsTab.classList.remove("active");
 });
 /////////////////////////////////////////end tabs code //////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////// back botton//////////////////////////////////////////////
 import $ from 'jquery';
 
 $(document).ready(function() {
@@ -49,3 +52,38 @@ $(document).ready(function() {
         window.location = $(this).data("href");
     });
 });
+
+
+///////////////////////////// end back botton /////////////////////////////
+
+
+
+let fragment = window.location.hash.substr(1);
+
+if(fragment === '' || fragment === 'about'){
+    aboutContent.classList.add("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    aboutTab.classList.add("active");
+    upcomingAppointmentsTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
+}
+else if(fragment === 'upcomingAppointments') {
+    upcomingAppointmentsContent.classList.add("show", "active");
+    aboutContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    upcomingAppointmentsTab.classList.add("active");
+    aboutTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
+}
+else if(fragment === 'completedAppointments') {
+    completedAppointmentsContent.classList.add("show", "active");
+    aboutContent.classList.remove("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    completedAppointmentsTab.classList.add("active");
+    aboutTab.classList.remove("active");
+    upcomingAppointmentsTab.classList.remove("active");
+}

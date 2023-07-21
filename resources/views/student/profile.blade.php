@@ -39,7 +39,7 @@
                 <div class="tabs-sec">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab"
+                            <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab"
                                aria-controls="about" aria-selected="true">About</a>
                         </li>
                         <li class="nav-item">
@@ -56,7 +56,7 @@
                     </ul>
                 </div>
                 <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                    <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Name</label>
@@ -151,7 +151,8 @@
                             </thead>
                             <tbody>
                             @foreach($completedAppointments as $appointment)
-                                <tr class="clickable-row" data-href="{{route('student.showSubprocessMark',$appointment->id)}}">
+                                <tr class="clickable-row"
+                                    data-href="{{route('student.showSubprocessMark',$appointment->id)}}">
                                     <td>{{$appointment->doctor_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
                                     <td>{{$appointment->assistant_name}}</td>
@@ -162,6 +163,9 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="text-center">
+                            {!! $completedAppointments->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>
