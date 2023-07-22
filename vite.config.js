@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/studentProfile.js',
+                'resources/js/studentProfileEdit.js',
                 'resources/js/doctorProfile.js',
                 'resources/js/set-sub-marks.js',
             ],
