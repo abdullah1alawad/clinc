@@ -1,4 +1,9 @@
-@extends('layouts.doctor')
+@extends('layouts.app')
+
+@section('head')
+    @parent
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/doctorProfile.js','resources/js/set-sub-marks.js'])
+@endsection
 
 @section('content')
 

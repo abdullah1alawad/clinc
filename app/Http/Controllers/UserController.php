@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ChangePhotoRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Models\Process;
 
 use App\Models\Subprocess_mark;
@@ -132,8 +135,7 @@ class UserController extends Controller
         return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
     }
 
-    public function studentProfileEdit()
-    {
+    public function studentProfileEdit(){
         $user = auth()->user();
 
         return view('student.editProfile', compact('user'));
@@ -182,6 +184,20 @@ class UserController extends Controller
         dd($request->input('photo'));
 
     }
+
+    public function studentProfileUpdate(UpdateRequest $request){
+        return 'hi';
+    }
+
+    public function studentChangePassword(ChangePasswordRequest $request){
+        return 'hi';
+    }
+
+    public function studentChangePhoto(ChangePhotoRequest $request){
+        return 'hi';
+    }
+
+
 
     public function doctorProfile(Request $request)
     {
