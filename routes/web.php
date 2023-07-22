@@ -49,7 +49,8 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
 Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
 
     Route::get('/profile',[UserController::class, 'doctorProfile'])->name('doctor.profile');
-    Route::get('/profile/edit',[UserController::class, 'studentProfileEdit'])->name('student.edit.profile');
+    Route::get('/profile/edit',[UserController::class, 'doctorProfileEdit'])->name('doctor.profile.edit');
+    Route::put('/profile/update',[UserController::class, 'doctorProfileUpdate'])->name('doctor.profile.update');
     Route::get('/profile/set-sub-marks/{id}',[SubprocessMarkController::class,'create'])->name('doctor.setSubmarks');
     Route::post('/profile/store-sub-marks',[SubprocessMarkController::class,'store'])->name('doctor.storeSubmarks');
     Route::delete('/profile/delete-sub-marks/{id}',[SubprocessMarkController::class,'destroy'])->name('doctor.deleteSubmarks');

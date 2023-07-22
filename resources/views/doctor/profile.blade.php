@@ -136,23 +136,23 @@
                         <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
                              aria-labelledby="completedAppointments-tab">
 
-{{--                        <div style="display: flex; justify-content: space-between; align-items: center;">--}}
-{{--                            <h6>Press any row to show sub-mark</h6>--}}
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h6>Press any row to show sub-mark</h6>
 
-{{--                            <form method="GET" action="{{ route('doctor.profile') }}">--}}
-{{--                                <label for="subject" style="margin-right: 5px">Filter by subject:</label>--}}
-{{--                                <select name="subject" id="subject">--}}
-{{--                                    <option value="">All subjects</option>--}}
-{{--                                    @foreach($subjects as $subject)--}}
-{{--                                        <option value="{{ $subject->id }}"--}}
-{{--                                            {{ request()->input('subject') == $subject->id ? 'selected' : '' }}>--}}
-{{--                                            {{ $subject->name }}--}}
-{{--                                        </option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                                <button type="submit" class="btn btn-primary" style="margin-left: 5px">Filter</button>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
+                            <form method="GET" action="{{ route('doctor.profile') }}">
+                                <label for="subject" style="margin-right: 5px">Filter by subject:</label>
+                                <select name="subject" id="subject">
+                                    <option value="">All subjects</option>
+                                    @foreach($subjects as $subject)
+                                        <option value="{{ $subject->id }}"
+                                            {{ request()->input('subject') == $subject->id ? 'selected' : '' }}>
+                                            {{ $subject->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="btn btn-primary" style="margin-left: 5px">Filter</button>
+                            </form>
+                        </div>
 
                         <table>
                             <thead>
@@ -179,10 +179,10 @@
                             @endforeach
                             </tbody>
                         </table>
-{{--                        <br>--}}
-{{--                        <div class="text-center">--}}
-{{--                            {!!$completedAppointments->links() !!}--}}
-{{--                        </div>--}}
+                            <br>
+                            <div class="text-center">
+                                {!!$completedAppointments->links() !!}
+                            </div>
                     </div>
                 </div>
             </div>

@@ -1,29 +1,30 @@
-@extends('layouts.student')
+@extends('layouts.doctor')
 
 @section('content')
 
     <div class="container emp-profile">
-        <form action="{{route('doctor.profile.update')}}" method="post" enctype="multipart/form-data">
-            @method('put')
-            @csrf
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
                         <img
-                            src="{{asset('images/'.$user->photo)}}"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
                             alt=""/>
                         <div class="file btn btn-lg btn-primary">
                             Change Photo
-                            <input type="file" name="photo"/>
+                            <input type="file" name="file"/>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>
-                            {{$user->name}}
+                            Kshiti Ghelani
                         </h5>
-
+                        <h6>
+                            Web Developer and Designer
+                        </h6>
+                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -40,7 +41,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-work">
-{{--                        keep it empty        --}}
+                        {{--                        keep it empty        --}}
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -51,7 +52,7 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" value="{{$user->name}}">
+                                    <input type="text" name="name" value="Kshiti Ghelani">
                                 </div>
                             </div>
                             <div class="row py-1">
@@ -59,7 +60,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" name="email" value="{{$user->email}}">
+                                    <input type="email" name="email" value="kshitighelani@gmail.com">
                                 </div>
                             </div>
                             <div class="row py-1">
@@ -67,7 +68,7 @@
                                     <label>Phone</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="phone" value="{{$user->phone}}">
+                                    <input type="text" name="phone" value="123 456 7890">
                                 </div>
                             </div>
                             <div class="row py-1">
@@ -75,7 +76,7 @@
                                     <label>National_id</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="national_id" value="{{$user->national_id}}">
+                                    <input type="text" name="national_id" value="123 456 7890">
                                 </div>
                             </div>
                             <div class="row py-2">
@@ -84,7 +85,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio-container">
-                                        <input type="radio" id="male" name="gender" value="0" checked>
+                                        <input type="radio" id="male" name="gender" value="0">
                                         <label for="male">Male</label>
                                     </div>
 
@@ -127,15 +128,6 @@
                     </div>
                 </div>
             </div>
-            @if($errors->any())
-                <div class="error-message">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
             <div class="row justify-content-center py-4">
                 <div class="col-md-5 text-center">
