@@ -8,6 +8,14 @@
 @section('content')
 
     <div class="container emp-profile">
+
+        @if(session('success'))
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
+    <div class="container emp-profile">
         <div class="row">
             <div class="col-md-4">
                 <form action="{{route('doctor.change.photo')}}" method="post" enctype="multipart/form-data">
@@ -37,6 +45,9 @@
                     </h6>
 
                 </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{{route('doctor.profile')}}" class="profile-edit-btn">Profile</a>
             </div>
         </div>
         <div class="row justify-content-end">
@@ -186,6 +197,7 @@
             </div>
 
         </div>
+    </div>
     </div>
 
 @endsection

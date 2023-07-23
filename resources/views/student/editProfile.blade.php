@@ -9,15 +9,22 @@
 
     <div class="container emp-profile">
 
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="container emp-profile">
         <div class="row">
             <div class="col-md-4">
-                <form action="{{route('student.change.photo')}}" method="post" enctype="multipart/form-data">
+                <form method="POST" action="{{route('student.change.photo')}}" enctype="multipart/form-data">
                     @csrf
                         <div class="profile-img">
-                            <img src="{{asset('images/' . $user->photo)}}" alt="image error"/>
+                            <img src="{{asset('images/' . (($user->photo != null) ? $user->photo : '123456.jpg') )}}" alt="image error"/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="photo"/>
+                                <input type="file" name="photo" accept="image/*"/>
                             </div>
                         </div>
                         <div class="text-center">
@@ -37,6 +44,9 @@
                     </h6>
 
                 </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{{route('student.profile')}}" class="profile-edit-btn">Profile</a>
             </div>
         </div>
         <div class="row justify-content-end">

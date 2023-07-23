@@ -74,6 +74,7 @@ class UserController extends Controller
         //
     }
 
+    //////////////////////////////////////// student section ////////////////////////////////////////////////
     public function studentProfile(Request $request)
     {
         $user = auth()->user();
@@ -136,6 +137,19 @@ class UserController extends Controller
         return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
     }
 
+    public function showSubprocessMark($process_id)
+    {
+        $process = Process::find($process_id);
+        $process_mark = $process->marks;
+
+        $total_mark = 0;
+        foreach ($process_mark as $mark)
+            $total_mark += $mark->mark;
+        $process_mark->total_mark = $total_mark;
+
+        return view('student.showSubprocessMark', compact('process_mark'));
+    }
+
     public function studentProfileEdit(){
         $user = auth()->user();
 
@@ -143,27 +157,7 @@ class UserController extends Controller
     }
 
     public function studentProfileUpdate(UpdateRequest $request){
-        return 'hi';
-    }
-
-    public function studentChangePassword(ChangePasswordRequest $request){
-        return 'hi';
-    }
-
-    public function studentChangePhoto(ChangePhotoRequest $request){
-        return 'hi';
-    }
-
-    public function doctorProfileEdit()
-    {
         $user = auth()->user();
-
-        return view('doctor.edit-profile', compact('user'));
-    }
-
-    public function doctorProfileUpdate(UpdateRequest $request)
-    {
-        $user=auth()->user();
 
         $user->name=$request->input('name');
         $user->email=$request->input('email');
@@ -172,32 +166,41 @@ class UserController extends Controller
         $user->phone=$request->input('phone');
 
         $user->save();
-        return redirect()->route('doctor.profile');
+
+        return redirect()->route('student.edit.profile')
+            ->with('success', 'Your Profile Has Been Updated Successfully!');
+
     }
 
-    public function doctorChangePassword(ChangePasswordRequest $request)
-    {
+    public function studentChangePassword(ChangePasswordRequest $request){
         $user=auth()->user();
 
-        $user->password=Hash::make($request->input('newPassword'));
+        $user->password= Hash::make($request->input('newPassword'));
 
         $user->save();
-        return redirect()->route('doctor.profile');
+
+        return redirect()->route('student.edit.profile')
+            ->with('success', 'Your Password Has Been Updated Successfully!');
     }
 
-    public function doctorChangePhoto(ChangePhotoRequest $request)
-    {
-        $user=auth()->user();
+    public function studentChangePhoto(ChangePhotoRequest $request){
+        $user = auth()->user();
 
-        if($request->hasFile('photo'))
-        {
-            $url=saveImage($request->file('photo'),'images');
-            $user->photo=$url;
-        }
+
+        $photoBath=saveImage( $request->file('photo'),'images');
+
+        $user->photo=$photoBath;
+
         $user->save();
-        return redirect()->route('doctor.profile');
+
+        return redirect()->route('student.edit.profile')
+            ->with('success', 'Your Profile Photo Has Been Updated Successfully!');
     }
 
+
+    //////////////////////////////////////// end student section /////////////////////////////////////////////
+
+    /////////////////////////////////////// doctor section //////////////////////////////////////////////////
     public function doctorProfile(Request $request)
     {
         $user = auth()->user();
@@ -253,16 +256,53 @@ class UserController extends Controller
         return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
     }
 
-    public function showSubprocessMark($process_id)
+    public function doctorProfileEdit()
     {
-        $process = Process::find($process_id);
-        $process_mark = $process->marks;
+        $user = auth()->user();
 
-        $total_mark = 0;
-        foreach ($process_mark as $mark)
-            $total_mark += $mark->mark;
-        $process_mark->total_mark = $total_mark;
-
-        return view('student.showSubprocessMark', compact('process_mark'));
+        return view('doctor.edit-profile', compact('user'));
     }
+
+    public function doctorProfileUpdate(UpdateRequest $request)
+    {
+        $user=auth()->user();
+
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->national_id=$request->input('national_id');
+        $user->gender=$request->input('gender');
+        $user->phone=$request->input('phone');
+
+        $user->save();
+        return redirect()->route('doctor.profile.edit')
+            ->with('success', 'Your Profile Has Been Updated Successfully!');
+    }
+
+    public function doctorChangePhoto(ChangePhotoRequest $request)
+    {
+        $user=auth()->user();
+
+        if($request->hasFile('photo'))
+        {
+            $url=saveImage($request->file('photo'),'images');
+            $user->photo=$url;
+        }
+        $user->save();
+        return redirect()->route('doctor.profile.edit')
+            ->with('success', 'Your Profile Photo Has Been Updated Successfully!');
+    }
+
+    public function doctorChangePassword(ChangePasswordRequest $request)
+    {
+        $user=auth()->user();
+
+        $user->password=Hash::make($request->input('newPassword'));
+
+        $user->save();
+        return redirect()->route('doctor.profile.edit')
+            ->with('success', 'Your Password Has Been Updated Successfully!');
+    }
+
+    ///////////////////////////////////// end doctor section /////////////////////////////////////////////
 }
+
