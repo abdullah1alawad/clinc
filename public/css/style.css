@@ -215,3 +215,13 @@ tr:hover {
 /* /////////////////////  pagination ////////////////////////    */
 
 
+/* ////////////////////////////  patient //////////////////*/
+
+.patient-class label{
+    font-weight: 600;
+}
+
+.patient-class span{
+    font-weight: 300;
+    margin-left: 5%;
+}

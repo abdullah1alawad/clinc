@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -61,3 +62,12 @@ Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
 });
 
 /////////////////////end doctor routes//////////////////
+
+//////////////////// patient routes ////////////////////
+
+Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
+
+    Route::get('/information/{id}',[PatientController::class, 'show'])->name('patient.information');
+});
+
+//////////////////// end patient routes ////////////////////

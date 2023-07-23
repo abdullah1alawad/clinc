@@ -20,6 +20,7 @@ class Patient extends Authenticatable
     protected $fillable = [
         'student_id','doctor_id',
         'name','gender',
+        'national_id',
         'birth_date',
         'height','weight',
         'address','job',
@@ -71,6 +72,30 @@ class Patient extends Authenticatable
 
     public function setGenderAttribute($val){
         $this->attributes['gender']=strtolower($val)=='female'? 1 : 0;
+    }
+
+    public function getQuestionsAttribute($val){
+        $ret = array();
+        while($val != 0){
+            if($val&1)
+                $ret[]=1;
+            else
+                $ret[]=0;
+            $val/=2;
+        }
+
+        return $ret;
+    }
+
+    public function setQuestionsAttribute($val){
+        $len = count($val);
+        $ans = 0;
+
+        for($i = 0;$i < $len;$i++){
+            $ans += pow(2,$i) * $val[$i];
+        }
+
+        $this->attributes['questions'] = $ans;
     }
 
 }

@@ -34,9 +34,11 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Patient $patient)
+    public function show($id)
     {
-        //
+        $patient=Patient::find($id);
+
+        return view('patient.information',compact('patient'));
     }
 
     /**

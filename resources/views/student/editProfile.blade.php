@@ -123,7 +123,6 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="radio-container">
-                                        <input type="radio" id="male" name="gender" value="0" checked>
                                         <input type="radio" id="male" name="gender"
                                                value="0" {{($user->gender == 'Male') ? 'checked' : ''}}>
                                         <label for="male">Male</label>
@@ -184,7 +183,7 @@
                             </div>
                             <div class="col-md-7 text-center">
                                 <input type="submit" class="profile-edit-btn" name="changePassword"
-                                       value="Edit Profile"/>
+                                       value="Edit Password"/>
                             </div>
                         </form>
                     </div>
