@@ -44,6 +44,7 @@ class SubprocessMarkController extends Controller
             'process_id.required'=>'The student_id is required.',
             'process_id.numeric'=>'The student_id can contain numbers only.',
             'name.required'=>'The sub-process name is required.',
+            'name.*.string'=>'The name must be a string.',
             'mark.required'=>'The sub-mark filed is required.',
             'mark.*.numeric'=>'The sub-mark can contain numbers only.',
         ];

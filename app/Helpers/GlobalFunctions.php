@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 if(!function_exists('calculateAge')) {
     function calculateAge($birthdate)
@@ -51,12 +53,16 @@ if(!function_exists('saveImage')) {
     {
         //save photo in folder
         //folder must be full path ex:images/student or images
-
+        $resizedImage=Image::make($photo)->resize(300,200);
         $file_extension = $photo->getClientOriginalExtension();
         $file_name = time() . '.' . $file_extension;
         $path = $folder;
-        $photo->move($path, $file_name);
+        $resizedImage->save(public_path($path . '/' . $file_name));
+//        $photo->move($path, $file_name);
 
         return $file_name;
+
+//        $resizedImage=Image::make($photo)->resize(300,200);
+//        $resizedImage->save(public_path($folder . $file_name));
     }
 }

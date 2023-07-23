@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a href="{{route('student.edit.profile')}}" class="profile-edit-btn">Edit Profile</a>
+                <a href="{{route('doctor.profile.edit')}}" class="profile-edit-btn">Edit Profile</a>
             </div>
         </div>
         <div class="row">

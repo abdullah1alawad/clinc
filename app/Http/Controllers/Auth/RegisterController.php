@@ -102,7 +102,7 @@ class RegisterController extends Controller
     {
         $photoPath="123456.jpg";
         if(isset($data['photo']))
-            $photoPath=saveImage($data['photo'],'images');
+            $photoPath=saveImage($data['photo'],'images/');
 
         $user=User::create([
             'name' => $data['name'],
