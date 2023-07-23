@@ -7,48 +7,22 @@
 
 @section('content')
 
-    <div class="container emp-profile">
-{{--        <form action="{{route('doctor.profile.update')}}" method="post" enctype="multipart/form-data">--}}
-{{--            @method('put')--}}
-{{--            @csrf--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-4">--}}
-{{--                    <div class="profile-img">--}}
-{{--                        <img--}}
-{{--                            src="{{asset('images/'.$user->photo)}}"--}}
-{{--                            alt=""/>--}}
-{{--                        <div class="file btn btn-lg btn-primary">--}}
-{{--                            Change Photo--}}
-{{--                            <input type="file" name="photo"/>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-md-6">--}}
-{{--                    <div class="profile-head">--}}
-{{--                        <h5>--}}
-{{--                            {{$user->name}}--}}
-{{--                        </h5>--}}
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
 
-{{--                        <ul class="nav nav-tabs" id="myTab" role="tablist">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"--}}
-{{--                                   aria-controls="home" aria-selected="true">About</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"--}}
-{{--                                   aria-controls="profile" aria-selected="false">Change Password</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
+    <div class="container emp-profile">
         <div class="row">
             <div class="col-md-4">
-                <form action="{{route('student.change.photo')}}" method="post" enctype="multipart/form-data">
+                <form method="POST" action="{{route('student.change.photo')}}" enctype="multipart/form-data">
                     @csrf
                         <div class="profile-img">
-                            <img src="{{asset('images/' . $user->photo)}}" alt="image error"/>
+                            <img src="{{asset('images/' . (($user->photo != null) ? $user->photo : '123456.jpg') )}}" alt="image error"/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="photo"/>
+                                <input type="file" name="photo" accept="image/*"/>
                             </div>
                         </div>
                         <div class="text-center">
@@ -68,6 +42,9 @@
                     </h6>
 
                 </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{{route('student.profile')}}" class="profile-edit-btn">Profile</a>
             </div>
         </div>
         <div class="row justify-content-end">
@@ -213,24 +190,6 @@
                     </div>
                 </div>
             </div>
-{{--            @if($errors->any())--}}
-{{--                <div class="error-message">--}}
-{{--                    <ul>--}}
-{{--                        @foreach ($errors->all() as $error)--}}
-{{--                            <li>{{ $error }}</li>--}}
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-
-{{--            <div class="row justify-content-center py-4">--}}
-{{--                <div class="col-md-5 text-center">--}}
-{{--                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-        </form>
-
         </div>
     </div>
 

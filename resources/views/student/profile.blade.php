@@ -12,7 +12,7 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <img
-                        src="{{asset('images/' . $user->photo)}}"
+                        src="{{asset('images/' . (($user->photo != null) ? $user->photo : '123456.jpg') )}}"
                         alt="image error"/>
                 </div>
             </div>
