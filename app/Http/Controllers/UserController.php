@@ -263,32 +263,9 @@ class UserController extends Controller
         return view('doctor.edit-profile', compact('user'));
     }
 
-    public function doctorProfileUpdate(Request $request)
+    public function doctorProfileUpdate(UpdateRequest $request)
     {
         $user=auth()->user();
-
-        $errorMessages=[
-            'name.required'=>'The name field is required.',
-            'name.regex'=>'The name can have only letters.',
-            'name.max'=>'The name must be less than or equal to 40 characters.',
-            'national_id.required'=>'The national id field is required.',
-            'national_id.regex'=>'The national id can only have numbers.',
-            'national_id.max'=>'The national id must be less than or equal to 30 digits.',
-            'gender.required'=>'The gender is required.',
-            'phone.required'=>'The phone field is required.',
-            'phone.regex'=>'The phone can only have a digits.',
-            'phone.max'=>'The phone can only have 10 digits .',
-            'photo.image'=>'you must choose a valid image like png , jpg etc ....',
-            'photo.max'=>'choose an image size less than or equal to 2048KB.',
-        ];
-        $request->validate([
-            'name' => ['required','regex:/^[A-Za-z\s]+$/', 'max:40'],
-            'email'=>['required','email','unique:users'],
-            'national_id'=>['required','regex:/^[0-9]+$/', 'max:30'],
-            'gender'=>['required'],
-            'phone'=>['required','regex:/^[0-9]+$/','max:10','unique:users'],
-            'photo' => ['image', 'max:2048'], // Replace 'photo' with the name of your input field
-        ],$errorMessages);
 
         $user->name=$request->input('name');
         $user->email=$request->input('email');
@@ -296,8 +273,34 @@ class UserController extends Controller
         $user->gender=$request->input('gender');
         $user->phone=$request->input('phone');
 
-        dd($request->input('photo'));
+        $user->save();
+        return redirect()->route('doctor.profile.edit')
+            ->with('success', 'Your Profile Has Been Updated Successfully!');
+    }
 
+    public function doctorChangePhoto(ChangePhotoRequest $request)
+    {
+        $user=auth()->user();
+
+        if($request->hasFile('photo'))
+        {
+            $url=saveImage($request->file('photo'),'images');
+            $user->photo=$url;
+        }
+        $user->save();
+        return redirect()->route('doctor.profile.edit')
+            ->with('success', 'Your Profile Photo Has Been Updated Successfully!');
+    }
+
+    public function doctorChangePassword(ChangePasswordRequest $request)
+    {
+        $user=auth()->user();
+
+        $user->password=Hash::make($request->input('newPassword'));
+
+        $user->save();
+        return redirect()->route('doctor.profile.edit')
+            ->with('success', 'Your Password Has Been Updated Successfully!');
     }
 
     ///////////////////////////////////// end doctor section /////////////////////////////////////////////

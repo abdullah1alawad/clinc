@@ -51,9 +51,15 @@
                                 <!-- The first field -->
                                 <div class="field-container1 col-md-5">
                                     sub-process name : <input type="text" class="form-control @error('name') is-invalid @enderror" name="name[]" placeholder="Enter a value">
+                                @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                                 </div>
                                 <div class="field-container2 col-md-5">
                                     sub-mark : <input type="number" class="form-control @error('mark') is-invalid @enderror" name="mark[]" placeholder="Enter a value">
+                                    @error('mark')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
@@ -64,11 +70,7 @@
 
                         @if($errors->any())
                             <div class="error-message">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                                <p class="btn-danger" style="background: white;color: red">{{$errors->first()}}</p>
                             </div>
                         @endif
 

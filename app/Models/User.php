@@ -82,7 +82,8 @@ class User extends Authenticatable
         return (!$val)?'Male':'Female';
     }
 
-    public function setGenderAttribute($val){
-        $this->attributes['gender']=strtolower($val)=='female'? 1 : 0;
-    }
+//    public function setGenderAttribute($val){
+//        $this->attributes['gender']=strtolower($val)=='female'? 1 : 0;
+//        dd($this->attributes['gender']);
+//    }
 }

@@ -12,6 +12,7 @@ export default defineConfig({
                 'resources/js/studentProfileEdit.js',
                 'resources/js/doctorProfile.js',
                 'resources/js/set-sub-marks.js',
+                'resources/js/doctorProfileEdit.js',
             ],
             refresh: true,
         }),
