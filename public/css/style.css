@@ -290,3 +290,41 @@ tr:hover {
     color: #fff;
     border-radius: 5px;
 }
+
+.patient-class .radio-container label {
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #eee;
+    color: #333;
+    margin-bottom: 0px;
+}
+
+.patient-class .profile-edit-btn {
+    display: inline-block;
+    background-color: darkgray;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 2%;
+    border-radius: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 70%;
+}
+
+.patient-class .profile-edit-btn:hover {
+    background-color: #40abb0;
+    color: white;
+    text-decoration: none;
+}
+
+/*.patient-class select {*/
+/*    display: none;*/
+/*}*/
+/*.patient-class select option {*/
+/*    display: inline;*/
+/*}*/
