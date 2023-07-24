@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/js/doctorProfile.js',
                 'resources/js/set-sub-marks.js',
                 'resources/js/doctorProfileEdit.js',
+                'resources/js/patientInfo.js',
             ],
             refresh: true,
         }),

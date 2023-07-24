@@ -78,9 +78,9 @@ class Patient extends Authenticatable
         $ret = array();
         while($val != 0){
             if($val&1)
-                $ret[]=1;
+                $ret[]='YES';
             else
-                $ret[]=0;
+                $ret[]='NO';
             $val/=2;
         }
 

@@ -72,3 +72,10 @@ Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
 });
 
 //////////////////// end patient routes ////////////////////
+
+
+/////////////////// test /////////////////////////
+Route::get('/test',function (){
+    return view('student.test');
+});
+/////////////////// end test /////////////////////////
