@@ -307,14 +307,88 @@ class UserController extends Controller
 
     public function doctorSearchPage()
     {
-        $users=User::all();
+        $users = User::paginate(5)->fragment('users');
         return view('doctor.search-student',compact('users'));
     }
 
     public function doctorSearchStudent(SearchRequest $request)
     {
+        $national_id = $request->national_id;
 
-        return redirect()->back();
+        if ($national_id) {
+            // Search query is present, perform the search
+            $users = User::where('national_id', 'LIKE', '%' . $national_id . '%')->paginate(5)->appends(['national_id' => $national_id]);
+        } else {
+            // No search query, show all users
+            $users = User::paginate(5)->fragment('users');
+        }
+
+        return view('doctor.search-student', compact('users'));
+    }
+
+
+    public function doctorShowStudent($id,Request $request)
+    {
+        $user = User::find($id);
+        $subjects = Subject::all();
+
+        $selected_subject = $request->query('subject');
+        $current_time = Carbon::now();
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->get();
+
+        if ($selected_subject) {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+        } else {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+        }
+
+        $studentMarks = $user->studentMarks()->paginate(5)->fragment('subjectsMark');
+
+        foreach ($upcomingAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+            $student_name = $appointment->student->name;
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        foreach ($completedAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+            $student_name = $appointment->student->name;
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->student_name = $student_name;
+            $appointment->time_difference = $time_difference;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        foreach ($studentMarks as $mark) {
+            $subject_name = $mark->subject->name;
+
+            $mark->subject_name = $subject_name;
+        }
+
+        return view('doctor.show-student', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
     }
 
     ///////////////////////////////////// end doctor section /////////////////////////////////////////////

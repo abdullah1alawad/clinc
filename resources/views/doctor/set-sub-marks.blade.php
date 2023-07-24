@@ -75,8 +75,13 @@
                         @endif
 
                         <div class="col-md-12 text-center">
+                            @if(auth()->user()->id == $student->id)
                             <a href="{{ \Illuminate\Support\Facades\URL::route('doctor.profile') }}#completedAppointments"
                                class="back-btn">Back</a>
+                            @else
+                            <a href="{{ \Illuminate\Support\Facades\URL::route('doctor.show.student',$student->id) }}#completedAppointments"
+                               class="back-btn">Back</a>
+                            @endif
                         </div>
                     </div>
                 </div>
