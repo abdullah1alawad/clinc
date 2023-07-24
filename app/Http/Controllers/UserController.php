@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangePhotoRequest;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\UpdateRequest;
 use App\Models\Process;
 
 use App\Models\Subprocess_mark;
 use App\Models\Subject;
+use App\Models\User;
 use App\Traits\GlobalFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -303,6 +305,124 @@ class UserController extends Controller
             ->with('success', 'Your Password Has Been Updated Successfully!');
     }
 
+    public function doctorSearchPage()
+    {
+        $users=User::all();
+        return view('doctor.search-student',compact('users'));
+    }
+
+    public function doctorSearchStudent(SearchRequest $request)
+    {
+
+        return redirect()->back();
+    }
+
     ///////////////////////////////////// end doctor section /////////////////////////////////////////////
+
+
+    /////////////////////////////////////// assistant section //////////////////////////////////////////////////
+    public function assistantProfile(Request $request)
+    {
+        $user = auth()->user();
+        $subjects = Subject::all();
+
+        $selected_subject = $request->query('subject');
+        $current_time = Carbon::now();
+        $upcomingAppointments = $user->assistantProcesses()->where('date', '>=', $current_time)->get();
+
+        if ($selected_subject) {
+            $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+        } else {
+            $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+        }
+
+        foreach ($upcomingAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+
+            $student_name = $appointment->student->name;
+            $patient_name = $appointment->patient->name;
+            $doctor_name = $appointment->doctor->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+
+        foreach ($completedAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+
+            $student_name = $appointment->student->name;
+            $patient_name = $appointment->patient->name;
+            $doctor_name = $appointment->doctor->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
+    }
+
+    public function assistantProfileEdit()
+    {
+        $user = auth()->user();
+
+        return view('assistant.edit-profile', compact('user'));
+    }
+
+    public function assistantProfileUpdate(UpdateRequest $request)
+    {
+        $user=auth()->user();
+
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->national_id=$request->input('national_id');
+        $user->gender=$request->input('gender');
+        $user->phone=$request->input('phone');
+
+        $user->save();
+        return redirect()->route('assistant.profile.edit')
+            ->with('success', 'Your Profile Has Been Updated Successfully!');
+    }
+
+    public function assistantChangePhoto(ChangePhotoRequest $request)
+    {
+        $user=auth()->user();
+
+        if($request->hasFile('photo'))
+        {
+            $url=saveImage($request->file('photo'),'images');
+            $user->photo=$url;
+        }
+        $user->save();
+        return redirect()->route('assistant.profile.edit')
+            ->with('success', 'Your Profile Photo Has Been Updated Successfully!');
+    }
+
+    public function assistantChangePassword(ChangePasswordRequest $request)
+    {
+        $user=auth()->user();
+
+        $user->password=Hash::make($request->input('newPassword'));
+
+        $user->save();
+        return redirect()->route('assistant.profile.edit')
+            ->with('success', 'Your Password Has Been Updated Successfully!');
+    }
+
+    ///////////////////////////////////// end assistant section /////////////////////////////////////////////
 }
 
