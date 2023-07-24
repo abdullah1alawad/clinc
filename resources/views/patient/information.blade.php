@@ -22,6 +22,10 @@
                                     <td>{{$patient->name}}</td>
                                 </tr>
                                 <tr>
+                                    <th>National Id</th>
+                                    <td>{{$patient->national_id}}</td>
+                                </tr>
+                                <tr>
                                     <th>Gender</th>
                                     <td>{{$patient->gender}}</td>
                                 </tr>
@@ -59,7 +63,7 @@
                         <section id="section2">
                             <table>
                                 <tr>
-                                    <th>Last Medical Scan Date</th>
+                                    <th class="col-md-8">Last Medical Scan Date</th>
                                     <td>{{$patient->last_medical_scan_date}}</td>
                                 </tr>
                                 <tr>
@@ -101,7 +105,7 @@
                             <p>Do you have or have you had any of the following diseases or conditions?</p>
                             <table>
                                 <tr>
-                                    <th>Pneumonia or Pulmonary Heart Disease (rheumatic)</th>
+                                    <th class="col-md-10">Pneumonia or Pulmonary Heart Disease (rheumatic)</th>
                                     <td>{{$patient->questions[4]}}</td>
                                 </tr>
                                 <tr>
@@ -192,7 +196,7 @@
                                 </tr>
                                 <tr>
                                     <th>Other disease</th>
-                                    <td>link</td>
+                                    <td><a href="{{route('patient.diseases',$patient->id)}}">Show</a></td>
                                 </tr>
                             </table>
                         </section>
@@ -200,7 +204,7 @@
                         <section id="section4">
                             <table>
                                 <tr>
-                                    <th>Have you had any abnormal bleeding</th>
+                                    <th class="col-md-10">Have you had any abnormal bleeding</th>
                                     <td>{{$patient->questions[26]}}</td>
                                 </tr>
                                 <tr>
@@ -230,7 +234,7 @@
                             <p>Do you take any of the following?</p>
                             <table>
                                 <tr>
-                                    <th>Antibiotics or sulfa drugs</th>
+                                    <th class="col-md-10">Antibiotics or sulfa drugs</th>
                                     <td>{{$patient->questions[31]}}</td>
                                 </tr>
                                 <tr>
@@ -271,7 +275,7 @@
                                 </tr>
                                 <tr>
                                     <th>Other medicine</th>
-                                    <td>link</td>
+                                    <td><a href="{{route('patient.medicines',$patient->id)}}">Show</a></td>
                                 </tr>
                             </table>
                         </section>
@@ -280,7 +284,7 @@
                             <p>Do you have any allergies or have you ever had an allergic reaction to:</p>
                             <table>
                                 <tr>
-                                    <th>Local anesthesia (Novocaine, Lidocaine)</th>
+                                    <th class="col-md-10">Local anesthesia (Novocaine, Lidocaine)</th>
                                     <td>{{$patient->questions[41]}}</td>
                                 </tr>
                                 <tr>

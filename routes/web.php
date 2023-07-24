@@ -85,6 +85,10 @@ Route::group(['prefix' => 'assistant' , 'middleware' => 'auth'],function(){
 Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
 
     Route::get('/information/{id}',[PatientController::class, 'show'])->name('patient.information');
+    Route::get('/diseases/{id}',[PatientController::class, 'diseases'])->name('patient.diseases');
+    Route::get('/medicines/{id}',[PatientController::class, 'medicines'])->name('patient.medicines');
+    Route::get('/create',[PatientController::class, 'create'])->name('patient.create');
+    Route::post('/store',[PatientController::class, 'store'])->name('patient.store');
 });
 
 //////////////////// end patient routes ////////////////////

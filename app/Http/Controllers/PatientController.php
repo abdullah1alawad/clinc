@@ -20,7 +20,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('patient.create');
     }
 
     /**
@@ -28,7 +28,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "hi";
     }
 
     /**
@@ -63,5 +63,17 @@ class PatientController extends Controller
     public function destroy(Patient $patient)
     {
         //
+    }
+
+    public function diseases($id){
+        $diseases = Patient::find($id)->diseases;
+
+        return view('patient.diseases',compact('diseases'));
+    }
+
+    public function medicines($id){
+        $medicines = Patient::find($id)->medicines;
+
+        return view('patient.medicines',compact('medicines'));
     }
 }

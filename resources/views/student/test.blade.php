@@ -32,7 +32,8 @@
             transition: all 0.2s ease-in-out;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav li.active a {
             background-color: #333;
             color: #fff;
             border-radius: 5px;
