@@ -225,3 +225,68 @@ tr:hover {
     font-weight: 300;
     margin-left: 5%;
 }
+
+.patient-class table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.patient-class th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+.patient-class th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.patient-class p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.patient-class img{
+    height: 200px;
+    width: 200px;
+}
+
+.patient-class section {
+    /*height: 100vh;*/
+    margin-bottom: 5%;
+    display: none;
+}
+.patient-class section:first-of-type {
+    display: block;
+}
+
+.patient-class nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.patient-class nav li {
+    margin: 0 10px;
+}
+
+.patient-class nav a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.patient-class nav a:hover {
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}

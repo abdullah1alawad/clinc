@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/assistantProfile.js',
                 'resources/js/assistantProfileEdit.js',
                 'resources/js/search.js',
+                'resources/js/patientInfo.js',
             ],
             refresh: true,
         }),
