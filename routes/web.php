@@ -55,6 +55,7 @@ Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
     Route::get('/profile',[UserController::class, 'doctorProfile'])->name('doctor.profile');
     Route::get('/profile/search/page',[UserController::class, 'doctorSearchPage'])->name('doctor.search.page');
     Route::get('/profile/search/student',[UserController::class, 'doctorSearchStudent'])->name('doctor.search.student');
+    Route::get('/profile/show/student/{id}',[UserController::class, 'doctorShowStudent'])->name('doctor.show.student');
     Route::get('/profile/edit',[UserController::class, 'doctorProfileEdit'])->name('doctor.profile.edit');
     Route::put('/profile/update',[UserController::class, 'doctorProfileUpdate'])->name('doctor.profile.update');
     Route::put('/profile/change-password',[UserController::class, 'doctorChangePassword'])->name('doctor.change.password');
