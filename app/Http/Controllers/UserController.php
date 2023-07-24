@@ -307,7 +307,9 @@ class UserController extends Controller
 
     public function doctorSearchPage()
     {
-        $users = User::paginate(5)->fragment('users');
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'student');
+        })->paginate(5)->fragment('users');
         return view('doctor.search-student',compact('users'));
     }
 
@@ -317,10 +319,19 @@ class UserController extends Controller
 
         if ($national_id) {
             // Search query is present, perform the search
-            $users = User::where('national_id', 'LIKE', '%' . $national_id . '%')->paginate(5)->appends(['national_id' => $national_id]);
+            $users = User::where('national_id', 'LIKE', '%' . $national_id . '%')
+                ->whereHas('roles', function ($query) {
+                    $query->where('name', 'student');
+                })
+                ->paginate(5)
+                ->appends(['national_id' => $national_id]);
         } else {
-            // No search query, show all users
-            $users = User::paginate(5)->fragment('users');
+            // No search query, show all users with student role
+            $users = User::whereHas('roles', function ($query) {
+                $query->where('name', 'student');
+            })
+                ->paginate(5)
+                ->fragment('users');
         }
 
         return view('doctor.search-student', compact('users'));
