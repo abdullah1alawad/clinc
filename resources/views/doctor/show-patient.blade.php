@@ -8,36 +8,35 @@
 @section('content')
 
     <div class="container emp-profile">
+
         <div class="row">
             <div class="col-md-4">
-                <div class="profile-img">
-                    <img
-                        src="{{asset('images/' . $user->photo)}}"
-                        alt="image error"/>
-                </div>
+
+{{--                <div class="profile-img">--}}
+{{--                    <img--}}
+{{--                        src="{{asset('images/' . $user->photo)}}"--}}
+{{--                        alt="image error"/>--}}
+{{--                </div>--}}
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        {{$user->name}}
+                        {{$patient->name}}
                     </h5>
-                    <h6>
-                        The Best Dentist In The World
-                    </h6>
+
                 </div>
-            </div>
-            <div class="col-md-2">
-                <a href="{{route('doctor.profile.edit')}}" class="profile-edit-btn">Edit Profile</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>WORK SPACE</p>
-                    <a href="{{route('doctor.search.student.page')}}">Search on Student</a><br/>
-                    <a href="{{route('doctor.search.patient.page')}}">Search on Patient</a><br/>
+                    <h2 style="color: #0d6efd">links section</h2>
+                    <a href="{{route('patient.information',$patient->id)}}" class="btn-outline-light">see more details</a><br/>
+                    <a href="{{route('doctor.search.patient.page')}}" class="btn-outline-light">back to search page</a><br/>
+                    <a href="{{route('doctor.profile')}}" class="btn-outline-light">back to profile</a><br/>
                 </div>
             </div>
+
             <div class="col-md-8">
                 <div class="tabs-sec">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -64,15 +63,7 @@
                                 <label>Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$user->name}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{$user->email}}</p>
+                                <p>{{$patient->name}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -80,7 +71,7 @@
                                 <label>Phone</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$user->phone}}</p>
+                                <p>{{$patient->phone}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -88,7 +79,7 @@
                                 <label>National Id</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$user->national_id}}</p>
+                                <p>{{$patient->national_id}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -96,7 +87,7 @@
                                 <label>Gender</label>
                             </div>
                             <div class="col-md-6">
-                                @if($user->gender=='Male')
+                                @if($patient->gender=='Male')
                                     <div class="radio-container">
                                         <input type="radio" id="male" name="gender" value="0" checked>
                                         <label for="male">Male</label>
@@ -115,6 +106,7 @@
                         <table>
                             <thead>
                             <tr>
+                                <th>Doctor Name</th>
                                 <th>Student Name</th>
                                 <th>Patient Name</th>
                                 <th>Assistant Name</th>
@@ -126,6 +118,7 @@
                             <tbody>
                             @foreach($upcomingAppointments as $appointment)
                                 <tr>
+                                    <td>{{$appointment->doctor_name}}</td>
                                     <td>{{$appointment->student_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
                                     <td>{{$appointment->assistant_name}}</td>
@@ -137,13 +130,13 @@
                             </tbody>
                         </table>
                     </div>
-                        <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
-                             aria-labelledby="completedAppointments-tab">
+                    <div class="tab-pane fade" id="completedAppointments" role="tabpanel"
+                         aria-labelledby="completedAppointments-tab">
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h6>Press any row to show sub-mark</h6>
 
-                            <form method="GET" action="{{ route('doctor.profile') }}">
+                            <form method="GET" action="{{ route('doctor.show.patient',$patient->id) }}">
                                 <label for="subject" style="margin-right: 5px">Filter by subject:</label>
                                 <select name="subject" id="subject">
                                     <option value="">All subjects</option>
@@ -161,6 +154,7 @@
                         <table>
                             <thead>
                             <tr>
+                                <th>Doctor Name</th>
                                 <th>Student Name</th>
                                 <th>Patient Name</th>
                                 <th>Assistant Name</th>
@@ -171,8 +165,8 @@
                             </thead>
                             <tbody>
                             @foreach($completedAppointments as $appointment)
-                                <tr class="clickable-row"
-                                    data-href="{{route('doctor.setSubmarks',$appointment->id)}}">
+                                <tr>
+                                    <td>{{$appointment->doctor_name}}</td>
                                     <td>{{$appointment->student_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
                                     <td>{{$appointment->assistant_name}}</td>
@@ -183,10 +177,10 @@
                             @endforeach
                             </tbody>
                         </table>
-                            <br>
-                            <div class="text-center">
-                                {!!$completedAppointments->links() !!}
-                            </div>
+                        <br>
+                        <div class="text-center">
+                            {!!$completedAppointments->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>

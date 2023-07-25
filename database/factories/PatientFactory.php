@@ -38,7 +38,7 @@ class PatientFactory extends Factory
             'address'=>$this->faker->address,
             'job'=>$this->faker->jobTitle,
             'phone'=>$this->faker->phoneNumber,
-            'questions'=>$this->faker->numberBetween(1,219902325),
+            'questions'=>$this->faker->numberBetween(219902310,219902325),
             'last_medical_scan_date'=>$this->faker->date,
             'personal_doctor_name'=>$this->faker->name,
             'currently_disease'=>$this->faker->colorName,

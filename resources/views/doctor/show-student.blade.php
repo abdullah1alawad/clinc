@@ -31,7 +31,7 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>WORK SPACE</p>
-                    <a href="{{route('doctor.search.page')}}">back to search page</a><br/>
+                    <a href="{{route('doctor.search.student.page')}}">back to search page</a><br/>
                     <a href="{{route('doctor.profile')}}">back to profile</a><br/>
                 </div>
             </div>

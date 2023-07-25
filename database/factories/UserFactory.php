@@ -20,7 +20,7 @@ class UserFactory extends Factory
         return [
             'email'=>$this->faker->email,
             'name'=>$this->faker->name,
-            'gender'=>$this->faker->randomElement(['Male', 'Female']),
+            'gender'=>$this->faker->randomElement([0, 1]),
             'phone'=>$this->faker->phoneNumber(),
             'password' =>bcrypt('password'),
             'national_id'=>$this->faker->numberBetween(1,2000),
