@@ -18,7 +18,6 @@ class Patient extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'student_id','doctor_id',
         'name','gender',
         'national_id',
         'birth_date',
@@ -81,17 +80,17 @@ class Patient extends Authenticatable
                 $ret[]='YES';
             else
                 $ret[]='NO';
-            $val/=2;
+
+            $val=(int)$val/2;
         }
 
         return $ret;
     }
 
     public function setQuestionsAttribute($val){
-        $len = count($val);
-        $ans = 0;
+        $ans = pow(2,51);
 
-        for($i = 0;$i < $len;$i++){
+        for($i = 1;$i <= 50;$i++){
             $ans += pow(2,$i) * $val[$i];
         }
 

@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header">Add Patient</div>
 
-                    <form action="{{route('patient.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('patient.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body patient-class">
 
@@ -143,13 +143,13 @@
                                         <th>Are You Currently Under a Doctor's Care</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[1]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes1" name="questions[1]" value="1">
+                                                <label for="yes1">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[1]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no1" name="questions[1]" value="0" checked>
+                                                <label for="no1">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -167,13 +167,13 @@
                                         <th>Have you ever had a skin condition or surgery</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[2]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes2" name="questions[2]" value="1">
+                                                <label for="yes2">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[2]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no2" name="questions[2]" value="0" checked>
+                                                <label for="no2">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -201,13 +201,13 @@
                                         <th>Have you been hospitalized within the past five years</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[3]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes3" name="questions[3]" value="1">
+                                                <label for="yes3">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[3]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no3" name="questions[3]" value="0" checked>
+                                                <label for="no3">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -231,13 +231,13 @@
                                         <th class="col-md-9">Pneumonia or Pulmonary Heart Disease (rheumatic)</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[4]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes4" name="questions[4]" value="1">
+                                                <label for="yes4">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[4]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no4" name="questions[4]" value="0" checked>
+                                                <label for="no4">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -245,13 +245,13 @@
                                         <th>Congenital heart disorders</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[5]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes5" name="questions[5]" value="1">
+                                                <label for="yes5">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[5]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no5" name="questions[5]" value="0" checked>
+                                                <label for="no5">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -259,13 +259,13 @@
                                         <th>Cardiovascular Disease</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[6]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes6" name="questions[6]" value="1">
+                                                <label for="yes6">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[6]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no6" name="questions[6]" value="0" checked>
+                                                <label for="no6">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -273,13 +273,13 @@
                                         <th>Do you experience chest pain or pressure during exertion</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[7]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes7" name="questions[7]" value="1">
+                                                <label for="yes7">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[7]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no7" name="questions[7]" value="0" checked>
+                                                <label for="no7">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -287,13 +287,13 @@
                                         <th>Do you experience shortness of breath after light exercise</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[8]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes8" name="questions[8]" value="1">
+                                                <label for="yes8">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[8]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no8" name="questions[8]" value="0" checked>
+                                                <label for="no8">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -301,13 +301,13 @@
                                         <th>Do your ankles swell</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[9]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes9" name="questions[9]" value="1">
+                                                <label for="yes9">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[9]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no9" name="questions[9]" value="0" checked>
+                                                <label for="no9">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -318,13 +318,13 @@
                                         </th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[10]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes10" name="questions[10]" value="1">
+                                                <label for="yes10">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[10]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no10" name="questions[10]" value="0" checked>
+                                                <label for="no10">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -332,13 +332,13 @@
                                         <th>Have you ever been told you have a heart murmur</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[11]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes11" name="questions[11]" value="1">
+                                                <label for="yes11">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[11]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no11" name="questions[11]" value="0" checked>
+                                                <label for="no11">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -346,13 +346,13 @@
                                         <th>Asthma or hay fever</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[12]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes12" name="questions[12]" value="1">
+                                                <label for="yes12">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[12]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no12" name="questions[12]" value="0" checked>
+                                                <label for="no12">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -360,13 +360,13 @@
                                         <th>Skin rash or hives</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[13]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes13" name="questions[13]" value="1">
+                                                <label for="yes13">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[13]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no13" name="questions[13]" value="0" checked>
+                                                <label for="no13">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -374,13 +374,13 @@
                                         <th>Seizure disorder</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[14]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes14" name="questions[14]" value="1">
+                                                <label for="yes14">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[14]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no14" name="questions[14]" value="0" checked>
+                                                <label for="no14">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -388,13 +388,13 @@
                                         <th>Diabetes</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[15]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes15" name="questions[15]" value="1">
+                                                <label for="yes15">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[15]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no15" name="questions[15]" value="0" checked>
+                                                <label for="no15">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -402,13 +402,13 @@
                                         <th>Do you urinate more than 6 times a day</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[16]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes16" name="questions[16]" value="1">
+                                                <label for="yes16">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[16]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no16" name="questions[16]" value="0" checked>
+                                                <label for="no16">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -416,13 +416,13 @@
                                         <th>Do you feel thirsty most of the time</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[17]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes17" name="questions[17]" value="1">
+                                                <label for="yes17">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[17]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no17" name="questions[17]" value="0" checked>
+                                                <label for="no17">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -430,13 +430,13 @@
                                         <th>Does your throat become dry</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[18]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes18" name="questions[18]" value="1">
+                                                <label for="yes18">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[18]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no18" name="questions[18]" value="0" checked>
+                                                <label for="no18">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -444,13 +444,13 @@
                                         <th>Hepatitis or liver disease</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[19]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes19" name="questions[19]" value="1">
+                                                <label for="yes19">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[19]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no19" name="questions[19]" value="0" checked>
+                                                <label for="no19">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -458,13 +458,13 @@
                                         <th>Arthritis or joint problems</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[20]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes20" name="questions[20]" value="1">
+                                                <label for="yes20">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[20]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no20" name="questions[20]" value="0" checked>
+                                                <label for="no20">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -472,13 +472,13 @@
                                         <th>Gastroesophageal reflux disease (GERD)</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[21]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes21" name="questions[21]" value="1">
+                                                <label for="yes21">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[21]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no21" name="questions[21]" value="0" checked>
+                                                <label for="no21">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -486,13 +486,13 @@
                                         <th>Kidney problems</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[22]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes22" name="questions[22]" value="1">
+                                                <label for="yes22">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[22]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no22" name="questions[22]" value="0" checked>
+                                                <label for="no22">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -500,13 +500,13 @@
                                         <th>Tuberculosis (TB)</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[23]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes23" name="questions[23]" value="1">
+                                                <label for="yes23">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[23]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no23" name="questions[23]" value="0" checked>
+                                                <label for="no23">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -514,13 +514,13 @@
                                         <th>Persistent cough or coughing up blood</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[24]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes24" name="questions[24]" value="1">
+                                                <label for="yes24">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[24]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no24" name="questions[24]" value="0" checked>
+                                                <label for="no24">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -528,13 +528,13 @@
                                         <th>Syphilis</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[25]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes25" name="questions[25]" value="1">
+                                                <label for="yes25">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[25]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no25" name="questions[25]" value="0" checked>
+                                                <label for="no25">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -559,13 +559,13 @@
                                         <th class="col-md-10">Have you had any abnormal bleeding</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[26]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes26" name="questions[26]" value="1">
+                                                <label for="yes26">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[26]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no26" name="questions[26]" value="0" checked>
+                                                <label for="no26">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -573,13 +573,13 @@
                                         <th>Do you bruise easily</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[27]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes27" name="questions[27]" value="1">
+                                                <label for="yes27">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[27]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no27" name="questions[27]" value="0" checked>
+                                                <label for="no27">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -587,13 +587,13 @@
                                         <th>Have you ever required a blood transfusion</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[28]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes28" name="questions[28]" value="1">
+                                                <label for="yes28">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[28]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no28" name="questions[28]" value="0" checked>
+                                                <label for="no28">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -611,13 +611,13 @@
                                         <th>Have you ever had any blood disorders such as anemia</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[29]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes29" name="questions[29]" value="1">
+                                                <label for="yes29">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[29]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no29" name="questions[29]" value="0" checked>
+                                                <label for="no29">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -625,13 +625,13 @@
                                         <th>Have you ever had radiation therapy for tumors in the head</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[30]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes30" name="questions[30]" value="1">
+                                                <label for="yes30">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[30]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no30" name="questions[30]" value="0" checked>
+                                                <label for="no30">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -645,13 +645,13 @@
                                         <th class="col-md-9">Antibiotics or sulfa drugs</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[31]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes31" name="questions[31]" value="1">
+                                                <label for="yes31">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[31]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no31" name="questions[31]" value="0" checked>
+                                                <label for="no31">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -659,13 +659,13 @@
                                         <th>Blood thinners or anticoagulants</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[32]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes32" name="questions[32]" value="1">
+                                                <label for="yes32">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[32]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no32" name="questions[32]" value="0" checked>
+                                                <label for="no32">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -673,13 +673,13 @@
                                         <th>High blood pressure medication</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[33]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes33" name="questions[33]" value="1">
+                                                <label for="yes33">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[33]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no33" name="questions[33]" value="0" checked>
+                                                <label for="no33">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -687,13 +687,13 @@
                                         <th>Cortisone, including prednisone</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[34]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes34" name="questions[34]" value="1">
+                                                <label for="yes34">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[34]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no34" name="questions[34]" value="0" checked>
+                                                <label for="no34">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -701,13 +701,13 @@
                                         <th>Sedatives</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[35]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes35" name="questions[35]" value="1">
+                                                <label for="yes35">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[35]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no35" name="questions[35]" value="0" checked>
+                                                <label for="no35">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -715,13 +715,13 @@
                                         <th>Aspirin</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[36]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes36" name="questions[36]" value="1">
+                                                <label for="yes36">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[36]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no36" name="questions[36]" value="0" checked>
+                                                <label for="no36">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -729,13 +729,13 @@
                                         <th>Insulin</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[37]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes37" name="questions[37]" value="1">
+                                                <label for="yes37">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[37]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no37" name="questions[37]" value="0" checked>
+                                                <label for="no37">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -743,13 +743,13 @@
                                         <th>Digitalis or heart medication</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[38]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes38" name="questions[38]" value="1">
+                                                <label for="yes38">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[38]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no38" name="questions[38]" value="0" checked>
+                                                <label for="no38">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -757,13 +757,13 @@
                                         <th>Nitroglycerin</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[39]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes39" name="questions[39]" value="1">
+                                                <label for="yes39">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[39]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no39" name="questions[39]" value="0" checked>
+                                                <label for="no39">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -771,13 +771,13 @@
                                         <th>Oral contraceptives or any other hormonal treatments</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[40]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes40" name="questions[40]" value="1">
+                                                <label for="yes40">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[40]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no40" name="questions[40]" value="0" checked>
+                                                <label for="no40">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -803,13 +803,13 @@
                                         <th class="col-md-9">Local anesthesia (Novocaine, Lidocaine)</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[41]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes41" name="questions[41]" value="1">
+                                                <label for="yes41">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[41]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no41" name="questions[41]" value="0" checked>
+                                                <label for="no41">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -817,13 +817,13 @@
                                         <th>Penicillin or antibiotics</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[42]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes42" name="questions[42]" value="1">
+                                                <label for="yes42">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[42]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no42" name="questions[42]" value="0" checked>
+                                                <label for="no42">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -831,13 +831,13 @@
                                         <th>Penicillin or antibiotics</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[43]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes43" name="questions[43]" value="1">
+                                                <label for="yes43">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[43]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no43" name="questions[43]" value="0" checked>
+                                                <label for="no43">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -845,13 +845,13 @@
                                         <th>Aspirin</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[44]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes44" name="questions[44]" value="1">
+                                                <label for="yes44">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[44]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no44" name="questions[44]" value="0" checked>
+                                                <label for="no44">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -859,13 +859,13 @@
                                         <th>Iodine or X-rays</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[45]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes45" name="questions[45]" value="1">
+                                                <label for="yes45">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[45]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no45" name="questions[45]" value="0" checked>
+                                                <label for="no45">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -873,13 +873,13 @@
                                         <th>Codeine or other sedatives</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[46]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes46" name="questions[46]" value="1">
+                                                <label for="yes46">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[46]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no46" name="questions[46]" value="0" checked>
+                                                <label for="no46">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -902,13 +902,13 @@
                                         <th>Do you work anywhere that exposes you to X-rays or other radiation</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[47]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes47" name="questions[47]" value="1">
+                                                <label for="yes47">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[47]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no47" name="questions[47]" value="0" checked>
+                                                <label for="no47">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -916,13 +916,13 @@
                                         <th>Do you wear contact lenses</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[48]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes48" name="questions[48]" value="1">
+                                                <label for="yes48">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[48]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no48" name="questions[48]" value="0" checked>
+                                                <label for="no48">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -937,13 +937,13 @@
                                         <th>Are you pregnant or have you missed a menstrual period</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[49]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes49" name="questions[49]" value="1">
+                                                <label for="yes49">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[49]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no49" name="questions[49]" value="0" checked>
+                                                <label for="no49">No</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -951,13 +951,13 @@
                                         <th>Are you currently breastfeeding</th>
                                         <td>
                                             <div class="radio-container">
-                                                <input type="radio" id="yes" name="questions[50]" value="1">
-                                                <label for="yes">Yes</label>
+                                                <input type="radio" id="yes50" name="questions[50]" value="1">
+                                                <label for="yes50">Yes</label>
                                             </div>
 
                                             <div class="radio-container">
-                                                <input type="radio" id="no" name="questions[50]" value="0" checked>
-                                                <label for="no">No</label>
+                                                <input type="radio" id="no50" name="questions[50]" value="0" checked>
+                                                <label for="no50">No</label>
                                             </div>
                                         </td>
                                     </tr>

@@ -7,6 +7,7 @@
             height: 100vh;
             display: none;
         }
+
         section:first-of-type {
             display: block;
         }
@@ -41,50 +42,34 @@
     </style>
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="#section1">Section 1</a></li>
-        <li><a href="#section2">Section 2</a></li>
-        <li><a href="#section3">Section 3</a></li>
-    </ul>
-</nav>
-<section id="section1">
-    <p>Section 1</p>
-</section>
-<section id="section2">
-    <p>Section 2</p>
-</section>
-<section id="section3">
-    <p>Section 3</p>
-</section>
+<form action="{{route('patient.test')}}" method="post">
+    @csrf
+    <div class="new-disease">
+        {{--the new disease will appended here--}}
+    </div>
+    <input type="submit" value="go">
+</form>
+
+<input type="text" name="new_disease" placeholder="Add other disease"
+       style="margin-bottom: 5px">
+<button type="button" onclick="addDisease()">Add</button>
+
+
 <script>
     // Get all the navigation links
     const links = document.querySelectorAll('nav a');
 
-    // Loop through each link and add a click event listener
-    links.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault(); // Prevent default link behavior
-
-            // Get the target section ID from the link href attribute
-            const targetId = link.getAttribute('href');
-
-            // Hide all sections except the target section
-            document.querySelectorAll('section').forEach(section => {
-                if (section.getAttribute('id') === targetId.substring(1)) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-
-            // Set the active class on the clicked link
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            link.classList.add('active');
-        });
-    });
+    function addDisease() {
+        let input = document.getElementsByName('new_disease')[0];
+        let div = document.getElementsByClassName('new-disease')[0];
+        let newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'other_diseases[]';
+        newInput.value = input.value;
+        newInput.style = "margin-bottom: 5px";
+        div.appendChild(newInput);
+        input.value = '';
+    }
 </script>
 </body>
 </html>

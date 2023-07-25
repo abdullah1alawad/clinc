@@ -99,4 +99,6 @@ Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
 Route::get('/test',function (){
     return view('student.test');
 });
+
+Route::post('/store',[PatientController::class, 'test'])->name('patient.test');
 /////////////////// end test /////////////////////////
