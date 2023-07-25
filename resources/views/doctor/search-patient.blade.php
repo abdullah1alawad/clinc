@@ -18,9 +18,9 @@
 
                 <div class="search-container">
                     <div class="col-md-3" style="margin-left: 900px;">
-                        <a href="{{ route('doctor.search.student.page') }}" class="profile-edit-btn">Show all users</a>
+                        <a href="{{ route('doctor.search.patient.page') }}" class="profile-edit-btn">Show all users</a>
                     </div>
-                    <form id="searchForm" action="{{ route('doctor.search.student', ['national_id' => Request::get('national_id')]) }}" method="get">
+                    <form id="searchForm" action="{{ route('doctor.search.patient', ['national_id' => Request::get('national_id')]) }}" method="get">
                         <div class="container">
                             <div class="search_wrap search_wrap_3">
                                 <div class="search_box">
@@ -41,7 +41,7 @@
                     </form>
 
                 </div>
-                @if(count($users))
+                @if(count($patients))
                     <table>
                         <thead>
                         <tr>
@@ -50,23 +50,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($patients as $patient)
                             <tr>
-                                <td>{{$user->name}}</td>
+                                <td>{{$patient->name}}</td>
                                 <td>
-                                    <form action="{{route('doctor.show.student',$user->id)}}" method="get">
+                                    <form action="{{route('doctor.show.patient',$patient->id)}}" method="get">
                                         <button class="btn btn-link">show profile</button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
-                    @endif
-                </table>
+                        @endif
+                    </table>
             </div>
             <br><br>
             <div class="col-md-1 text-center" style="margin-left: 400px">
-                {!!$users->links() !!}
+                {!!$patients->links() !!}
             </div>
         </div>
         <div class="col-md-12 text-center">

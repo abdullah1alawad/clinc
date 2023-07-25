@@ -305,7 +305,7 @@ class UserController extends Controller
             ->with('success', 'Your Password Has Been Updated Successfully!');
     }
 
-    public function doctorSearchPage()
+    public function doctorSearchStudentPage()
     {
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', 'student');
