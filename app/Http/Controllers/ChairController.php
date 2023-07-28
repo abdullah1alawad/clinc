@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubjectRequest;
 use App\Models\Chair;
+use App\Models\Clinic;
 use Illuminate\Http\Request;
 
 class ChairController extends Controller
@@ -61,5 +63,25 @@ class ChairController extends Controller
     public function destroy(Chair $chair)
     {
         //
+    }
+
+    public function addChair(){
+        return view('admin.addChair');
+    }
+
+    public function storeChair(StoreSubjectRequest $request){
+
+        $clinic=Clinic::where('name',$request->input('name'))->first();
+
+        if(!$clinic)
+            return redirect()->route('add.chair')
+                ->with('field', 'Clinic Not Found');
+
+        Chair::create([
+           'clinic_id'=>$clinic->id,
+        ]);
+
+        return redirect()->route('add.chair')
+            ->with('success', 'Chair Has Been Added Successfully!');
     }
 }

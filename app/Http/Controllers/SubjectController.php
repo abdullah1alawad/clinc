@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -61,5 +62,25 @@ class SubjectController extends Controller
     public function destroy(Subject $subject)
     {
         //
+    }
+
+    public function addSubject(){
+        return view('admin.addSubject');
+    }
+
+    public function storeSubject(StoreSubjectRequest $request){
+        $subject=Subject::where('name',$request->input('name'))->first();
+
+        if($subject)
+            return redirect()->route('add.subject')
+                ->with('field', 'Subject is Already exist');
+
+        Subject::create([
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect()->route('add.subject')
+            ->with('success', 'Subject Has Been Added Successfully!');
+
     }
 }

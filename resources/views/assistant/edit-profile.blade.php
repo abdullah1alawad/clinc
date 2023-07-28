@@ -7,13 +7,13 @@
 
 @section('content')
 
-    <div class="container emp-profile">
 
         @if(session('success'))
             <div class="alert alert-success text-center">
                 {{ session('success') }}
             </div>
         @endif
+
 
         <div class="container emp-profile">
             <div class="row">
@@ -198,7 +198,6 @@
 
             </div>
         </div>
-    </div>
 
 @endsection
 

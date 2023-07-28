@@ -291,6 +291,12 @@ tr:hover {
     border-radius: 5px;
 }
 
+.patient-class nav a.active {
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
 .patient-class .radio-container label {
     display: inline-block;
     cursor: pointer;
@@ -322,9 +328,52 @@ tr:hover {
     text-decoration: none;
 }
 
-/*.patient-class select {*/
-/*    display: none;*/
-/*}*/
-/*.patient-class select option {*/
-/*    display: inline;*/
-/*}*/
+.notify-count {
+    display: inline;
+    background-color: #333;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.sidebar {
+    height: border-box;
+    background-color: inherit;
+    position: center;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.sidebar p {
+    font-weight: bold;
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+
+.admin-btn .profile-edit-btn {
+    display: inline-block;
+    background-color: #F0F0F0;
+    color: #6c757d;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 2%;
+    border-radius: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 30%;
+}
+
+.admin-btn .profile-edit-btn:hover {
+    background-color: #40abb0;
+    color: white;
+    text-decoration: none;
+}

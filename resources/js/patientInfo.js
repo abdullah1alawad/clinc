@@ -1,5 +1,5 @@
 // Get all the navigation links
-const links = document.querySelectorAll('nav a');
+const links = document.querySelectorAll('.patient-class nav a');
 
 // Loop through each link and add a click event listener
 links.forEach(link => {

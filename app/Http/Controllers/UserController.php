@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangePhotoRequest;
 use App\Http\Requests\SearchRequest;
+use App\Http\Requests\StoreExistingAdminRequest;
+use App\Http\Requests\StoreNewAdminRequest;
+use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateRequest;
+use App\Models\Clinic;
 use App\Models\Process;
 
+use App\Models\Role;
 use App\Models\Subprocess_mark;
 use App\Models\Subject;
 use App\Models\User;
@@ -75,6 +80,103 @@ class UserController extends Controller
     {
         //
     }
+
+    //////////////////////////////////////// admin section ///////////////////////////////////////////////////
+
+    public function adminProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($request->has('unread') && $request->input('unread') === '1')
+            $messages = $user->unreadNotifications()->paginate(5);
+        else
+            $messages = $user->notifications()->paginate(5);
+
+        //dd($messages);
+        return view('admin.profile', compact('user', 'messages'));
+    }
+
+    public function adminProfileEdit()
+    {
+        $user = auth()->user();
+
+        return view('admin.editProfile', compact('user'));
+    }
+
+    public function adminProfileUpdate(UpdateRequest $request)
+    {
+        $user = auth()->user();
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->national_id = $request->input('national_id');
+        $user->gender = $request->input('gender');
+        $user->phone = $request->input('phone');
+
+        $user->save();
+
+        return redirect()->route('admin.edit.profile')
+            ->with('success', 'Your Profile Has Been Updated Successfully!');
+
+    }
+
+    public function adminChangePassword(ChangePasswordRequest $request)
+    {
+        $user = auth()->user();
+
+        $user->password = Hash::make($request->input('newPassword'));
+
+        $user->save();
+
+        return redirect()->route('admin.edit.profile')
+            ->with('success', 'Your Password Has Been Updated Successfully!');
+    }
+
+    public function addAdmin()
+    {
+        $user = auth()->user();
+        return view('admin.addAdmin', compact('user'));
+    }
+
+    public function storeExistingAdmin(StoreExistingAdminRequest $request)
+    {
+        $user = User::where('national_id', $request->input('national_id'))->first();
+
+        if (!$user)
+            return redirect()->route('add.admin')
+                ->with('field', 'User Not Found');
+
+        $roles = $user->roles;
+
+        if ($roles[0]->name == "admin")
+            return redirect()->route('add.admin')
+                ->with('field', 'User Already Admin');
+
+        $user->roles()->attach(1);
+
+        return redirect()->route('add.admin')
+            ->with('success', 'Admin Has Been Added Successfully!');
+    }
+
+    public function storeNewAdmin(StoreNewAdminRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'national_id' => $request->input('national_id'),
+            'gender' => $request->input('gender'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        $user->roles()->attach(1);
+
+        return redirect()->route('add.admin')
+            ->with('success', 'Admin Has Been Added Successfully!');
+    }
+
+
+    //////////////////////////////////////// end admin section ///////////////////////////////////////////////////
 
     //////////////////////////////////////// student section ////////////////////////////////////////////////
     public function studentProfile(Request $request)
@@ -152,20 +254,22 @@ class UserController extends Controller
         return view('student.showSubprocessMark', compact('process_mark'));
     }
 
-    public function studentProfileEdit(){
+    public function studentProfileEdit()
+    {
         $user = auth()->user();
 
         return view('student.editProfile', compact('user'));
     }
 
-    public function studentProfileUpdate(UpdateRequest $request){
+    public function studentProfileUpdate(UpdateRequest $request)
+    {
         $user = auth()->user();
 
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->national_id=$request->input('national_id');
-        $user->gender=$request->input('gender');
-        $user->phone=$request->input('phone');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->national_id = $request->input('national_id');
+        $user->gender = $request->input('gender');
+        $user->phone = $request->input('phone');
 
         $user->save();
 
@@ -174,10 +278,11 @@ class UserController extends Controller
 
     }
 
-    public function studentChangePassword(ChangePasswordRequest $request){
-        $user=auth()->user();
+    public function studentChangePassword(ChangePasswordRequest $request)
+    {
+        $user = auth()->user();
 
-        $user->password= Hash::make($request->input('newPassword'));
+        $user->password = Hash::make($request->input('newPassword'));
 
         $user->save();
 
@@ -185,13 +290,14 @@ class UserController extends Controller
             ->with('success', 'Your Password Has Been Updated Successfully!');
     }
 
-    public function studentChangePhoto(ChangePhotoRequest $request){
+    public function studentChangePhoto(ChangePhotoRequest $request)
+    {
         $user = auth()->user();
 
 
-        $photoBath=saveImage( $request->file('photo'),'images');
+        $photoBath = saveImage($request->file('photo'), 'images');
 
-        $user->photo=$photoBath;
+        $user->photo = $photoBath;
 
         $user->save();
 
@@ -267,13 +373,13 @@ class UserController extends Controller
 
     public function doctorProfileUpdate(UpdateRequest $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->national_id=$request->input('national_id');
-        $user->gender=$request->input('gender');
-        $user->phone=$request->input('phone');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->national_id = $request->input('national_id');
+        $user->gender = $request->input('gender');
+        $user->phone = $request->input('phone');
 
         $user->save();
         return redirect()->route('doctor.profile.edit')
@@ -282,12 +388,11 @@ class UserController extends Controller
 
     public function doctorChangePhoto(ChangePhotoRequest $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        if($request->hasFile('photo'))
-        {
-            $url=saveImage($request->file('photo'),'images');
-            $user->photo=$url;
+        if ($request->hasFile('photo')) {
+            $url = saveImage($request->file('photo'), 'images');
+            $user->photo = $url;
         }
         $user->save();
         return redirect()->route('doctor.profile.edit')
@@ -296,9 +401,9 @@ class UserController extends Controller
 
     public function doctorChangePassword(ChangePasswordRequest $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        $user->password=Hash::make($request->input('newPassword'));
+        $user->password = Hash::make($request->input('newPassword'));
 
         $user->save();
         return redirect()->route('doctor.profile.edit')
@@ -310,7 +415,7 @@ class UserController extends Controller
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', 'student');
         })->paginate(5)->fragment('users');
-        return view('doctor.search-student',compact('users'));
+        return view('doctor.search-student', compact('users'));
     }
 
     public function doctorSearchStudent(SearchRequest $request)
@@ -338,7 +443,7 @@ class UserController extends Controller
     }
 
 
-    public function doctorShowStudent($id,Request $request)
+    public function doctorShowStudent($id, Request $request)
     {
         $user = User::find($id);
         $subjects = Subject::all();
@@ -470,13 +575,13 @@ class UserController extends Controller
 
     public function assistantProfileUpdate(UpdateRequest $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->national_id=$request->input('national_id');
-        $user->gender=$request->input('gender');
-        $user->phone=$request->input('phone');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->national_id = $request->input('national_id');
+        $user->gender = $request->input('gender');
+        $user->phone = $request->input('phone');
 
         $user->save();
         return redirect()->route('assistant.profile.edit')
@@ -485,12 +590,11 @@ class UserController extends Controller
 
     public function assistantChangePhoto(ChangePhotoRequest $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        if($request->hasFile('photo'))
-        {
-            $url=saveImage($request->file('photo'),'images');
-            $user->photo=$url;
+        if ($request->hasFile('photo')) {
+            $url = saveImage($request->file('photo'), 'images');
+            $user->photo = $url;
         }
         $user->save();
         return redirect()->route('assistant.profile.edit')
@@ -499,9 +603,9 @@ class UserController extends Controller
 
     public function assistantChangePassword(ChangePasswordRequest $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
-        $user->password=Hash::make($request->input('newPassword'));
+        $user->password = Hash::make($request->input('newPassword'));
 
         $user->save();
         return redirect()->route('assistant.profile.edit')

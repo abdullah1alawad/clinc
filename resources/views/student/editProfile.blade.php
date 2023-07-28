@@ -7,7 +7,6 @@
 
 @section('content')
 
-    <div class="container emp-profile">
 
     @if(session('success'))
         <div class="alert alert-success text-center">

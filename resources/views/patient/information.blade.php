@@ -362,7 +362,7 @@
 
                         <nav>
                             <ul>
-                                <li><a href="#section1">1</a></li>
+                                <li><a href="#section1" class="active">1</a></li>
                                 <li><a href="#section2">2</a></li>
                                 <li><a href="#section3">3</a></li>
                                 <li><a href="#section4">4</a></li>

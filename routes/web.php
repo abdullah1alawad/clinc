@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ChairController;
+use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +35,28 @@ Route::get('/home',function (){
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+////////////////////// admin routes //////////////////
+
+Route::group(['prefix' => 'admin' , 'middleware' => 'auth'],function(){
+
+    Route::get('/profile',[UserController::class, 'adminProfile'])->name('admin.profile');
+    Route::get('/profile/edit',[UserController::class, 'adminProfileEdit'])->name('admin.edit.profile');
+    Route::post('/profile/update',[UserController::class, 'adminProfileUpdate'])->name('admin.update.profile');
+    Route::post('/profile/change-password',[UserController::class, 'adminChangePassword'])->name('admin.change.password');
+    Route::get('/profile/add-admin',[UserController::class, 'addAdmin'])->name('add.admin');
+    Route::post('/profile/store-existing-admin',[UserController::class, 'storeExistingAdmin'])->name('store.existing.admin');
+    Route::post('/profile/store-new-admin',[UserController::class, 'storeNewAdmin'])->name('store.new.admin');
+    Route::get('/profile/add-subject',[SubjectController::class, 'addSubject'])->name('add.subject');
+    Route::post('/profile/store-subject',[SubjectController::class, 'storeSubject'])->name('store.subject');
+    Route::get('/profile/add-clinic',[ClinicController::class, 'addClinic'])->name('add.clinic');
+    Route::post('/profile/store-Clinic',[ClinicController::class, 'storeClinic'])->name('store.clinic');
+    Route::get('/profile/add-chair',[ChairController::class, 'addChair'])->name('add.chair');
+    Route::post('/profile/store-chair',[chairController::class, 'storeChair'])->name('store.chair');
+});
+
+////////////////////// end admin routes //////////////////
 
 //////////////////////student routes///////////////////
 
@@ -103,5 +128,6 @@ Route::get('/test',function (){
     return view('student.test');
 });
 
-Route::post('/store',[PatientController::class, 'test'])->name('patient.test');
+
+//Route::post('/store',[PatientController::class, 'test'])->name('patient.test');
 /////////////////// end test /////////////////////////

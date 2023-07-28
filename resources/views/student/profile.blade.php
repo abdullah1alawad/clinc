@@ -34,8 +34,8 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>WORK SPACE</p>
-                    <a href="">Add Patient</a><br/>
-                    <a href="">Search on Patient</a><br/>
+                    <a href="{{route('patient.create')}}">Add Patient</a><br/>
+                    <a href="{{route('doctor.search.patient.page')}}">Search on Patient</a><br/>
                     <a href="">Booking an Chair</a><br/>
                     <a href="">Canceling a Chair Reservation</a>
                 </div>
@@ -50,18 +50,26 @@
                         <li class="nav-item">
                             <a class="nav-link" id="upcomingAppointments-tab" data-toggle="tab"
                                href="#upcomingAppointments" role="tab"
-                               aria-controls="upcomingAppointments" aria-selected="false">Your Upcoming Appointments</a>
+                               aria-controls="upcomingAppointments" aria-selected="false">Upcoming Appointments</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="completedAppointments-tab" data-toggle="tab"
                                href="#completedAppointments" role="tab"
-                               aria-controls="completedAppointments" aria-selected="false">Your Completed
+                               aria-controls="completedAppointments" aria-selected="false">Completed
                                 Appointments</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="subjectsMark-tab" data-toggle="tab"
                                href="#subjectsMark" role="tab"
                                aria-controls="subjectsMark" aria-selected="false">Subjects Mark</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="messages-tab" data-toggle="tab"
+                               href="#messages" role="tab"
+                               aria-controls="messages" aria-selected="false">
+                                Messages
+                                <span class="notify-count">2</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -219,6 +227,10 @@
                         <div class="text-center">
                             {!! $completedAppointments->links() !!}
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="messages" role="tabpanel"
+                         aria-labelledby="messages-tab">
+                        hello
                     </div>
                 </div>
             </div>
