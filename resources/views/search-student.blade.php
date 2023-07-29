@@ -18,9 +18,9 @@
 
                 <div class="search-container">
                     <div class="col-md-3" style="margin-left: 900px;">
-                        <a href="{{ route('doctor.search.student.page') }}" class="profile-edit-btn">Show all users</a>
+                        <a href="{{ route('search.student.page') }}" class="profile-edit-btn">Show all users</a>
                     </div>
-                    <form id="searchForm" action="{{ route('doctor.search.student', ['national_id' => Request::get('national_id')]) }}" method="get">
+                    <form id="searchForm" action="{{ route('search.student', ['national_id' => Request::get('national_id')]) }}" method="get">
                         <div class="container">
                             <div class="search_wrap search_wrap_3">
                                 <div class="search_box">
@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{$user->name}}</td>
                                 <td>
-                                    <form action="{{route('doctor.show.student',$user->id)}}" method="get">
+                                    <form action="{{route('show.student',$user->id)}}" method="get">
                                         <button class="btn btn-link">show profile</button>
                                     </form>
                                 </td>
@@ -65,13 +65,19 @@
                 </table>
             </div>
             <br><br>
+
             <div class="col-md-1 text-center" style="margin-left: 400px">
-                {!!$users->links() !!}
+                {!!$users->links()!!}
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <a href="{{ route('doctor.profile') }}"
-               class="back-btn">Back</a>
+            @if(auth()->user()->roles()->where('name','doctor')->first())
+                <a href="{{ route('doctor.profile') }}"
+                   class="back-btn">Back</a>
+            @else
+                <a href="{{ route('admin.profile') }}"
+                   class="back-btn">Back</a>
+            @endif
         </div>
     </div>
 

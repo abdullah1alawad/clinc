@@ -410,15 +410,15 @@ class UserController extends Controller
             ->with('success', 'Your Password Has Been Updated Successfully!');
     }
 
-    public function doctorSearchStudentPage()
+    public function searchStudentPage()
     {
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', 'student');
         })->paginate(5)->fragment('users');
-        return view('doctor.search-student', compact('users'));
+        return view('search-student', compact('users'));
     }
 
-    public function doctorSearchStudent(SearchRequest $request)
+    public function searchStudent(SearchRequest $request)
     {
         $national_id = $request->national_id;
 
@@ -439,11 +439,11 @@ class UserController extends Controller
                 ->fragment('users');
         }
 
-        return view('doctor.search-student', compact('users'));
+        return view('search-student', compact('users'));
     }
 
 
-    public function doctorShowStudent($id, Request $request)
+    public function showStudent($id, Request $request)
     {
         $user = User::find($id);
         $subjects = Subject::all();
@@ -504,7 +504,7 @@ class UserController extends Controller
             $mark->subject_name = $subject_name;
         }
 
-        return view('doctor.show-student', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
+        return view('show-student', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
     }
 
     ///////////////////////////////////// end doctor section /////////////////////////////////////////////

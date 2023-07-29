@@ -8,35 +8,41 @@
 @section('content')
 
     <div class="container emp-profile">
-
         <div class="row">
             <div class="col-md-4">
-
-{{--                <div class="profile-img">--}}
-{{--                    <img--}}
-{{--                        src="{{asset('images/' . $user->photo)}}"--}}
-{{--                        alt="image error"/>--}}
-{{--                </div>--}}
+                <div class="profile-img">
+                    <img
+                        src="{{asset('images/' . $user->photo)}}"
+                        alt="image error"/>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        {{$patient->name}}
+                        {{$user->name}}
                     </h5>
-
+                    <h6>
+                        The Best Dentist In The World
+                    </h6>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <h2 style="color: #0d6efd">links section</h2>
-                    <a href="{{route('patient.information',$patient->id)}}" class="btn-outline-light">see more details</a><br/>
-                    <a href="{{route('doctor.search.patient.page')}}" class="btn-outline-light">back to search page</a><br/>
-                    <a href="{{route('doctor.profile')}}" class="btn-outline-light">back to profile</a><br/>
+                    <p>WORK SPACE</p>
+                    <a href="{{route('search.student.page')}}">back to search page</a><br/>
+                    @if(auth()->user()->roles()->where('name','doctor')->first())
+                    <a href="{{ route('doctor.profile') }}"
+                       class="btn-outline-light">back to profile</a>
+                    @else
+                        <a href="{{ route('admin.profile') }}"
+                           class="btn-outline-light">back to profile</a>
+                    @endif
+                    <br>
+{{--                    <a href="{{route('doctor.profile')}}">back to profile</a><br/>--}}
                 </div>
             </div>
-
             <div class="col-md-8">
                 <div class="tabs-sec">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -63,7 +69,15 @@
                                 <label>Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$patient->name}}</p>
+                                <p>{{$user->name}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{$user->email}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -71,7 +85,7 @@
                                 <label>Phone</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$patient->phone}}</p>
+                                <p>{{$user->phone}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -79,7 +93,7 @@
                                 <label>National Id</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$patient->national_id}}</p>
+                                <p>{{$user->national_id}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -87,7 +101,7 @@
                                 <label>Gender</label>
                             </div>
                             <div class="col-md-6">
-                                @if($patient->gender=='Male')
+                                @if($user->gender=='Male')
                                     <div class="radio-container">
                                         <input type="radio" id="male" name="gender" value="0" checked>
                                         <label for="male">Male</label>
@@ -136,7 +150,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h6>Press any row to show sub-mark</h6>
 
-                            <form method="GET" action="{{ route('doctor.show.patient',$patient->id) }}">
+                            <form method="GET" action="{{ route('show.student',$user->id) }}">
                                 <label for="subject" style="margin-right: 5px">Filter by subject:</label>
                                 <select name="subject" id="subject">
                                     <option value="">All subjects</option>
@@ -165,7 +179,8 @@
                             </thead>
                             <tbody>
                             @foreach($completedAppointments as $appointment)
-                                <tr>
+                                <tr class="clickable-row"
+                                    data-href="{{route('doctor.setSubmarks',$appointment->id)}}">
                                     <td>{{$appointment->doctor_name}}</td>
                                     <td>{{$appointment->student_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>

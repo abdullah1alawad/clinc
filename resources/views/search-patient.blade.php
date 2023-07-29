@@ -18,9 +18,9 @@
 
                 <div class="search-container">
                     <div class="col-md-3" style="margin-left: 900px;">
-                        <a href="{{ route('doctor.search.patient.page') }}" class="profile-edit-btn">Show all users</a>
+                        <a href="{{ route('search.patient.page') }}" class="profile-edit-btn">Show all users</a>
                     </div>
-                    <form id="searchForm" action="{{ route('doctor.search.patient', ['national_id' => Request::get('national_id')]) }}" method="get">
+                    <form id="searchForm" action="{{ route('search.patient', ['national_id' => Request::get('national_id')]) }}" method="get">
                         <div class="container">
                             <div class="search_wrap search_wrap_3">
                                 <div class="search_box">
@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{$patient->name}}</td>
                                 <td>
-                                    <form action="{{route('doctor.show.patient',$patient->id)}}" method="get">
+                                    <form action="{{route('show.patient',$patient->id)}}" method="get">
                                         <button class="btn btn-link">show profile</button>
                                     </form>
                                 </td>
@@ -70,8 +70,17 @@
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <a href="{{ route('doctor.profile') }}"
-               class="back-btn">Back</a>
+            @if(auth()->user()->roles()->where('name','student')->first())
+                <a href="{{ route('student.profile') }}"
+                   class="back-btn">Back</a>
+            @elseif(auth()->user()->roles()->where('name','doctor')->first())
+                <a href="{{ route('doctor.profile') }}"
+                   class="back-btn">Back</a>
+            @else
+                <a href="{{ route('admin.profile') }}"
+                   class="back-btn">Back</a>
+            @endif
+
         </div>
     </div>
 

@@ -152,14 +152,14 @@ class PatientController extends Controller
         return "done";
     }
 
-    public function doctorSearchPatientPage()
+    public function searchPatientPage()
     {
         $patients = Patient::paginate(5)->fragment('patients');
 
-        return view('doctor.search-patient',compact('patients'));
+        return view('search-patient',compact('patients'));
     }
 
-    public function doctorSearchPatient(SearchRequest $request)
+    public function searchPatient(SearchRequest $request)
     {
         $national_id = $request->national_id;
 
@@ -171,10 +171,10 @@ class PatientController extends Controller
             $patients = Patient::paginate(5)->fragment('patients');
         }
 
-        return view('doctor.search-student', compact('patients'));
+        return view('search-patient', compact('patients'));
     }
 
-    public function doctorShowPatient($id,Request $request)
+    public function showPatient($id,Request $request)
     {
         $patient = Patient::find($id);
         $subjects = Subject::all();
@@ -228,6 +228,6 @@ class PatientController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('doctor.show-patient', compact('patient', 'upcomingAppointments', 'completedAppointments', 'subjects'));
+        return view('show-patient', compact('patient', 'upcomingAppointments', 'completedAppointments', 'subjects'));
     }
 }

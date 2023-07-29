@@ -78,12 +78,6 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
 Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
 
     Route::get('/profile',[UserController::class, 'doctorProfile'])->name('doctor.profile');
-    Route::get('/profile/search/student/page',[UserController::class, 'doctorSearchStudentPage'])->name('doctor.search.student.page');
-    Route::get('/profile/search/student',[UserController::class, 'doctorSearchStudent'])->name('doctor.search.student');
-    Route::get('/profile/show/student/{id}',[UserController::class, 'doctorShowStudent'])->name('doctor.show.student');
-    Route::get('/profile/search/patient/page',[PatientController::class, 'doctorSearchPatientPage'])->name('doctor.search.patient.page');
-    Route::get('/profile/search/patient',[PatientController::class, 'doctorSearchPatient'])->name('doctor.search.patient');
-    Route::get('/profile/show/patient/{id}',[PatientController::class, 'doctorShowPatient'])->name('doctor.show.patient');
     Route::get('/profile/edit',[UserController::class, 'doctorProfileEdit'])->name('doctor.profile.edit');
     Route::put('/profile/update',[UserController::class, 'doctorProfileUpdate'])->name('doctor.profile.update');
     Route::put('/profile/change-password',[UserController::class, 'doctorChangePassword'])->name('doctor.change.password');
@@ -95,6 +89,24 @@ Route::group(['prefix' => 'doctor' , 'middleware' => 'auth'],function(){
 
 /////////////////////end doctor routes//////////////////
 
+
+
+////////////////////search routes/////////////////////////////
+
+Route::group(['prefix'=>'search','middleware'=>'auth'],function (){
+
+    Route::get('/student/page',[UserController::class, 'searchStudentPage'])->name('search.student.page');
+    Route::get('/student',[UserController::class, 'searchStudent'])->name('search.student');
+    Route::get('/patient/page',[PatientController::class, 'searchPatientPage'])->name('search.patient.page');
+    Route::get('/patient',[PatientController::class, 'searchPatient'])->name('search.patient');
+    Route::get('/show/student/{id}',[UserController::class, 'showStudent'])->name('show.student');
+    Route::get('/show/patient/{id}',[PatientController::class, 'showPatient'])->name('show.patient');
+
+});
+
+
+
+///////////////////end search routes //////////////////////////////
 
 //////////////////////assistant routes///////////////////
 

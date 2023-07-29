@@ -14,8 +14,8 @@
                     <p>WORK SPACE</p>
                     <a href="{{route('add.admin')}}">Add Admin</a>
                     <a href="{{route('patient.create')}}">Add Patient</a>
-                    <a href="{{route('doctor.search.patient.page')}}">Search on Patient</a>
-                    <a href="{{route('doctor.search.student.page')}}">Search on Student</a>
+                    <a href="{{route('search.patient.page')}}">Search on Patient</a>
+                    <a href="{{route('search.student.page')}}">Search on Student</a>
                     <a href="">Canceling a Chair Reservation</a>
                     <a href="{{route('add.subject')}}">Add Subject</a>
                     <a href="{{route('add.clinic')}}">Add Clinic</a>
