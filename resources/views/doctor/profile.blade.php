@@ -35,7 +35,7 @@
                 <div class="profile-work">
                     <p>WORK SPACE</p>
                     <a href="{{route('search.student.page')}}">Search on Student</a><br/>
-                    <a href="{{route('search.patient.page')}}">Search on Patient</a><br/>
+                    <a href="{{route('search.patient.page',1)}}">Search on Patient</a><br/>
                 </div>
             </div>
             <div class="col-md-8">

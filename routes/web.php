@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChairController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ProcessController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SubprocessMarkController;
+
 
 
 /*
@@ -68,6 +70,7 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
     Route::post('/profile/change-password',[UserController::class, 'studentChangePassword'])->name('student.change.password');
     Route::post('/profile/change-photo',[UserController::class, 'studentChangePhoto'])->name('student.change.photo');
     Route::get('/profile/sub-mark/{id}',[UserController::class, 'showSubprocessMark'])->name('student.showSubprocessMark');
+    Route::get('/profile/book/process/{id}',[ProcessController::class,'index'])->name('book.process');
 });
 
 /////////////////////end student routes//////////////////
@@ -97,7 +100,7 @@ Route::group(['prefix'=>'search','middleware'=>'auth'],function (){
 
     Route::get('/student/page',[UserController::class, 'searchStudentPage'])->name('search.student.page');
     Route::get('/student',[UserController::class, 'searchStudent'])->name('search.student');
-    Route::get('/patient/page',[PatientController::class, 'searchPatientPage'])->name('search.patient.page');
+    Route::get('/patient/page/{id}',[PatientController::class, 'searchPatientPage'])->name('search.patient.page');
     Route::get('/patient',[PatientController::class, 'searchPatient'])->name('search.patient');
     Route::get('/show/student/{id}',[UserController::class, 'showStudent'])->name('show.student');
     Route::get('/show/patient/{id}',[PatientController::class, 'showPatient'])->name('show.patient');

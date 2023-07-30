@@ -4,10 +4,17 @@
     @parent
     <link rel="stylesheet" href="{{asset('css/search.css')}}">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/doctorProfile.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 @endsection
 
 @section('content')
+
+    @if(isset($message))
+        <div class="alert alert-danger text-center">
+            {{ $message }}
+        </div>
+    @endif
+
     <div class="container emp-profile">
 
         <div class="card">
@@ -18,7 +25,7 @@
 
                 <div class="search-container">
                     <div class="col-md-3" style="margin-left: 900px;">
-                        <a href="{{ route('search.patient.page') }}" class="profile-edit-btn">Show all users</a>
+                        <a href="{{ route('search.patient.page',1) }}" class="profile-edit-btn">Show all users</a>
                     </div>
                     <form id="searchForm" action="{{ route('search.patient', ['national_id' => Request::get('national_id')]) }}" method="get">
                         <div class="container">

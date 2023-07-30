@@ -23,16 +23,21 @@
                     <h5>
                         {{$patient->name}}
                     </h5>
-
                 </div>
             </div>
+            @if(auth()->user()->roles()->where('name','student')->first())
+            <div class="col-md-2">
+                <a href="{{route('book.process',$patient->id)}}" class="profile-edit-btn">choose patient</a>
+            </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
+
                     <h2 style="color: #0d6efd">links section</h2>
                     <a href="{{route('patient.information',$patient->id)}}" class="btn-outline-light">see more details</a><br/>
-                    <a href="{{route('search.patient.page')}}" class="btn-outline-light">back to search page</a><br/>
+                    <a href="{{route('search.patient.page',1)}}" class="btn-outline-light">back to search page</a><br/>
                     @if(auth()->user()->roles()->where('name','student')->first())
                         <a href="{{ route('student.profile') }}"
                            class="btn-outline-light">back to profile</a>
@@ -49,6 +54,7 @@
             </div>
 
             <div class="col-md-8">
+
                 <div class="tabs-sec">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -68,6 +74,7 @@
                     </ul>
                 </div>
                 <div class="tab-content profile-tab" id="myTabContent">
+
                     <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
                         <div class="row">
                             <div class="col-md-6">

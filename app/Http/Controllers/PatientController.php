@@ -152,11 +152,14 @@ class PatientController extends Controller
         return "done";
     }
 
-    public function searchPatientPage()
+    public function searchPatientPage($id)
     {
         $patients = Patient::paginate(5)->fragment('patients');
-
-        return view('search-patient',compact('patients'));
+        $message='choose a patient for process.';
+        if($id==1)
+            return view('search-patient',compact('patients'));
+        else
+            return view('search-patient',compact('patients','message'));
     }
 
     public function searchPatient(SearchRequest $request)
