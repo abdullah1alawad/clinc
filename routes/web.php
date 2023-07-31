@@ -139,9 +139,7 @@ Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
 
 
 /////////////////// test /////////////////////////
-Route::get('/test',function (){
-    return view('student.test');
-});
+Route::get('/test/{id}',[ProcessController::class,'index']);
 
 
 //Route::post('/store',[PatientController::class, 'test'])->name('patient.test');

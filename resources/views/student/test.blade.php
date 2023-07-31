@@ -6,23 +6,28 @@
         body {
             font-family: Arial, sans-serif;
         }
+
         .calendar {
             display: inline-block;
             border-collapse: collapse;
         }
+
         .calendar th, .calendar td {
             padding: 10px;
             text-align: center;
             border: 1px solid #ccc;
         }
+
         .calendar th {
             background-color: #f2f2f2;
         }
+
         .calendar td.booked {
             background-color: #f44336;
             color: #fff;
             cursor: not-allowed;
         }
+
         .calendar td.available {
             background-color: #4caf50;
             color: #fff;
@@ -32,20 +37,42 @@
 </head>
 <body>
 <h2>Select a Date and Time Slot:</h2>
+
 <table class="calendar">
     <thead>
+
     <tr>
-        <th>Sun</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
+        <th>#</th>
+        @foreach($week1 as $key => $value)
+            @if($loop->iteration%4==1)
+                <th>{{getDay($key)}}</th>
+            @endif
+        @endforeach
     </tr>
+
     </thead>
     <tbody id="calendar-body">
     <!-- Calendar cells will be generated here -->
+    <tr>
+        <th>09:00</th>
+{{--        two dimantion      --}}
+        @for($i=0;$i<7;$i++)
+            @if(count($week1[$days[$i]]))
+                <td class="available" id="{{$week1[$days[$i]][0]}}"></td>
+            @else
+                <td class="booked" id="0"></td>
+            @endif
+        @endfor
+    </tr>
+    <tr>
+        <th>10:30</th>
+    </tr>
+    <tr>
+        <th>12:00</th>
+    </tr>
+    <tr>
+        <th>01:30</th>
+    </tr>
     </tbody>
 </table>
 
@@ -78,7 +105,7 @@
                         cell.classList.add("booked");
                     } else {
                         cell.classList.add("available");
-                        cell.addEventListener("click", function() {
+                        cell.addEventListener("click", function () {
                             bookTimeSlot(dateString);
                         });
                     }
@@ -112,7 +139,7 @@
     }
 
     // Call the function to generate the calendar for July 2023 (month: 6 since months are zero-indexed)
-    generateCalendar(2023, 6);
+    //generateCalendar(2023, 6);
 </script>
 </body>
 </html>

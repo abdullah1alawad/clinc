@@ -66,3 +66,15 @@ if(!function_exists('saveImage')) {
 //        $resizedImage->save(public_path($folder . $file_name));
     }
 }
+
+if(!function_exists('getDay')) {
+    function getDay($date){
+        return Carbon::parse($date)->format('D');
+    }
+}
+
+if(!function_exists('getHour')) {
+    function getHour($date){
+        return Carbon::parse($date)->format('H:i');
+    }
+}
