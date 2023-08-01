@@ -39,6 +39,14 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+////////////////////// notification //////////////////////////////////////
+
+Route::post('/mark-notification',[UserController::class,'markNotification'])->name('mark.notification')->middleware('auth');
+Route::get('/message-info/{user_id}/{msg_id}',[UserController::class,'showMessage'])->name('message.info')->middleware('auth');
+
+////////////////////// end  notification //////////////////////////////////////
+
+
 ////////////////////// admin routes //////////////////
 
 Route::group(['prefix' => 'admin' , 'middleware' => 'auth'],function(){

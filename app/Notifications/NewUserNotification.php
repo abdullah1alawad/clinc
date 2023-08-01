@@ -41,14 +41,26 @@ class NewUserNotification extends Notification
     {
         if($this->user->roles[0]->id == 3) {
             return [
-                'title' => 'doctor registration',
-                'user' => $this->user->id,
+                'user' => 'Doctor',
+                'user_name' => $this->user->name,
+                'user_email' => $this->user->email,
+                'user_id' => $this->user->id,
+            ];
+        }
+        else if($this->user->roles[0]->id == 2){
+            return [
+                'user' => 'Student',
+                'user_name' => $this->user->name,
+                'user_email' => $this->user->email,
+                'user_id' => $this->user->id,
             ];
         }
         else{
             return [
-                'title' => 'student registration',
-                'user' => $this->user->id,
+                'user' => 'Assistant',
+                'user_name' => $this->user->name,
+                'user_email' => $this->user->email,
+                'user_id' => $this->user->id,
             ];
         }
     }

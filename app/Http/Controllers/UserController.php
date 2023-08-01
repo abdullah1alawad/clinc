@@ -7,9 +7,7 @@ use App\Http\Requests\ChangePhotoRequest;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreExistingAdminRequest;
 use App\Http\Requests\StoreNewAdminRequest;
-use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateRequest;
-use App\Models\Clinic;
 use App\Models\Process;
 
 use App\Models\Role;
@@ -81,6 +79,25 @@ class UserController extends Controller
         //
     }
 
+    //////////////////////////////////////// notification //////////////////////////////////////////////////
+
+    public function markNotification(Request $request){
+
+        if($request->has('id'))
+            auth()->user()->notifications()->find($request->input('id'))->markAsRead();
+        else
+            auth()->user()->notifications()->get()->markAsRead();
+
+
+        return response()->noContent();
+    }
+
+    public function showMessage($user_id,$msg_id){
+        
+    }
+
+    //////////////////////////////////////// end notification //////////////////////////////////////////////////
+
     //////////////////////////////////////// admin section ///////////////////////////////////////////////////
 
     public function adminProfile(Request $request)
@@ -88,9 +105,9 @@ class UserController extends Controller
         $user = auth()->user();
 
         if ($request->has('unread') && $request->input('unread') === '1')
-            $messages = $user->unreadNotifications()->paginate(5);
+            $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
         else
-            $messages = $user->notifications()->paginate(5);
+            $messages = $user->notifications()->paginate(5)->fragment('messages');
 
         //dd($messages);
         return view('admin.profile', compact('user', 'messages'));
