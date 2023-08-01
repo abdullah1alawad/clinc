@@ -140,7 +140,12 @@ Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
 
 
 /////////////////// test /////////////////////////
-Route::get('/test/{id}',[ProcessController::class,'index']);
+//Route::get('/test/{id}',[ProcessController::class,'index']);
+//Route::get('/test',[UserController::class,'showDoctorNotifications']);
+
+//Route::get('/test',function (){
+//
+//});
 
 
 //Route::post('/store',[PatientController::class, 'test'])->name('patient.test');

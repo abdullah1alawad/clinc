@@ -37,6 +37,8 @@ class BookProcessRequest extends FormRequest
             'patient_id.required'=>'you must choose a patient.',
             'doctor_id.required'=>'you must choose a doctor.',
             'subject_id.required'=>'you must choose a subject.',
+            'chair_id.required'=>'you must select a chair.',
+            'date_id.required'=>'you must choose a time for your process.',
             'photo.image' => 'you must choose a valid image like png , jpg etc ....',
             'photo.max' => 'choose an image size less than or equal to 2048KB.',
 

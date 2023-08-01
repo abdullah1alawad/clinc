@@ -184,7 +184,7 @@ class PatientController extends Controller
 
         $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $patient->processes()->where('date', '>=', $current_time)->get();
+        $upcomingAppointments = $patient->processes()->where('date', '>=', $current_time)->where('status',1)->get();
 
         if ($selected_subject) {
             $completedAppointments = $patient->processes()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
