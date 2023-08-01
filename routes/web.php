@@ -71,6 +71,7 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
     Route::post('/profile/change-photo',[UserController::class, 'studentChangePhoto'])->name('student.change.photo');
     Route::get('/profile/sub-mark/{id}',[UserController::class, 'showSubprocessMark'])->name('student.showSubprocessMark');
     Route::get('/profile/book/process/{id}',[ProcessController::class,'index'])->name('book.process');
+    Route::post('/profile/book/process/store',[ProcessController::class,'store'])->name('book.process.store');
 });
 
 /////////////////////end student routes//////////////////

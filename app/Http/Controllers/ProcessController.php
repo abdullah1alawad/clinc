@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookProcessRequest;
 use App\Models\Chair;
 use App\Models\Clinic;
 use App\Models\Patient;
@@ -244,9 +245,9 @@ class ProcessController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookProcessRequest $request)
     {
-        //
+
     }
 
     /**
