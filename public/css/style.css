@@ -212,6 +212,29 @@ tr:hover {
     background-color: #ddd;
 }
 
+section table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+section th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+section th {
+    background-color: #f2f2f2;
+}
+section tr:nth-child(even) {
+    background-color: initial;
+}
+
+section tr:hover {
+    background-color: unset;
+}
+
 /* /////////////////////  pagination ////////////////////////    */
 
 
@@ -396,13 +419,13 @@ tr:hover {
 }
 
 .calendar td.booked {
-    background-color: #f44336;
+    background-color: crimson;
     color: #fff;
     cursor: not-allowed;
 }
 
 .calendar td.available {
-    background-color: #4caf50;
+    background-color: darkturquoise;
     color: #fff;
     cursor: pointer;
 }
@@ -440,4 +463,9 @@ tr:hover {
     background-color: #40abb0;
     color: white;
     text-decoration: none;
+}
+
+
+.booking-class label{
+    font-weight: 600;
 }

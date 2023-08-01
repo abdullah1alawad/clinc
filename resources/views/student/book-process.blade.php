@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Booking Appointment</div>
-                    <div class="card-body">
+                    <div class="card-body booking-class">
                         <form action="" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="photo" class="col-md-2 ">{{ __('Photo:') }}</label>
+                                <label for="photo" class="col-md-2 ">Photo: (optional)</label>
 
                                 <div class="col-md-6">
                                     <input id="photo" type="file"
@@ -486,6 +486,17 @@
             let id = tdElement.id;
             document.getElementById("date").value = date;
             document.getElementById("chair_id").value = id;
+
+            // Remove 'chosen' class from all td elements and add 'available' class
+            let allTds = document.getElementsByTagName("td");
+            for (let i = 0; i < allTds.length; i++) {
+                if (allTds[i].classList.contains('chosen')) {
+                    allTds[i].classList.remove('chosen');
+                    allTds[i].classList.add('available');
+                }
+            }
+
+
             tdElement.classList.remove('available');
             tdElement.classList.add('chosen');
         }

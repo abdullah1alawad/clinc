@@ -128,7 +128,7 @@ class ProcessController extends Controller
                 $chairProcesses[$key][] = $chair->id;
             }
         }
-        else {
+        elseif($t4->gt($currentHour)) {
             $currentDay = Carbon::now();
 
             $currentDay->setTime($t1->hour, $t1->minute);
@@ -152,6 +152,29 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
+        }
+        else {
+            $currentDay = Carbon::now();
+
+            $currentDay->setTime($t1->hour, $t1->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
+            $currentDay->setTime($t2->hour, $t2->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
+            $currentDay->setTime($t3->hour, $t3->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
+            $currentDay->setTime($t4->hour, $t4->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
         }
 
 
