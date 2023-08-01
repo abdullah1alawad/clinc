@@ -327,7 +327,7 @@ tr:hover {
     color: white;
     text-decoration: none;
 }
-
+/*///////////////////////////////////////////////////*/
 .notify-count {
     display: inline;
     background-color: #333;
@@ -373,6 +373,70 @@ tr:hover {
 }
 
 .admin-btn .profile-edit-btn:hover {
+    background-color: #40abb0;
+    color: white;
+    text-decoration: none;
+}
+/* /////////////////////////////  booking chair//////////////////// */
+
+.calendar {
+    display: inline;
+    border-collapse: collapse;
+    margin: 100px;
+}
+
+.calendar th, .calendar td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.calendar th {
+    background-color: #f2f2f2;
+}
+
+.calendar td.booked {
+    background-color: #f44336;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.calendar td.available {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+.calendar td.chosen {
+    background-color: #0b5ed7;
+    color: #fff;
+    cursor: pointer;
+}
+
+.hidden-text {
+    position: absolute;
+    left: -9999px;
+    /*visibility: hidden;*/
+}
+
+
+.app .back-btn {
+    display: inline-block;
+    background-color: darkturquoise;
+    color: #6c757d;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 1%;
+    border-radius: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    margin-top: 5%;
+}
+
+.app .back-btn:hover {
     background-color: #40abb0;
     color: white;
     text-decoration: none;

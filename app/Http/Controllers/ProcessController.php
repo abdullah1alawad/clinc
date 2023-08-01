@@ -29,16 +29,14 @@ class ProcessController extends Controller
 
         $chairs = Chair::all();
         $currentTime = Carbon::now();
-
         $results = Process::where('date', '>', $currentTime)->select('chair_id', 'date')->get();
-
         $currentHour = Carbon::parse($currentTime)->format('h:i A');
-        $days=[];
 
         $t1 = Carbon::parse('09:00 am');
         $t2 = Carbon::parse('10:30 am');
         $t3 = Carbon::parse('12:00 pm');
         $t4 = Carbon::parse('01:30 pm');
+
 
         $chairProcesses = [];
         if ($t1->gt($currentHour)) {
@@ -50,7 +48,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t2->hour, $t2->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -58,7 +55,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t3->hour, $t3->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -66,7 +62,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t4->hour, $t4->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -74,11 +69,16 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
 
-        } else if ($t2->gt($currentHour)) {
+        }
+        else if ($t2->gt($currentHour)) {
             $currentDay = Carbon::now();
+
+            $currentDay->setTime($t1->hour, $t1->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
 
             $currentDay->setTime($t2->hour, $t2->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -86,7 +86,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t3->hour, $t3->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -94,7 +93,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t4->hour, $t4->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -102,9 +100,19 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
-        } else if ($t3->gt($currentHour)) {
+        }
+        else if ($t3->gt($currentHour)) {
             $currentDay = Carbon::now();
+
+            $currentDay->setTime($t1->hour, $t1->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
+            $currentDay->setTime($t2->hour, $t2->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
 
             $currentDay->setTime($t3->hour, $t3->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -112,7 +120,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t4->hour, $t4->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -120,21 +127,35 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
-        } else {
+        }
+        else {
             $currentDay = Carbon::now();
 
+            $currentDay->setTime($t1->hour, $t1->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
+            $currentDay->setTime($t2->hour, $t2->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
+            $currentDay->setTime($t3->hour, $t3->minute);
+            $key = $currentDay->format('Y-m-d H:i');
+            $chairProcesses[$key] = [];
+            $chairProcesses[$key][] = -1;
+
             $currentDay->setTime($t4->hour, $t4->minute);
             $key = $currentDay->format('Y-m-d H:i');
             $chairProcesses[$key] = [];
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
         }
 
 
-        for ($i = 1; $i <= 29; $i++) {
+        for ($i = 1; $i <= 27; $i++) {
             $currentDay = Carbon::now();
             $currentDay->addDays($i);
 
@@ -145,7 +166,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t2->hour, $t2->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -154,7 +174,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t3->hour, $t3->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -163,7 +182,6 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
 
             $currentDay->setTime($t4->hour, $t4->minute);
             $key = $currentDay->format('Y-m-d H:i');
@@ -172,9 +190,7 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-            $days[]=$key;
         }
-
 
         foreach ($results as $result) {
             $date = Carbon::parse($result->date)->format('Y-m-d H:i');
@@ -183,6 +199,7 @@ class ProcessController extends Controller
             unset($chairProcesses[$date][$ind]);
 
         }
+
         $week1 = [];$week2 = [];$week3 = [];$week4 = [];
 
         $cnt=1;
@@ -211,9 +228,9 @@ class ProcessController extends Controller
             $cnt++;
         }
 
-        return view('student.test',compact('week1','week2','week3','week4','days'));
+        //return view('student.test',compact('week1','week2','week3','week4'));
 
-        return view('student.book-process', compact('patient', 'doctors', 'subjects', 'chairProcesses'));
+        return view('student.book-process', compact('patient', 'doctors', 'subjects', 'week1','week2','week3','week4'));
     }
 
     /**

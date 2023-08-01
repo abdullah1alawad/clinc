@@ -78,3 +78,9 @@ if(!function_exists('getHour')) {
         return Carbon::parse($date)->format('H:i');
     }
 }
+
+if(!function_exists('getYMD')){
+    function getYMD($date){
+        return Carbon::parse($date)->format('Y-m-d');
+    }
+}
