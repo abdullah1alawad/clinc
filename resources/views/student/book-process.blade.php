@@ -12,8 +12,10 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Booking Appointment</div>
+
+                    {{--                    <div class="card-body">--}}
                     <div class="card-body booking-class">
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="{{route('book.process.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
                                 <label for="patient_id" class="col-md-2">{{ __('Patient Name:') }}</label>

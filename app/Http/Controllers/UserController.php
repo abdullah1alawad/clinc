@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangePhotoRequest;
 use App\Http\Requests\SearchRequest;
@@ -203,7 +204,7 @@ class UserController extends Controller
 
         $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->get();
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
 
         if ($selected_subject) {
             $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
@@ -522,6 +523,13 @@ class UserController extends Controller
         }
 
         return view('show-student', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
+    }
+
+    public function showDoctorNotifications()
+    {
+        $doctor = Auth::user();
+        $notifications = $doctor->notifications;
+        dd($notifications);
     }
 
     ///////////////////////////////////// end doctor section /////////////////////////////////////////////

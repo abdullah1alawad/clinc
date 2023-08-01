@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('doctor_id');
-            $table->unsignedBigInteger('assistant_id');
+            $table->unsignedBigInteger('assistant_id')->nullable();
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('chair_id');
             $table->unsignedBigInteger('subject_id');
             $table->dateTime('date');
             $table->string('photo')->nullable();
+            $table->boolean('status');
             $table->timestamps();
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');

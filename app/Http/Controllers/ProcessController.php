@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProcessCreated;
+use App\Http\Requests\BookProcessRequest;
 use App\Models\Chair;
 use App\Models\Clinic;
 use App\Models\Patient;
@@ -267,9 +269,29 @@ class ProcessController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookProcessRequest $request)
     {
-        //
+        $user_id=auth()->user()->id;
+
+        $photoPath="";
+        if($request->hasFile('photo'))
+            $photoPath = saveImage($request->file('photo'), 'images/');
+
+        $process=new Process;
+        $process->student_id=$user_id;
+        $process->patient_id=$request->input('patient_id');
+        $process->doctor_id=$request->input('doctor_id');
+        $process->subject_id=$request->input('subject_id');
+        $process->chair_id=$request->input('chair_id');
+        $process->date=$request->input('date');
+        $process->photo=$photoPath;
+        $process->status=0;
+        $process->save();
+
+        event(new ProcessCreated($process));
+
+        return redirect()->route('student.profile');
+
     }
 
     /**

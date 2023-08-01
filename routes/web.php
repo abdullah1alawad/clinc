@@ -79,6 +79,7 @@ Route::group(['prefix' => 'student' , 'middleware' => 'auth'],function(){
     Route::post('/profile/change-photo',[UserController::class, 'studentChangePhoto'])->name('student.change.photo');
     Route::get('/profile/sub-mark/{id}',[UserController::class, 'showSubprocessMark'])->name('student.showSubprocessMark');
     Route::get('/profile/book/process/{id}',[ProcessController::class,'index'])->name('book.process');
+    Route::post('/profile/book/process/store',[ProcessController::class,'store'])->name('book.process.store');
 });
 
 /////////////////////end student routes//////////////////
@@ -147,7 +148,12 @@ Route::group(['prefix' => 'patient' , 'middleware' => 'auth'],function(){
 
 
 /////////////////// test /////////////////////////
-Route::get('/test/{id}',[ProcessController::class,'index']);
+//Route::get('/test/{id}',[ProcessController::class,'index']);
+//Route::get('/test',[UserController::class,'showDoctorNotifications']);
+
+//Route::get('/test',function (){
+//
+//});
 
 
 //Route::post('/store',[PatientController::class, 'test'])->name('patient.test');

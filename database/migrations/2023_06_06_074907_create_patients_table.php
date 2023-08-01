@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('doctor_id');
             $table->string('name');
             $table->string('national_id')->unique();
             $table->boolean('gender');
@@ -36,8 +34,6 @@ return new class extends Migration
             $table->string('reason_to_came')->nullable();
             $table->string('signature');
             $table->timestamps();
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }
