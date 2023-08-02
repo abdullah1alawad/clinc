@@ -80,11 +80,33 @@ class UserController extends Controller
         //
     }
 
+    public function accept($id, $type)
+    {
+        $user = User::find($id);
+
+        if ($type == 'Doctor')
+            $user->roles()->sync(3);
+        else
+            $user->roles()->sync(4);
+
+        return redirect()->back()->with('success', $type . ' Has Been Accepted!');
+    }
+
+    public function reject($id,$type)
+    {
+        $user = User::find($id);
+
+        $user->roles()->sync(6);
+
+        return redirect()->back()->with('success', $type . ' Has Been Banned!');
+    }
+
     //////////////////////////////////////// notification //////////////////////////////////////////////////
 
-    public function markNotification(Request $request){
+    public function markNotification(Request $request)
+    {
 
-        if($request->has('id'))
+        if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
             auth()->user()->notifications()->get()->markAsRead();
@@ -93,8 +115,18 @@ class UserController extends Controller
         return response()->noContent();
     }
 
-    public function showMessage($user_id,$msg_id){
-        
+    public function showMessage($msg_id)
+    {
+
+        $msg = auth()->user()->notifications()->find($msg_id);
+
+        if (!$msg)
+            abort('404');
+
+        $user = User::find($msg->data['user_id']);
+        $msg->markAsRead();
+
+        return view('show-message', compact('user', 'msg'));
     }
 
     //////////////////////////////////////// end notification //////////////////////////////////////////////////

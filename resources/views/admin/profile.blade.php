@@ -111,12 +111,6 @@
                     <div class="tab-pane fade" id="messages" role="tabpanel"
                          aria-labelledby="messages-tab">
 
-                        {{--                        <div class="col-md-12"--}}
-                        {{--                             style="display: flex; justify-content: end; align-items: center;">--}}
-
-
-                        {{--                        </div>--}}
-
                         <div class="message-table">
                             <table>
                                 <thead>
@@ -159,8 +153,9 @@
                                             </td>
                                             <td class="text-end">
 
-                                                <a href="{{route('message.info',['user_id' => $message->data['user_id'], 'msg_id' => $message->id])}}">
-                                                    More Details</a>
+                                                <a href="{{route('message.info',['msg_id' => $message->id])}}">
+                                                    More Details
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach

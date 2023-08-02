@@ -509,3 +509,14 @@ table a{
 .my-link a:hover{
     text-decoration: none;
 }
+
+.info-class{
+    margin-left: 1%;
+}
+.info-class label{
+    font-weight: 600;
+}
+.info-class p{
+    font-weight: 600;
+    color: #0062cc;
+}

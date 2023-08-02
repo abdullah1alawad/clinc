@@ -38,11 +38,18 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+////////////////////// messages action /////////////
+
+Route::get('/accept/{id}/{type}',[UserController::class,'accept'])->name('accept')->middleware('auth');
+Route::get('/reject/{id}/{type}',[UserController::class,'reject'])->name('reject')->middleware('auth');
+
+////////////////////// end messages action /////////////
+
 
 ////////////////////// notification //////////////////////////////////////
 
 Route::post('/mark-notification',[UserController::class,'markNotification'])->name('mark.notification')->middleware('auth');
-Route::get('/message-info/{user_id}/{msg_id}',[UserController::class,'showMessage'])->name('message.info')->middleware('auth');
+Route::get('/message-info/{msg_id}',[UserController::class,'showMessage'])->name('message.info')->middleware('auth');
 
 ////////////////////// end  notification //////////////////////////////////////
 
