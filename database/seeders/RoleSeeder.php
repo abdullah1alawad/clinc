@@ -17,5 +17,7 @@ class RoleSeeder extends Seeder
         DB::table('roles')->insert(['name'=>'student']);
         DB::table('roles')->insert(['name'=>'doctor']);
         DB::table('roles')->insert(['name'=>'assistant']);
+        DB::table('roles')->insert(['name'=>'banned']);
+        DB::table('roles')->insert(['name'=>'pending']);
     }
 }
