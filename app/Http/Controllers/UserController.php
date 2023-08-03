@@ -239,9 +239,9 @@ class UserController extends Controller
         $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
 
         if ($selected_subject) {
-            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         } else {
-            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         }
 
         $studentMarks = $user->studentMarks()->paginate(5)->fragment('subjectsMark');
@@ -366,13 +366,18 @@ class UserController extends Controller
 
         $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $user->doctorProcesses()->where('date', '>=', $current_time)->get();
+        $upcomingAppointments = $user->doctorProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
 
         if ($selected_subject) {
-            $completedAppointments = $user->doctorProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+            $completedAppointments = $user->doctorProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         } else {
-            $completedAppointments = $user->doctorProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+            $completedAppointments = $user->doctorProcesses()->where('date', '<', $current_time)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         }
+
+        if ($request->has('unread') && $request->input('unread') === '1')
+            $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
+        else
+            $messages = $user->notifications()->paginate(5)->fragment('messages');
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -411,7 +416,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
+        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects','messages'));
     }
 
     public function doctorProfileEdit()
@@ -575,12 +580,12 @@ class UserController extends Controller
 
         $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $user->assistantProcesses()->where('date', '>=', $current_time)->get();
+        $upcomingAppointments = $user->assistantProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
 
         if ($selected_subject) {
-            $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+            $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         } else {
-            $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+            $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         }
 
         foreach ($upcomingAppointments as $appointment) {
