@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NewUserNotification;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangePhotoRequest;
@@ -73,19 +74,7 @@ class UserController extends Controller
         return response()->noContent();
     }
 
-    public function showMessage($msg_id)
-    {
 
-        $msg = auth()->user()->notifications()->find($msg_id);
-
-        if (!$msg)
-            abort('404');
-
-        $user = User::find($msg->data['user_id']);
-        $msg->markAsRead();
-
-        return view('show-message', compact('user', 'msg'));
-    }
 
     //////////////////////////////////////// end notification //////////////////////////////////////////////////
 
@@ -96,12 +85,14 @@ class UserController extends Controller
         $user = auth()->user();
 
         if ($request->has('unread') && $request->input('unread') === '1')
-            $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
+            $messages = $user->unreadNotifications()->where('type',NewUserNotification::class)->paginate(5)->fragment('messages');
         else
-            $messages = $user->notifications()->paginate(5)->fragment('messages');
+            $messages = $user->notifications()->where('type',NewUserNotification::class)->paginate(5)->fragment('messages');
 
-        //dd($messages);
-        return view('admin.profile', compact('user', 'messages'));
+        $unreadNotificationsCount=$user->unreadNotifications()->where('type',NewUserNotification::class)->count();
+
+
+        return view('admin.profile', compact('user', 'messages','unreadNotificationsCount'));
     }
 
     public function adminProfileEdit()
@@ -183,6 +174,19 @@ class UserController extends Controller
             ->with('success', 'Admin Has Been Added Successfully!');
     }
 
+    public function adminShowMessage($msg_id)
+    {
+
+        $msg = auth()->user()->notifications()->find($msg_id);
+
+        if (!$msg)
+            abort('404');
+
+        $user = User::find($msg->data['user_id']);
+        $msg->markAsRead();
+
+        return view('admin.show-message', compact('user', 'msg'));
+    }
 
     //////////////////////////////////////// end admin section ///////////////////////////////////////////////////
 

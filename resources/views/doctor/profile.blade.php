@@ -208,7 +208,7 @@
                                 <tr>
                                     <th class="text-center" width="70%">Title</th>
                                     <th colspan="2" class="text-end">
-                                        <form method="GET" action="{{ route('admin.profile') }}">
+                                        <form method="GET" action="{{ route('doctor.profile') }}">
                                             <input type="hidden" name="unread" value="1">
                                             <button type="submit" id="msg_btn" class="btn btn-outline-dark">Unread
                                                 Messages

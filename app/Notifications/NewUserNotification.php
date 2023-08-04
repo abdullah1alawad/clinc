@@ -39,23 +39,21 @@ class NewUserNotification extends Notification
      */
     public function toArray($notifiable): array
     {
-        if($this->user->roles[0]->id == 3) {
+        if ($this->user->roles[0]->id == 3) {
             return [
                 'user' => 'Doctor',
                 'user_name' => $this->user->name,
                 'user_email' => $this->user->email,
                 'user_id' => $this->user->id,
             ];
-        }
-        else if($this->user->roles[0]->id == 2){
+        } else if ($this->user->roles[0]->id == 2) {
             return [
                 'user' => 'Student',
                 'user_name' => $this->user->name,
                 'user_email' => $this->user->email,
                 'user_id' => $this->user->id,
             ];
-        }
-        else{
+        } else {
             return [
                 'user' => 'Assistant',
                 'user_name' => $this->user->name,
