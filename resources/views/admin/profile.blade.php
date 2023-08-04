@@ -154,7 +154,7 @@
                                             </td>
                                             <td class="text-end">
 
-                                                <a href="{{route('message.info',['msg_id' => $message->id])}}">
+                                                <a href="{{route('admin.message.info',['msg_id' => $message->id])}}">
                                                     More Details
                                                 </a>
                                             </td>
@@ -185,7 +185,7 @@
 
             function markNotificationAsRead(notificationId) {
                 return $.ajax({
-                    url: '{{route('mark.notification')}}',
+                    url: '{{route('admin.mark.notification')}}',
                     type: 'post',
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -210,7 +210,7 @@
 
             function markAllNotificationsAsRead() {
                 return $.ajax({
-                    url: '{{route('mark.notification')}}',
+                    url: '{{route('admin.mark.notification')}}',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}'

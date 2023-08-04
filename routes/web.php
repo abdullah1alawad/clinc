@@ -39,16 +39,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 ////////////////////// messages action /////////////
 
-Route::get('/accept/{id}/{type}', [UserController::class, 'accept'])->name('accept')->middleware('auth');
-Route::get('/reject/{id}/{type}', [UserController::class, 'reject'])->name('reject')->middleware('auth');
+
 
 ////////////////////// end messages action /////////////
 
 
 ////////////////////// notification //////////////////////////////////////
 
-Route::post('/mark-notification', [UserController::class, 'markNotification'])->name('mark.notification')->middleware('auth');
-Route::get('/message-info/{msg_id}', [UserController::class, 'showMessage'])->name('message.info')->middleware('auth');
+
 
 ////////////////////// end  notification //////////////////////////////////////
 
@@ -77,6 +75,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post('/profile/store-Clinic', [ClinicController::class, 'storeClinic'])->name('store.clinic');
     Route::get('/profile/add-chair', [ChairController::class, 'addChair'])->name('add.chair');
     Route::post('/profile/store-chair', [chairController::class, 'storeChair'])->name('store.chair');
+    Route::post('/mark-notification', [UserController::class, 'adminMarkNotification'])->name('admin.mark.notification');
+    Route::get('/message-info/{msg_id}', [UserController::class, 'adminShowMessage'])->name('admin.message.info');
+    Route::get('/accept/{id}/{type}', [UserController::class, 'userAccept'])->name('user.accept');
+    Route::get('/reject/{id}/{type}', [UserController::class, 'userReject'])->name('user.reject');
 });
 
 ////////////////////// end admin routes //////////////////
@@ -93,6 +95,8 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth','student']], functi
     Route::get('/profile/sub-mark/{id}', [UserController::class, 'showSubprocessMark'])->name('student.showSubprocessMark');
     Route::get('/profile/book/process/{id}', [ProcessController::class, 'index'])->name('book.process');
     Route::post('/profile/book/process/store', [ProcessController::class, 'store'])->name('book.process.store');
+    Route::post('/mark-notification', [UserController::class, 'studentMarkNotification'])->name('student.mark.notification');
+    Route::get('/message-info/{msg_id}', [UserController::class, 'studentShowMessage'])->name('student.message.info');
 });
 
 /////////////////////end student routes//////////////////
@@ -110,6 +114,10 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['auth','doctor']], function
     Route::get('/profile/set-sub-marks/{id}', [SubprocessMarkController::class, 'create'])->name('doctor.setSubmarks');
     Route::post('/profile/store-sub-marks', [SubprocessMarkController::class, 'store'])->name('doctor.storeSubmarks');
     Route::delete('/profile/delete-sub-marks/{id}', [SubprocessMarkController::class, 'destroy'])->name('doctor.deleteSubmarks');
+    Route::post('/mark-notification', [UserController::class, 'doctorMarkNotification'])->name('doctor.mark.notification');
+    Route::get('/message-info/{msg_id}', [UserController::class, 'doctorShowMessage'])->name('doctor.message.info');
+    Route::post('/process-accept', [ProcessController::class, 'processAccept'])->name('process.accept');
+    Route::get('/process-reject/{process_id}',[ProcessController::class, 'processReject'])->name('process.reject');
 });
 
 /////////////////////end doctor routes//////////////////

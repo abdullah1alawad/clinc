@@ -7,6 +7,12 @@
 
 @section('content')
 
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="container emp-profile">
         <div class="row">
             <div class="col-md-4">
@@ -61,8 +67,8 @@
                                href="#messages" role="tab"
                                aria-controls="messages" aria-selected="false">
                                 Messages
-                                @if($user->unreadNotifications->count())
-                                    <span class="notify-count">{{$user->unreadNotifications->count()}}</span>
+                                @if($unreadNotificationsCount)
+                                    <span class="notify-count">{{$unreadNotificationsCount}}</span>
                                 @endif
                             </a>
                         </li>
@@ -228,9 +234,9 @@
                                             @endif
 
                                             <td>
-                                                [{{$message->created_at}}
-                                                ] {{$message->data['user']}} {{$message->data['user_name']}}
-                                                ({{$message->data['user_email']}}) has just registered
+                                                [{{$message->created_at}}]
+                                                Student {{$message->data['student']}} wants to schedule an appointment to treat the patient
+                                                ({{$message->data['patient']}})  in the subject {{$message->data['subject']}}
                                             </td>
 
                                             <td class="text-end">
@@ -244,7 +250,7 @@
                                             </td>
                                             <td class="text-end">
 
-                                                <a href="{{route('message.info',['msg_id' => $message->id])}}">
+                                                <a href="{{route('doctor.message.info',['msg_id' => $message->id])}}">
                                                     More Details
                                                 </a>
                                             </td>
@@ -254,7 +260,7 @@
                             </table>
 
                             <div class="col-md-12 text-end py-2 my-link">
-                                @if($user->unreadNotifications->count())
+                                @if($unreadNotificationsCount)
                                     <a href="#messages" class="mark-as-read" id="mark-all">Mark All As Read</a>
                                 @endif
                             </div>
@@ -276,7 +282,7 @@
 
         function markNotificationAsRead(notificationId) {
             return $.ajax({
-                url: '{{route('mark.notification')}}',
+                url: '{{route('doctor.mark.notification')}}',
                 type: 'post',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -301,7 +307,7 @@
 
         function markAllNotificationsAsRead() {
             return $.ajax({
-                url: '{{route('mark.notification')}}',
+                url: '{{route('doctor.mark.notification')}}',
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}'

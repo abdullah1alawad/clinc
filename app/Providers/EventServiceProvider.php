@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\ProcessAccepted;
 use App\Events\ProcessCreated;
+use App\Events\ProcessRejected;
 use App\Listeners\SendDoctorNotification;
 use App\Listeners\SendNewUserNotification;
+use App\Listeners\SendProcessAcceptedNotification;
+use App\Listeners\SendProcessRejectedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,6 +29,12 @@ class EventServiceProvider extends ServiceProvider
         ProcessCreated::class => [
             SendDoctorNotification::class,
         ],
+        ProcessAccepted::class =>[
+            SendProcessAcceptedNotification::class,
+        ],
+        ProcessRejected::class=>[
+            SendProcessRejectedNotification::class,
+        ]
     ];
 
     /**

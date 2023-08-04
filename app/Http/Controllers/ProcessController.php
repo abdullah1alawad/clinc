@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProcessAccepted;
 use App\Events\ProcessCreated;
+use App\Events\ProcessRejected;
 use App\Http\Requests\BookProcessRequest;
 use App\Models\Chair;
 use App\Models\Clinic;
@@ -324,5 +326,37 @@ class ProcessController extends Controller
     public function destroy(Process $process)
     {
         //
+    }
+
+    public function processAccept(Request $request){
+
+        $process=Process::find($request->input('process_id'));
+        if(!$process)
+            return redirect()->back()->with('field','The Process Has Already Been Rejected!');
+
+        $process->status=1;
+        $process->assistant_id=$request->input('assistant_id');
+
+        $process->save();
+
+        event(new ProcessAccepted($process));
+
+        return redirect()->route('doctor.profile')->with('success','Process Has Been Accepted!');
+    }
+
+    public function processReject($id){
+        $process=Process::find($id);
+        if(!$process)
+            return redirect()->back()->with('field','The Process Has Already Been Rejected!');
+
+        $currentTime=Carbon::now();
+        if($currentTime->gt($process->date))
+            return redirect()->back()->with('field','The Process Has Already Been Completed!');
+
+        event(new ProcessRejected($process));
+
+        $process->delete();
+
+        return redirect()->route('doctor.profile')->with('success','Process Has Been Rejected!');
     }
 }

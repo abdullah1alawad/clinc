@@ -47,10 +47,13 @@ class NewProcessNotification extends Notification
         $photo=$this->process->photo;
 
         return [
+            'process_id'=>$this->process->id,
             'student'=>$student->name,
+            'student_id'=>$student->id,
             'patient'=>$patient->name,
+            'patient_id'=>$patient->id,
             'subject'=>$subject->name,
-//            'chair_id'=>$this->process->chair_id,
+            'chair_id'=>$this->process->chair_id,
             'date'=>$date,
             'photo'=>$photo,
         ];

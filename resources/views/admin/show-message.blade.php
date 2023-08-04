@@ -81,12 +81,12 @@
 
                         @if($msg->data['user'] == 'Student')
                             <div class="row justify-content-center">
-                                <a href="{{route('reject',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-danger col-md-2" style="margin: 1%;">Ban</a>
+                                <a href="{{route('user.reject',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-danger col-md-2" style="margin: 1%;">Ban</a>
                             </div>
                             @else
                             <div class="row justify-content-center">
-                                <a href="{{route('reject',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-danger col-md-2" style="margin: 1%;">Reject</a>
-                                <a href="{{route('accept',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-success col-md-2" style="margin: 1%;">Accept</a>
+                                <a href="{{route('user.reject',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-danger col-md-2" style="margin: 1%;">Reject</a>
+                                <a href="{{route('user.accept',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-success col-md-2" style="margin: 1%;">Accept</a>
                             </div>
                         @endif
                     </div>
