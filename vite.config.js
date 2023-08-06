@@ -19,6 +19,7 @@ export default defineConfig({
                 'resources/js/patientInfo.js',
                 'resources/js/adminProfile.js',
                 'resources/js/adminProfileEdit.js',
+                'resources/js/showProfile.js',
             ],
             refresh: true,
         }),

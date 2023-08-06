@@ -54,7 +54,18 @@
                         <li class="nav-item">
                             <a class="nav-link" id="completedAppointments-tab" data-toggle="tab"
                                href="#completedAppointments" role="tab"
-                               aria-controls="completedAppointments" aria-selected="false">Your Completed Appointments</a>
+                               aria-controls="completedAppointments" aria-selected="false">Your Completed
+                                Appointments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="messages-tab" data-toggle="tab"
+                               href="#messages" role="tab"
+                               aria-controls="messages" aria-selected="false">
+                                Messages
+                                @if($user->unreadNotifications->count())
+                                    <span class="notify-count">{{$user->unreadNotifications->count()}}</span>
+                                @endif
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -188,9 +199,145 @@
                             {!!$completedAppointments->links() !!}
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="messages" role="tabpanel"
+                         aria-labelledby="messages-tab">
+
+                        <div class="message-table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th class="text-center" width="70%">Title</th>
+                                    <th colspan="2" class="text-end">
+                                        <form method="GET" action="{{ route('assistant.profile') }}">
+                                            <input type="hidden" name="unread" value="1">
+                                            <button type="submit" id="msg_btn" class="btn btn-outline-dark">Unread
+                                                Messages
+                                                Only
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($messages as $message)
+                                    @if(!$message->read_at)
+                                        <tr class="alert alert-success notify-item" id="notify-{{$message->id}}">
+                                    @else
+                                        <tr class="alert alert-dark">
+                                            @endif
+
+                                            <td>
+                                                [{{$message->created_at}}]
+                                                Doctor {{$message->data['doctor_name']}} has been assigned you for assistant
+                                            </td>
+
+                                            <td class="text-end">
+
+                                                @if(!$message->read_at)
+                                                    <a href="#messages" class="mark-as-read"
+                                                       data-id="{{$message->id}}">
+                                                        Mark As Read
+                                                    </a>
+                                                @endif
+
+                                            </td>
+                                            <td class="text-end">
+
+                                                <a href="{{route('assistant.message.info',['msg_id' => $message->id])}}">
+                                                    More Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                </tbody>
+                            </table>
+
+                            <div class="col-md-12 text-end py-2 my-link">
+                                @if($user->unreadNotifications->count())
+                                    <a href="#messages" class="mark-as-read" id="mark-all">Mark All As Read</a>
+                                @endif
+                            </div>
+
+                        </div>
+                        <div class="col-md-1 text-center" style="margin-left: 300px">
+                            {!! $messages->links() !!}
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        function markNotificationAsRead(notificationId) {
+            return $.ajax({
+                url: '{{route('assistant.mark.notification')}}',
+                type: 'post',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: notificationId,
+                },
+                success: function (response) {
+                    // Update the UI to show that the notification has been marked as read
+                    $('#notify-' + notificationId).removeClass('alert-success');
+                    $('#notify-' + notificationId).addClass('alert-dark');
+                    let count = $('.notify-count').innerHTML;
+                    if (count > 1)
+                        $('.notify-count').innerHTML = count - 1;
+                    else
+                        $('.notify-count').removeClass('notify-count').addClass('hidit');
+                    // ...
+                },
+                error: function (xhr) {
+
+                }
+            });
+        }
+
+        function markAllNotificationsAsRead() {
+            return $.ajax({
+                url: '{{route('assistant.mark.notification')}}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    // Update the UI to show that all notifications have been marked as read
+                    $('.notify-item').removeClass('alert-success');
+                    $('.notify-item').addClass('alert-dark');
+                    $('.notify-count').removeClass('notify-count').addClass('hidit');
+                    $('.mark-as-read').removeClass('mark-as-read').addClass('hidit');
+                    // ...
+                },
+                error: function (xhr) {
+                    // Handle the error
+                    // ...
+                }
+            });
+        }
+
+        $(function () {
+            $('.mark-as-read').click(function () {
+
+                //alert($(this).data('id'));
+                event.preventDefault();
+                markNotificationAsRead($(this).data('id'));
+                $(this).removeClass('mark-as-read');
+                $(this).addClass('hidit');
+            });
+
+            $('#mark-all').click(function () {
+                event.preventDefault();
+                markAllNotificationsAsRead();
+
+            });
+        });
+
+
+    </script>
 @endsection

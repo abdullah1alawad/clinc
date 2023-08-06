@@ -97,9 +97,13 @@ if (subject !== null) {
 if (messages !== null) {
     messagesContent.classList.add("show", "active");
     aboutContent.classList.remove("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
     // Update the active class of the tabs
     messagesTab.classList.add("active");
     aboutTab.classList.remove("active");
+    upcomingAppointmentsTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
 
     let btn = document.getElementById('msg_btn');
     let input = document.getElementsByName('unread')[0];

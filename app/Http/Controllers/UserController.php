@@ -605,6 +605,11 @@ class UserController extends Controller
             $completedAppointments = $user->assistantProcesses()->where('date', '<', $current_time)->where('status', 1)->paginate(5)->fragment('completedAppointments');
         }
 
+        if ($request->has('unread') && $request->input('unread') === '1')
+            $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
+        else
+            $messages = $user->notifications()->paginate(5)->fragment('messages');
+
         foreach ($upcomingAppointments as $appointment) {
 
             $date_from_database = Carbon::parse($appointment->date);
@@ -642,7 +647,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects'));
+        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects','messages'));
     }
 
     public function assistantProfileEdit()
@@ -689,6 +694,31 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('assistant.profile.edit')
             ->with('success', 'Your Password Has Been Updated Successfully!');
+    }
+
+    public function assistantMarkNotification(Request $request)
+    {
+
+        if ($request->has('id'))
+            auth()->user()->notifications()->find($request->input('id'))->markAsRead();
+        else
+            auth()->user()->notifications()->get()->markAsRead();
+
+
+        return response()->noContent();
+    }
+
+    public function assistantShowMessage($msg_id)
+    {
+
+        $message = auth()->user()->notifications()->find($msg_id);
+
+        if (!$message)
+            abort('404');
+
+        $message->markAsRead();
+
+        return view('assistant.show-message', compact('message'));
     }
 
     ///////////////////////////////////// end assistant section /////////////////////////////////////////////

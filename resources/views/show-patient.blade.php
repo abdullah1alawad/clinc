@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/doctorProfile.js','resources/js/set-sub-marks.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/showProfile.js'])
 @endsection
 
 @section('content')
