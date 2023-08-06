@@ -257,7 +257,6 @@
                                     @else
                                         <tr class="alert alert-dark">
                                             @endif
-
                                             <td>
                                                 [{{$message->created_at}}]
                                                 Doctor {{$message->data['doctor_name']}} {{$message->data['title']}}

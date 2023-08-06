@@ -419,8 +419,8 @@ section tr:hover {
 }
 
 .calendar td.booked {
-    background-color: crimson;
-    color: #fff;
+    background-color: #333;
+    color: #333;
     cursor: not-allowed;
 }
 
@@ -431,7 +431,7 @@ section tr:hover {
 }
 
 .calendar td.chosen {
-    background-color: #0b5ed7;
+    background-color: #3a99a3 ;
     color: #fff;
     cursor: pointer;
 }

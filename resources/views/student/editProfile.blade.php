@@ -23,7 +23,7 @@
                             <img src="{{asset('images/' . (($user->photo != null) ? $user->photo : '123456.jpg') )}}" alt="image error"/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="photo" accept="image/*"/>
+                                <input type="file"  name="photo" accept="image/*"/>
                             </div>
                         </div>
                         <div class="text-center">

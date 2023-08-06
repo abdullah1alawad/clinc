@@ -17,10 +17,10 @@ class isDoctor
     public function handle(Request $request, Closure $next): Response
     {
         if(auth()->user()->roles()->where('name','banned')->first())
-            return redirect()->route('banned.page');
+            return redirect()->route('banned');
 
         if(auth()->user()->roles()->where('name','pending')->first())
-            return redirect()->route('pending.page');
+            return redirect()->route('pending');
 
         if(auth()->user()->roles()->where('name','doctor')->first())
             return $next($request);

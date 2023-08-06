@@ -27,8 +27,6 @@ class PatientFactory extends Factory
         })->inRandomOrder()->first()->id;
 
         return [
-            'student_id'=>$student,
-            'doctor_id'=>$doctor,
             'name'=>$this->faker->name,
             'national_id'=>$this->faker->numberBetween(10000,1000000),
             'gender'=>$this->faker->randomElement(['Male', 'Female']),

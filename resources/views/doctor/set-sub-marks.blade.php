@@ -75,7 +75,7 @@
                         @endif
 
                         <div class="col-md-12 text-center">
-                            <a href="{{ \Illuminate\Support\Facades\URL::route('doctor.show.student',$student->id) }}#completedAppointments"
+                            <a href="{{ \Illuminate\Support\Facades\URL::route('doctor.profile',$student->id) }}#completedAppointments"
                                class="back-btn">Back</a>
                         </div>
                     </div>

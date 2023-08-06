@@ -87,14 +87,14 @@ class Patient extends Authenticatable
         return $ret;
     }
 
-    public function setQuestionsAttribute($val){
-        $ans = pow(2,51);
-
-        for($i = 1;$i <= 50;$i++){
-            $ans += pow(2,$i) * $val[$i];
-        }
-
-        $this->attributes['questions'] = $ans;
-    }
+//    public function setQuestionsAttribute($val){
+//        $ans = pow(2,51);
+//
+//        for($i = 1;$i <= 50;$i++){
+//            $ans += pow(2,$i) * $val[$i];
+//        }
+//
+//        $this->attributes['questions'] = $ans;
+//    }
 
 }

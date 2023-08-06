@@ -17,7 +17,7 @@ class isStudent
     public function handle(Request $request, Closure $next): Response
     {
         if(auth()->user()->roles()->where('name','banned')->first())
-            return redirect()->route('banned.page');
+            return redirect()->route('banned');
 
         if(auth()->user()->roles()->where('name','student')->first())
             return $next($request);
