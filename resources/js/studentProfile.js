@@ -105,6 +105,7 @@ $(document).ready(function() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const subject = urlParams.get('subject');
+const messages = urlParams.get('unread');
 
 if(subject !== null){
     completedAppointmentsContent.classList.add("show", "active");
@@ -120,10 +121,35 @@ if(subject !== null){
     messagesTab.classList.remove("active");
 }
 
+if (messages !== null) {
+    messagesContent.classList.add("show", "active");
+    upcomingAppointmentsContent.classList.remove("show", "active");
+    completedAppointmentsContent.classList.remove("show", "active");
+    aboutContent.classList.remove("show", "active");
+    subjectsMarkContent.classList.remove("show", "active");
+    // Update the active class of the tabs
+    messagesTab.classList.add("active");
+    upcomingAppointmentsTab.classList.remove("active");
+    completedAppointmentsTab.classList.remove("active");
+    aboutTab.classList.remove("active");
+    subjectsMarkTab.classList.remove("active");
+
+    let btn = document.getElementById('msg_btn');
+    let input = document.getElementsByName('unread')[0];
+
+    if (messages === '1') {
+        btn.innerHTML = 'All messages';
+        input.value = '0';
+    } else {
+        btn.innerHTML = 'Unread Messages Only';
+        input.value = '1';
+    }
+}
+
 //////////////////////////////////////////////////////
 let fragment = window.location.hash.substr(1);
 
-if((fragment === '' && subject === null )|| fragment === 'about'){
+if((fragment === '' && subject === null && messages === null )|| fragment === 'about'){
     aboutContent.classList.add("show", "active");
     upcomingAppointmentsContent.classList.remove("show", "active");
     completedAppointmentsContent.classList.remove("show", "active");

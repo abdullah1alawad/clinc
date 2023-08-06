@@ -194,7 +194,7 @@
                     success: function (response) {
                         // Update the UI to show that the notification has been marked as read
                         $('#notify-' + notificationId).removeClass('alert-success');
-                        $('#notify-' + notificationId).addClass('alert-danger');
+                        $('#notify-' + notificationId).addClass('alert-dark');
                         let count = $('.notify-count').innerHTML;
                         if (count > 1)
                             $('.notify-count').innerHTML = count - 1;
@@ -218,7 +218,7 @@
                     success: function (response) {
                         // Update the UI to show that all notifications have been marked as read
                         $('.notify-item').removeClass('alert-success');
-                        $('.notify-item').addClass('alert-danger');
+                        $('.notify-item').addClass('alert-dark');
                         $('.notify-count').removeClass('notify-count').addClass('hidit');
                         $('.mark-as-read').removeClass('mark-as-read').addClass('hidit');
                         // ...

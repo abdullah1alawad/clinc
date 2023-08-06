@@ -148,6 +148,8 @@ Route::group(['prefix' => 'assistant', 'middleware' => ['auth','assistant']], fu
     Route::put('/profile/update', [UserController::class, 'assistantProfileUpdate'])->name('assistant.profile.update');
     Route::put('/profile/change-password', [UserController::class, 'assistantChangePassword'])->name('assistant.change.password');
     Route::put('/profile/change-photo', [UserController::class, 'assistantChangePhoto'])->name('assistant.change.photo');
+    Route::post('/mark-notification', [UserController::class, 'assistantMarkNotification'])->name('assistant.mark.notification');
+    Route::get('/message-info/{msg_id}', [UserController::class, 'assistantShowMessage'])->name('assistant.message.info');
 });
 
 /////////////////////end assistant routes//////////////////

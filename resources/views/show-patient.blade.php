@@ -2,7 +2,9 @@
 
 @section('head')
     @parent
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/doctorProfile.js'])
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/showProfile.js'])
+
 @endsection
 
 @section('content')
@@ -12,11 +14,6 @@
         <div class="row">
             <div class="col-md-4">
 
-{{--                <div class="profile-img">--}}
-{{--                    <img--}}
-{{--                        src="{{asset('images/' . $user->photo)}}"--}}
-{{--                        alt="image error"/>--}}
-{{--                </div>--}}
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
@@ -26,9 +23,9 @@
                 </div>
             </div>
             @if(auth()->user()->roles()->where('name','student')->first())
-            <div class="col-md-2">
-                <a href="{{route('book.process',$patient->id)}}" class="profile-edit-btn">choose patient</a>
-            </div>
+                <div class="col-md-2">
+                    <a href="{{route('book.process',$patient->id)}}" class="profile-edit-btn">choose patient</a>
+                </div>
             @endif
         </div>
         <div class="row">
@@ -36,7 +33,8 @@
                 <div class="profile-work">
 
                     <h2 style="color: #0d6efd">links section</h2>
-                    <a href="{{route('patient.information',$patient->id)}}" class="btn-outline-light">see more details</a><br/>
+                    <a href="{{route('patient.information',$patient->id)}}" class="btn-outline-light">see more
+                        details</a><br/>
                     <a href="{{route('search.patient.page',1)}}" class="btn-outline-light">back to search page</a><br/>
                     @if(auth()->user()->roles()->where('name','student')->first())
                         <a href="{{ route('student.profile') }}"
@@ -49,7 +47,7 @@
                            class="btn-outline-light">back to profile</a>
                     @endif
                     <br>
-{{--                    <a href="{{route('doctor.profile')}}" class="btn-outline-light">back to profile</a><br/>--}}
+                    {{--                    <a href="{{route('doctor.profile')}}" class="btn-outline-light">back to profile</a><br/>--}}
                 </div>
             </div>
 
@@ -69,7 +67,8 @@
                         <li class="nav-item">
                             <a class="nav-link" id="completedAppointments-tab" data-toggle="tab"
                                href="#completedAppointments" role="tab"
-                               aria-controls="completedAppointments" aria-selected="false">Your Completed Appointments</a>
+                               aria-controls="completedAppointments" aria-selected="false">Your Completed
+                                Appointments</a>
                         </li>
                     </ul>
                 </div>

@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/doctorProfile.js','resources/js/set-sub-marks.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/showProfile.js'])
 @endsection
 
 @section('content')
@@ -179,8 +179,7 @@
                             </thead>
                             <tbody>
                             @foreach($completedAppointments as $appointment)
-                                <tr class="clickable-row"
-                                    data-href="{{route('doctor.setSubmarks',$appointment->id)}}">
+                                <tr>
                                     <td>{{$appointment->doctor_name}}</td>
                                     <td>{{$appointment->student_name}}</td>
                                     <td>{{$appointment->patient_name}}</td>
