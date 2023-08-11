@@ -16,6 +16,7 @@
                     <a href="{{route('patient.create')}}">Add Patient</a>
                     <a href="{{route('search.patient.page',1)}}">Search on Patient</a>
                     <a href="{{route('search.student.page')}}">Search on Student</a>
+                    <a href="{{route('search.assistant.page')}}">Search on Assistant</a>
                     <a href="">Canceling a Chair Reservation</a>
                     <a href="{{route('add.subject')}}">Add Subject</a>
                     <a href="{{route('add.clinic')}}">Add Clinic</a>

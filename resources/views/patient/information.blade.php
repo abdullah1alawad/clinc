@@ -375,7 +375,10 @@
                                 <li><a href="#section9">{{($patient->gender == 'female' ? 9 : 8)}}</a></li>
                             </ul>
                         </nav>
-
+                        <div class="col-md-12 text-center">
+                            <a href="{{ \Illuminate\Support\Facades\URL::previous() }}"
+                               class="back-btn">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>

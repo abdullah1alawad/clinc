@@ -1014,6 +1014,11 @@
 
                         </div>
                     </form>
+                    <div class="col-md-12 text-center">
+                        <a href="{{ \Illuminate\Support\Facades\URL::previous() }}"
+                           class="back-btn">Back</a>
+                    </div>
+                    <br>
                 </div>
             </div>
         </div>

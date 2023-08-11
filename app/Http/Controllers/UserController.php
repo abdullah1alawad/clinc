@@ -28,18 +28,17 @@ class UserController extends Controller
 
     public function banned()
     {
-        $user=Auth::user();
-        return view('banned',compact('user'));
+        $user = Auth::user();
+        return view('banned', compact('user'));
     }
 
     public function pending()
     {
-        $user=Auth::user();
-        return view('pending',compact('user'));
+        $user = Auth::user();
+        return view('pending', compact('user'));
     }
 
     /////////////////////////////////////////////////////////////////////////
-
 
 
     //////////////////////////////////////// admin section ///////////////////////////////////////////////////
@@ -49,14 +48,14 @@ class UserController extends Controller
         $user = auth()->user();
 
         if ($request->has('unread') && $request->input('unread') === '1')
-            $messages = $user->unreadNotifications()->where('type',NewUserNotification::class)->paginate(5)->fragment('messages');
+            $messages = $user->unreadNotifications()->where('type', NewUserNotification::class)->paginate(5)->fragment('messages');
         else
-            $messages = $user->notifications()->where('type',NewUserNotification::class)->paginate(5)->fragment('messages');
+            $messages = $user->notifications()->where('type', NewUserNotification::class)->paginate(5)->fragment('messages');
 
-        $unreadNotificationsCount=$user->unreadNotifications()->where('type',NewUserNotification::class)->count();
+        $unreadNotificationsCount = $user->unreadNotifications()->where('type', NewUserNotification::class)->count();
 
 
-        return view('admin.profile', compact('user', 'messages','unreadNotificationsCount'));
+        return view('admin.profile', compact('user', 'messages', 'unreadNotificationsCount'));
     }
 
     public function adminProfileEdit()
@@ -158,7 +157,7 @@ class UserController extends Controller
         if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
-            auth()->user()->notifications()->where('type',NewUserNotification::class)->get()->markAsRead();
+            auth()->user()->notifications()->where('type', NewUserNotification::class)->get()->markAsRead();
 
 
         return response()->noContent();
@@ -176,7 +175,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', $type . ' Has Been Accepted!');
     }
 
-    public function userReject($id,$type)
+    public function userReject($id, $type)
     {
         $user = User::find($id);
 
@@ -253,7 +252,7 @@ class UserController extends Controller
             $mark->subject_name = $subject_name;
         }
 
-        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks','messages'));
+        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks', 'messages'));
     }
 
     public function showSubprocessMark($process_id)
@@ -320,7 +319,8 @@ class UserController extends Controller
             ->with('success', 'Your Profile Photo Has Been Updated Successfully!');
     }
 
-    public function studentMarkNotification(Request $request){
+    public function studentMarkNotification(Request $request)
+    {
         if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
@@ -330,7 +330,8 @@ class UserController extends Controller
         return response()->noContent();
     }
 
-    public function studentShowMessage($message_id){
+    public function studentShowMessage($message_id)
+    {
         $message = auth()->user()->notifications()->find($message_id);
 
         if (!$message)
@@ -360,11 +361,11 @@ class UserController extends Controller
         }
 
         if ($request->has('unread') && $request->input('unread') === '1')
-            $messages = $user->unreadNotifications()->where('type',NewProcessNotification::class)->paginate(5)->fragment('messages');
+            $messages = $user->unreadNotifications()->where('type', NewProcessNotification::class)->paginate(5)->fragment('messages');
         else
-            $messages = $user->notifications()->where('type',NewProcessNotification::class)->paginate(5)->fragment('messages');
+            $messages = $user->notifications()->where('type', NewProcessNotification::class)->paginate(5)->fragment('messages');
 
-        $unreadNotificationsCount=$user->unreadNotifications()->where('type',NewProcessNotification::class)->count();
+        $unreadNotificationsCount = $user->unreadNotifications()->where('type', NewProcessNotification::class)->count();
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -403,7 +404,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects','messages','unreadNotificationsCount'));
+        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'messages', 'unreadNotificationsCount'));
     }
 
     public function doctorProfileEdit()
@@ -458,7 +459,7 @@ class UserController extends Controller
         if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
-            auth()->user()->notifications()->where('type',NewProcessNotification::class)->get()->markAsRead();
+            auth()->user()->notifications()->where('type', NewProcessNotification::class)->get()->markAsRead();
 
 
         return response()->noContent();
@@ -477,9 +478,8 @@ class UserController extends Controller
 
         $message->markAsRead();
 
-        return view('doctor.show-message', compact('message','assistants'));
+        return view('doctor.show-message', compact('message', 'assistants'));
     }
-
 
 
     public function searchStudentPage()
@@ -522,7 +522,7 @@ class UserController extends Controller
 
         $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status',1)->get();
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
 
         if ($selected_subject) {
             $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
@@ -647,7 +647,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects','messages'));
+        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'messages'));
     }
 
     public function assistantProfileEdit()
@@ -722,5 +722,104 @@ class UserController extends Controller
     }
 
     ///////////////////////////////////// end assistant section /////////////////////////////////////////////
+
+    /////////////////////////////////////search here for now /////////////////////////////////////
+    public function searchAssistantPage()
+    {
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'assistant');
+        })->paginate(5)->fragment('users');
+        return view('search-assistant', compact('users'));
+    }
+
+    public function searchAssistant(SearchRequest $request)
+    {
+        $national_id = $request->national_id;
+
+        if ($national_id) {
+            // Search query is present, perform the search
+            $users = User::where('national_id', 'LIKE', '%' . $national_id . '%')
+                ->whereHas('roles', function ($query) {
+                    $query->where('name', 'assistant');
+                })
+                ->paginate(5)
+                ->appends(['national_id' => $national_id]);
+        } else {
+            // No search query, show all users with student role
+            $users = User::whereHas('roles', function ($query) {
+                $query->where('name', 'assistant');
+            })
+                ->paginate(5)
+                ->fragment('users');
+        }
+
+        return view('search-assistant', compact('users'));
+    }
+
+
+    public function showAssistant($id, Request $request)
+    {
+        $user = User::find($id);
+        $subjects = Subject::all();
+
+        $selected_subject = $request->query('subject');
+        $current_time = Carbon::now();
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
+
+        if ($selected_subject) {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+        } else {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+        }
+
+        $studentMarks = $user->studentMarks()->paginate(5)->fragment('subjectsMark');
+
+        foreach ($upcomingAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+            $student_name = $appointment->student->name;
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        foreach ($completedAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+            $student_name = $appointment->student->name;
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->student_name = $student_name;
+            $appointment->time_difference = $time_difference;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        foreach ($studentMarks as $mark) {
+            $subject_name = $mark->subject->name;
+
+            $mark->subject_name = $subject_name;
+        }
+
+        return view('show-assistant', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
+    }
+
 }
 

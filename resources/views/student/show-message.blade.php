@@ -40,6 +40,11 @@
                                 with chair number {{$message->data['chair_id']}}.
                             </div>
                         @endif
+
+                        <div class="col-md-12 text-center">
+                            <a href="{{ \Illuminate\Support\Facades\URL::previous() }}#messages"
+                               class="back-btn">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -89,6 +89,10 @@
                                 <a href="{{route('user.accept',['id'=>$user->id,'type'=>$msg->data['user']])}}" class="btn btn-success col-md-2" style="margin: 1%;">Accept</a>
                             </div>
                         @endif
+                        <div class="col-md-12 text-center">
+                            <a href="{{ \Illuminate\Support\Facades\URL::previous() }}#messages"
+                               class="back-btn">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -21,9 +21,12 @@
                     <div class="card-body">
                         <div class="alert alert-success">
                             [{{$message->created_at}}]
-                            Student (<a href="{{route('show.student',$message->data['student_id'])}}">{{$message->data['student']}}</a>) wants to schedule an appointment to treat the
+                            Student (<a
+                                href="{{route('show.student',$message->data['student_id'])}}">{{$message->data['student']}}</a>)
+                            wants to schedule an appointment to treat the
                             patient
-                            (<a href="{{route('show.patient',$message->data['patient_id'])}}">{{$message->data['patient']}}</a>) in the subject {{$message->data['subject']}} on a
+                            (<a href="{{route('show.patient',$message->data['patient_id'])}}">{{$message->data['patient']}}</a>)
+                            in the subject {{$message->data['subject']}} on a
                             date {{$message->data['date']}} chair No: {{$message->data['chair_id']}}
                         </div>
 
@@ -41,10 +44,16 @@
                             </select>
                             <input type="hidden" name="process_id" value="{{$message->data['process_id']}}">
                             <div class="row justify-content-center">
-                                <a href="{{route('process.reject',$message->data['process_id'])}}" class="btn btn-danger col-md-2" style="margin: 1%;">Reject</a>
-                                <input type="submit" class="btn btn-success col-md-2" style="margin: 1%;" value="Accept">
+                                <a href="{{route('process.reject',$message->data['process_id'])}}"
+                                   class="btn btn-danger col-md-2" style="margin: 1%;">Reject</a>
+                                <input type="submit" class="btn btn-success col-md-2" style="margin: 1%;"
+                                       value="Accept">
                             </div>
                         </form>
+                        <div class="col-md-12 text-center">
+                            <a href="{{ \Illuminate\Support\Facades\URL::previous() }}#messages"
+                               class="back-btn">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>
