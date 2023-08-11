@@ -135,6 +135,9 @@ Route::group(['prefix' => 'search', 'middleware' => 'auth'], function () {
     Route::get('/patient/page/{id}', [PatientController::class, 'searchPatientPage'])->name('search.patient.page')->middleware('notAssistant');
     Route::get('/patient', [PatientController::class, 'searchPatient'])->name('search.patient')->middleware('notAssistant');
     Route::get('/show/patient/{id}', [PatientController::class, 'showPatient'])->name('show.patient')->middleware('notAssistant');
+    Route::get('/assistant/page',[UserController::class,'searchAssistantPage'])->name('search.assistant.page')->middleware('admin.doctor');
+    Route::get('/assistant',[UserController::class,'searchAssistant'])->name('search.assistant')->middleware('admin.doctor');
+    Route::get('/show/assistant/{id}',[UserController::class,'showAssistant'])->name('show.assistant')->middleware('admin.doctor');
 
 });
 

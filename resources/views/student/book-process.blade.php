@@ -475,6 +475,10 @@
                                 <input type="submit" class="back-btn" name="changePassword"
                                        value="Booking Appointment"/>
                             </div>
+                            <div class="col-md-12 text-center">
+                                <a href="{{route('search.patient.page',2)}}"
+                                   class="back-btn">Back</a>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -720,5 +720,104 @@ class UserController extends Controller
     }
 
     ///////////////////////////////////// end assistant section /////////////////////////////////////////////
+
+    /////////////////////////////////////search here for now /////////////////////////////////////
+    public function searchAssistantPage()
+    {
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'assistant');
+        })->paginate(5)->fragment('users');
+        return view('search-assistant', compact('users'));
+    }
+
+    public function searchAssistant(SearchRequest $request)
+    {
+        $national_id = $request->national_id;
+
+        if ($national_id) {
+            // Search query is present, perform the search
+            $users = User::where('national_id', 'LIKE', '%' . $national_id . '%')
+                ->whereHas('roles', function ($query) {
+                    $query->where('name', 'assistant');
+                })
+                ->paginate(5)
+                ->appends(['national_id' => $national_id]);
+        } else {
+            // No search query, show all users with student role
+            $users = User::whereHas('roles', function ($query) {
+                $query->where('name', 'assistant');
+            })
+                ->paginate(5)
+                ->fragment('users');
+        }
+
+        return view('search-assistant', compact('users'));
+    }
+
+
+    public function showAssistant($id, Request $request)
+    {
+        $user = User::find($id);
+        $subjects = Subject::all();
+
+        $selected_subject = $request->query('subject');
+        $current_time = Carbon::now();
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
+
+        if ($selected_subject) {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
+        } else {
+            $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->paginate(5)->fragment('completedAppointments');
+        }
+
+        $studentMarks = $user->studentMarks()->paginate(5)->fragment('subjectsMark');
+
+        foreach ($upcomingAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+            $student_name = $appointment->student->name;
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->time_difference = $time_difference;
+            $appointment->student_name = $student_name;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        foreach ($completedAppointments as $appointment) {
+
+            $date_from_database = Carbon::parse($appointment->date);
+            $time_difference = $current_time->diffForHumans($date_from_database);
+            $student_name = $appointment->student->name;
+            $doctor_name = $appointment->doctor->name;
+            $patient_name = $appointment->patient->name;
+            $assistant_name = $appointment->assistant->name;
+            $subject_name = $appointment->subject->name;
+
+            $appointment->student_name = $student_name;
+            $appointment->time_difference = $time_difference;
+            $appointment->doctor_name = $doctor_name;
+            $appointment->patient_name = $patient_name;
+            $appointment->assistant_name = $assistant_name;
+            $appointment->subject_name = $subject_name;
+            $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
+        }
+
+        foreach ($studentMarks as $mark) {
+            $subject_name = $mark->subject->name;
+
+            $mark->subject_name = $subject_name;
+        }
+
+        return view('show-assistant', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks'));
+    }
+
 }
 
