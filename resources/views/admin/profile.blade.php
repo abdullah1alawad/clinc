@@ -48,8 +48,8 @@
                                href="#messages" role="tab"
                                aria-controls="messages" aria-selected="false">
                                 Messages
-                                @if($unreadNotificationsCount)
-                                    <span class="notify-count">{{$unreadNotificationsCount}}</span>
+                                @if($user->unreadNotifications->count())
+                                    <span class="notify-count">{{$user->unreadNotifications->count()}}</span>
                                 @endif
                             </a>
                         </li>
@@ -164,7 +164,7 @@
                             </table>
 
                             <div class="col-md-12 text-end py-2 my-link">
-                                @if($unreadNotificationsCount)
+                                @if($user->unreadNotifications->count())
                                     <a href="#messages" class="mark-as-read" id="mark-all">Mark All As Read</a>
                                 @endif
                             </div>

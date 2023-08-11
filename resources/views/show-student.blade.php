@@ -33,14 +33,14 @@
                     <p>WORK SPACE</p>
                     <a href="{{route('search.student.page')}}">back to search page</a><br/>
                     @if(auth()->user()->roles()->where('name','doctor')->first())
-                    <a href="{{ route('doctor.profile') }}"
-                       class="btn-outline-light">back to profile</a>
+                        <a href="{{ route('doctor.profile') }}"
+                           class="btn-outline-light">back to profile</a>
                     @else
                         <a href="{{ route('admin.profile') }}"
                            class="btn-outline-light">back to profile</a>
                     @endif
                     <br>
-{{--                    <a href="{{route('doctor.profile')}}">back to profile</a><br/>--}}
+                    {{--                    <a href="{{route('doctor.profile')}}">back to profile</a><br/>--}}
                 </div>
             </div>
             <div class="col-md-8">
@@ -58,7 +58,8 @@
                         <li class="nav-item">
                             <a class="nav-link" id="completedAppointments-tab" data-toggle="tab"
                                href="#completedAppointments" role="tab"
-                               aria-controls="completedAppointments" aria-selected="false">Your Completed Appointments</a>
+                               aria-controls="completedAppointments" aria-selected="false">Your Completed
+                                Appointments</a>
                         </li>
                     </ul>
                 </div>
@@ -127,6 +128,7 @@
                                 <th>Subject Name</th>
                                 <th>Chair Number</th>
                                 <th>Remaining Time</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -139,6 +141,11 @@
                                     <td>{{$appointment->subject_name}}</td>
                                     <td>{{$appointment->chair_id}}</td>
                                     <td>{{$appointment->time_difference}}</td>
+                                    @if(auth()->user()->roles()->where('name','admin')->first())
+                                        <td>
+                                            <a href="{{route('cancel.process',['id'=>$appointment->id,'user_type'=>'admin'])}}">Cancel</a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

@@ -58,6 +58,8 @@ Route::get('/banned', [UserController::class, 'banned'])->name('banned')->middle
 //////////////////////end banned and pending //////////////////////////////////////
 
 
+Route::get('/profile/cancel/process/{id}/{user_type}', [ProcessController::class, 'destroy'])->name('cancel.process')->middleware('auth');
+
 ////////////////////// admin routes //////////////////
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {

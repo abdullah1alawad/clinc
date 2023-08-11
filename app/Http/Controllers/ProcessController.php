@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ProcessAccepted;
 use App\Events\ProcessCreated;
 use App\Events\ProcessRejected;
+use App\Events\StudentProcessCanceling;
 use App\Http\Requests\BookProcessRequest;
 use App\Models\Chair;
 use App\Models\Clinic;
@@ -75,8 +76,7 @@ class ProcessController extends Controller
             }
 
 
-        }
-        else if ($t2->gt($currentHour)) {
+        } else if ($t2->gt($currentHour)) {
             $currentDay = Carbon::now();
 
             $currentDay->setTime($t1->hour, $t1->minute);
@@ -104,8 +104,7 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-        }
-        else if ($t3->gt($currentHour)) {
+        } else if ($t3->gt($currentHour)) {
             $currentDay = Carbon::now();
 
             $currentDay->setTime($t1->hour, $t1->minute);
@@ -131,8 +130,7 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-        }
-        elseif($t4->gt($currentHour)) {
+        } elseif ($t4->gt($currentHour)) {
             $currentDay = Carbon::now();
 
             $currentDay->setTime($t1->hour, $t1->minute);
@@ -156,8 +154,7 @@ class ProcessController extends Controller
             foreach ($chairs as $chair) {
                 $chairProcesses[$key][] = $chair->id;
             }
-        }
-        else {
+        } else {
             $currentDay = Carbon::now();
 
             $currentDay->setTime($t1->hour, $t1->minute);
@@ -227,37 +224,36 @@ class ProcessController extends Controller
 
         }
 
-        $week1 = [];$week2 = [];$week3 = [];$week4 = [];
+        $week1 = [];
+        $week2 = [];
+        $week3 = [];
+        $week4 = [];
 
-        $cnt=1;
-        foreach ($chairProcesses as $key => $value){
-            if($cnt<=28){
-                $week1[$key]=[];
+        $cnt = 1;
+        foreach ($chairProcesses as $key => $value) {
+            if ($cnt <= 28) {
+                $week1[$key] = [];
                 foreach ($value as $item)
-                    $week1[$key][]=$item;
-            }
-            else if($cnt<=56){
-                $week2[$key]=[];
+                    $week1[$key][] = $item;
+            } else if ($cnt <= 56) {
+                $week2[$key] = [];
                 foreach ($value as $item)
-                    $week2[$key][]=$item;
-            }
-            else if($cnt<=84){
-                $week3[$key]=[];
+                    $week2[$key][] = $item;
+            } else if ($cnt <= 84) {
+                $week3[$key] = [];
                 foreach ($value as $item)
-                    $week3[$key][]=$item;
-            }
-            else
-            {
-                $week4[$key]=[];
+                    $week3[$key][] = $item;
+            } else {
+                $week4[$key] = [];
                 foreach ($value as $item)
-                    $week4[$key][]=$item;
+                    $week4[$key][] = $item;
             }
             $cnt++;
         }
 
         //return view('student.test',compact('week1','week2','week3','week4'));
 
-        return view('student.book-process', compact('patient', 'doctors', 'subjects', 'week1','week2','week3','week4'));
+        return view('student.book-process', compact('patient', 'doctors', 'subjects', 'week1', 'week2', 'week3', 'week4'));
     }
 
     /**
@@ -273,26 +269,26 @@ class ProcessController extends Controller
      */
     public function store(BookProcessRequest $request)
     {
-        $user_id=auth()->user()->id;
+        $user_id = auth()->user()->id;
 
-        $photoPath="";
-        if($request->hasFile('photo'))
+        $photoPath = "";
+        if ($request->hasFile('photo'))
             $photoPath = saveImage($request->file('photo'), 'images/');
 
-        $process=new Process;
-        $process->student_id=$user_id;
-        $process->patient_id=$request->input('patient_id');
-        $process->doctor_id=$request->input('doctor_id');
-        $process->subject_id=$request->input('subject_id');
-        $process->chair_id=$request->input('chair_id');
-        $process->date=$request->input('date');
-        $process->photo=$photoPath;
-        $process->status=0;
+        $process = new Process;
+        $process->student_id = $user_id;
+        $process->patient_id = $request->input('patient_id');
+        $process->doctor_id = $request->input('doctor_id');
+        $process->subject_id = $request->input('subject_id');
+        $process->chair_id = $request->input('chair_id');
+        $process->date = $request->input('date');
+        $process->photo = $photoPath;
+        $process->status = 0;
         $process->save();
 
         event(new ProcessCreated($process));
 
-        return redirect()->route('student.profile');
+        return redirect()->route('student.profile')->with('success', 'Your request has been successfully submitted.');
 
     }
 
@@ -323,40 +319,48 @@ class ProcessController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Process $process)
+    public function destroy($id, $user_type)
     {
-        //
+        $process = Process::find($id);
+
+        event(new StudentProcessCanceling($process, $user_type));
+
+        $process->delete();
+
+        return redirect()->back()->with('success', 'Process has been canceled successfully');
     }
 
-    public function processAccept(Request $request){
+    public function processAccept(Request $request)
+    {
 
-        $process=Process::find($request->input('process_id'));
-        if(!$process)
-            return redirect()->back()->with('field','The Process Has Already Been Rejected!');
+        $process = Process::find($request->input('process_id'));
+        if (!$process)
+            return redirect()->back()->with('field', 'The Process Has Already Been Rejected!');
 
-        $process->status=1;
-        $process->assistant_id=$request->input('assistant_id');
+        $process->status = 1;
+        $process->assistant_id = $request->input('assistant_id');
 
         $process->save();
 
         event(new ProcessAccepted($process));
 
-        return redirect()->route('doctor.profile')->with('success','Process Has Been Accepted!');
+        return redirect()->route('doctor.profile')->with('success', 'Process Has Been Accepted!');
     }
 
-    public function processReject($id){
-        $process=Process::find($id);
-        if(!$process)
-            return redirect()->back()->with('field','The Process Has Already Been Rejected!');
+    public function processReject($id)
+    {
+        $process = Process::find($id);
+        if (!$process)
+            return redirect()->back()->with('field', 'The Process Has Already Been Rejected!');
 
-        $currentTime=Carbon::now();
-        if($currentTime->gt($process->date))
-            return redirect()->back()->with('field','The Process Has Already Been Completed!');
+        $currentTime = Carbon::now();
+        if ($currentTime->gt($process->date))
+            return redirect()->back()->with('field', 'The Process Has Already Been Completed!');
 
         event(new ProcessRejected($process));
 
         $process->delete();
 
-        return redirect()->route('doctor.profile')->with('success','Process Has Been Rejected!');
+        return redirect()->route('doctor.profile')->with('success', 'Process Has Been Rejected!');
     }
 }

@@ -130,6 +130,7 @@
                                 <th>Subject Name</th>
                                 <th>Chair Number</th>
                                 <th>Remaining Time</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -142,6 +143,11 @@
                                     <td>{{$appointment->subject_name}}</td>
                                     <td>{{$appointment->chair_id}}</td>
                                     <td>{{$appointment->time_difference}}</td>
+                                    @if(auth()->user()->roles()->where('name','admin')->first())
+                                        <td>
+                                            <a href="{{route('cancel.process',['id'=>$appointment->id,'user_type'=>'admin'])}}">Cancel</a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

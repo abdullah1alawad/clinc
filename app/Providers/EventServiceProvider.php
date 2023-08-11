@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Events\ProcessAccepted;
 use App\Events\ProcessCreated;
 use App\Events\ProcessRejected;
+use App\Events\StudentProcessCanceling;
 use App\Listeners\SendDoctorNotification;
 use App\Listeners\SendNewUserNotification;
 use App\Listeners\SendProcessAcceptedNotification;
+use App\Listeners\SendProcessCancelingNotification;
 use App\Listeners\SendProcessRejectedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -34,6 +36,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProcessRejected::class=>[
             SendProcessRejectedNotification::class,
+        ],
+        StudentProcessCanceling::class=>[
+            SendProcessCancelingNotification::class,
         ]
     ];
 

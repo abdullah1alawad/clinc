@@ -55,6 +55,7 @@ class AssistantNotification extends Notification
         $date = $this->process->date;
 
         return [
+            'title' => 'new process',
             'doctor_name' => $doctor_name,
             'doctor_id' => $doctor_id,
             'student_name' => $student_name,

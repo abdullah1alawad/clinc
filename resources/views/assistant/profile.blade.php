@@ -33,10 +33,10 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>WORK SPACE</p>
-                    <a href="">Search on Student</a><br/>
-                    <a href="">Search on Patient</a><br/>
-                    <a href="">Search on Patient</a><br/>
+{{--                    <p>WORK SPACE</p>--}}
+{{--                    <a href="">Search on Student</a><br/>--}}
+{{--                    <a href="">Search on Patient</a><br/>--}}
+{{--                    <a href="">Search on Patient</a><br/>--}}
                 </div>
             </div>
             <div class="col-md-8">
@@ -228,8 +228,15 @@
                                             @endif
 
                                             <td>
-                                                [{{$message->created_at}}]
-                                                Doctor {{$message->data['doctor_name']}} has been assigned you for assistant
+                                                @if($message->data['title'] == 'new process')
+                                                    [{{$message->created_at}}]
+                                                    Doctor ({{$message->data['doctor_name']}}) has been assigned you for
+                                                    assistant
+                                                @else
+                                                    [{{$message->created_at}}]
+                                                    {{$message->data['how']}} has canceled an appointment for which you
+                                                    are assistant.
+                                                @endif
                                             </td>
 
                                             <td class="text-end">

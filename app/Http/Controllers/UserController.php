@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notifications\NewProcessNotification;
 use App\Notifications\NewUserNotification;
+use App\Notifications\StudentProcessCancelingNotification;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangePhotoRequest;
@@ -28,18 +29,17 @@ class UserController extends Controller
 
     public function banned()
     {
-        $user=Auth::user();
-        return view('banned',compact('user'));
+        $user = Auth::user();
+        return view('banned', compact('user'));
     }
 
     public function pending()
     {
-        $user=Auth::user();
-        return view('pending',compact('user'));
+        $user = Auth::user();
+        return view('pending', compact('user'));
     }
 
     /////////////////////////////////////////////////////////////////////////
-
 
 
     //////////////////////////////////////// admin section ///////////////////////////////////////////////////
@@ -49,14 +49,12 @@ class UserController extends Controller
         $user = auth()->user();
 
         if ($request->has('unread') && $request->input('unread') === '1')
-            $messages = $user->unreadNotifications()->where('type',NewUserNotification::class)->paginate(5)->fragment('messages');
+            $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
         else
-            $messages = $user->notifications()->where('type',NewUserNotification::class)->paginate(5)->fragment('messages');
-
-        $unreadNotificationsCount=$user->unreadNotifications()->where('type',NewUserNotification::class)->count();
+            $messages = $user->notifications()->paginate(5)->fragment('messages');
 
 
-        return view('admin.profile', compact('user', 'messages','unreadNotificationsCount'));
+        return view('admin.profile', compact('user', 'messages'));
     }
 
     public function adminProfileEdit()
@@ -158,7 +156,7 @@ class UserController extends Controller
         if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
-            auth()->user()->notifications()->where('type',NewUserNotification::class)->get()->markAsRead();
+            auth()->user()->notifications()->where('type', NewUserNotification::class)->get()->markAsRead();
 
 
         return response()->noContent();
@@ -176,7 +174,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', $type . ' Has Been Accepted!');
     }
 
-    public function userReject($id,$type)
+    public function userReject($id, $type)
     {
         $user = User::find($id);
 
@@ -210,6 +208,7 @@ class UserController extends Controller
             $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
         else
             $messages = $user->notifications()->paginate(5)->fragment('messages');
+
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -253,7 +252,7 @@ class UserController extends Controller
             $mark->subject_name = $subject_name;
         }
 
-        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks','messages'));
+        return view('student.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'studentMarks', 'messages'));
     }
 
     public function showSubprocessMark($process_id)
@@ -320,7 +319,8 @@ class UserController extends Controller
             ->with('success', 'Your Profile Photo Has Been Updated Successfully!');
     }
 
-    public function studentMarkNotification(Request $request){
+    public function studentMarkNotification(Request $request)
+    {
         if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
@@ -330,7 +330,8 @@ class UserController extends Controller
         return response()->noContent();
     }
 
-    public function studentShowMessage($message_id){
+    public function studentShowMessage($message_id)
+    {
         $message = auth()->user()->notifications()->find($message_id);
 
         if (!$message)
@@ -360,11 +361,9 @@ class UserController extends Controller
         }
 
         if ($request->has('unread') && $request->input('unread') === '1')
-            $messages = $user->unreadNotifications()->where('type',NewProcessNotification::class)->paginate(5)->fragment('messages');
+            $messages = $user->unreadNotifications()->paginate(5)->fragment('messages');
         else
-            $messages = $user->notifications()->where('type',NewProcessNotification::class)->paginate(5)->fragment('messages');
-
-        $unreadNotificationsCount=$user->unreadNotifications()->where('type',NewProcessNotification::class)->count();
+            $messages = $user->notifications()->paginate(5)->fragment('messages');
 
         foreach ($upcomingAppointments as $appointment) {
 
@@ -403,7 +402,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects','messages','unreadNotificationsCount'));
+        return view('doctor.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'messages'));
     }
 
     public function doctorProfileEdit()
@@ -458,7 +457,7 @@ class UserController extends Controller
         if ($request->has('id'))
             auth()->user()->notifications()->find($request->input('id'))->markAsRead();
         else
-            auth()->user()->notifications()->where('type',NewProcessNotification::class)->get()->markAsRead();
+            auth()->user()->notifications()->where('type', NewProcessNotification::class)->get()->markAsRead();
 
 
         return response()->noContent();
@@ -477,9 +476,8 @@ class UserController extends Controller
 
         $message->markAsRead();
 
-        return view('doctor.show-message', compact('message','assistants'));
+        return view('doctor.show-message', compact('message', 'assistants'));
     }
-
 
 
     public function searchStudentPage()
@@ -522,7 +520,7 @@ class UserController extends Controller
 
         $selected_subject = $request->query('subject');
         $current_time = Carbon::now();
-        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status',1)->get();
+        $upcomingAppointments = $user->studentProcesses()->where('date', '>=', $current_time)->where('status', 1)->get();
 
         if ($selected_subject) {
             $completedAppointments = $user->studentProcesses()->where('date', '<', $current_time)->where('subject_id', $selected_subject)->paginate(5)->fragment('completedAppointments');
@@ -647,7 +645,7 @@ class UserController extends Controller
             $appointment->date = Carbon::parse($appointment->date)->format('Y-m-d');
         }
 
-        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects','messages'));
+        return view('assistant.profile', compact('user', 'upcomingAppointments', 'completedAppointments', 'subjects', 'messages'));
     }
 
     public function assistantProfileEdit()

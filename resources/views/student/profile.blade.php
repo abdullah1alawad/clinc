@@ -7,6 +7,12 @@
 
 @section('content')
 
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="container emp-profile">
         <div class="row">
             <div class="col-md-4">
@@ -37,7 +43,6 @@
                     <a href="{{route('patient.create')}}">Add Patient</a><br/>
                     <a href="{{route('search.patient.page',1)}}">Search on Patient</a><br/>
                     <a href="{{route('search.patient.page',2)}}">Booking an Chair</a><br/>
-                    <a href="">Canceling a Chair Reservation</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -139,6 +144,7 @@
                                 <th>Subject Name</th>
                                 <th>Chair Number</th>
                                 <th>Remaining Time</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -150,6 +156,9 @@
                                     <td>{{$appointment->subject_name}}</td>
                                     <td>{{$appointment->chair_id}}</td>
                                     <td>{{$appointment->time_difference}}</td>
+                                    <td>
+                                        <a href="{{route('cancel.process',['id'=>$appointment->id,'user_type'=>'student'])}}">Cancel</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -258,9 +267,15 @@
                                         <tr class="alert alert-dark">
                                             @endif
                                             <td>
-                                                [{{$message->created_at}}]
-                                                Doctor {{$message->data['doctor_name']}} {{$message->data['title']}}
-                                                your chair booking request.
+                                                @if($message->data['title']=='process canceled')
+                                                    [{{$message->created_at}}]
+                                                    {{$message->data['how']}}  has canceled an appointment that you had
+                                                    booked.
+                                                @else
+                                                    [{{$message->created_at}}]
+                                                    Doctor {{$message->data['doctor_name']}} {{$message->data['title']}}
+                                                    your chair booking request.
+                                                @endif
                                             </td>
 
                                             <td class="text-end">

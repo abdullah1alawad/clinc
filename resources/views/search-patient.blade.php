@@ -10,7 +10,7 @@
 @section('content')
 
     @if(isset($message))
-        <div class="alert alert-danger text-center">
+        <div class="alert alert-info text-center">
             {{ $message }}
         </div>
     @endif

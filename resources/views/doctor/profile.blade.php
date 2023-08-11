@@ -67,8 +67,8 @@
                                href="#messages" role="tab"
                                aria-controls="messages" aria-selected="false">
                                 Messages
-                                @if($unreadNotificationsCount)
-                                    <span class="notify-count">{{$unreadNotificationsCount}}</span>
+                                @if($user->unreadNotifications->count())
+                                    <span class="notify-count">{{$user->unreadNotifications->count()}}</span>
                                 @endif
                             </a>
                         </li>
@@ -138,6 +138,7 @@
                                 <th>Subject Name</th>
                                 <th>Chair Number</th>
                                 <th>Remaining Time</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -149,6 +150,9 @@
                                     <td>{{$appointment->subject_name}}</td>
                                     <td>{{$appointment->chair_id}}</td>
                                     <td>{{$appointment->time_difference}}</td>
+                                    <td>
+                                        <a href="{{route('cancel.process',['id'=>$appointment->id,'user_type'=>'doctor'])}}">Cancel</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -234,9 +238,18 @@
                                             @endif
 
                                             <td>
-                                                [{{$message->created_at}}]
-                                                Student {{$message->data['student']}} wants to schedule an appointment to treat the patient
-                                                ({{$message->data['patient']}})  in the subject {{$message->data['subject']}}
+                                                @if($message->data['title'] == 'new process')
+                                                    [{{$message->created_at}}]
+                                                    Student ({{$message->data['student']}}) wants to schedule an
+                                                    appointment to treat the patient
+                                                    ({{$message->data['patient']}})  in the
+                                                    subject {{$message->data['subject']}}
+                                                @else
+                                                    [{{$message->created_at}}]
+                                                    {{$message->data['how']}} has canceled an appointment for which you
+                                                    are supervising.
+                                                @endif
+
                                             </td>
 
                                             <td class="text-end">
@@ -249,7 +262,6 @@
 
                                             </td>
                                             <td class="text-end">
-
                                                 <a href="{{route('doctor.message.info',['msg_id' => $message->id])}}">
                                                     More Details
                                                 </a>
@@ -260,7 +272,7 @@
                             </table>
 
                             <div class="col-md-12 text-end py-2 my-link">
-                                @if($unreadNotificationsCount)
+                                @if($user->unreadNotifications->count())
                                     <a href="#messages" class="mark-as-read" id="mark-all">Mark All As Read</a>
                                 @endif
                             </div>
