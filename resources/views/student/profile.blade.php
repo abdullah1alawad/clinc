@@ -289,10 +289,11 @@
 
                                             </td>
                                             <td class="text-end">
-
-                                                <a href="{{route('student.message.info',['msg_id' => $message->id])}}">
-                                                    More Details
-                                                </a>
+                                                @if($message->data['title']!='process canceled')
+                                                    <a href="{{route('student.message.info',['msg_id' => $message->id])}}">
+                                                        More Details
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
